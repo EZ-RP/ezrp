@@ -32,7 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'base.apps.BaseConfig',
-    'humanresources.apps.HumanresourcesConfig',
+    'human_resources.apps.HumanresourcesConfig',
     'order.apps.OrdersConfig',
     'party.apps.PartyConfig',
     'product.apps.ProductConfig',
