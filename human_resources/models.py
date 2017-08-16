@@ -3,7 +3,6 @@ from django.db import models
 # Create your models here.
 
 class Employee(models.Model):
-    employee_id = models.CharField(max_length=100, primary_key=True)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     middle_name = models.CharField(max_length=30)
@@ -21,11 +20,9 @@ class Leave(models.Model):
     service_leave = models.IntegerField()
 
 class Employee_role(models.Model):
-    employee_role_id = models.CharField(max_length=100, primary_key=True)
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     role_id = models.ForeignKey(Roles)
 
 class Roles(models.Model):
-    role_id = models.CharField(max_length=100, primary_key=True)
     role_description = models.CharField(max_length=100)
 
