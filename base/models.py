@@ -9,6 +9,12 @@ class Address(models.Model):
     postcode = models.CharField(max_length=10)
     country = models.CharField(max_length=50)
 
+class Pay_details(models.Model):
+    account_number = models.CharField(max_length=10)
+    bsb_number = models.CharField(max_length=10)
+    account_name = models.CharField(max_length=20)
+
+
 
 # DS: Base Attribute Type Table
 class AttributeType (models.Model):
