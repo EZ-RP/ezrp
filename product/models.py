@@ -9,7 +9,7 @@ class Item(models.Model):
     productCategory = models.CharField(max_length=30)
 
 
-class Item_Attributes(models.Model):
+class ItemAttributes(models.Model):
     itemId = models.ForeignKey(Item, on_delete=models.CASCADE)
     height = models.IntegerField()
     width = models.IntegerField()
