@@ -1,13 +1,13 @@
 from django.db import models
-from base import models
+from base.models import Address
 
 
 # Create your models here.
 class Order(models.Model):
     ORDER_STATUS = (
-        ('Created', 'Created')
-        ('Confirmed', 'Confirmed')
-        ('Delivered', 'Delivered')
+        ('Created', 'Created'),
+        ('Confirmed', 'Confirmed'),
+        ('Delivered', 'Delivered'),
         ('Invoiced', 'Invoiced')
     )
     ORDER_TYPE = (
@@ -17,7 +17,7 @@ class Order(models.Model):
     OrderNumber = models.IntegerField()
     AccountNumber = models.CharField(max_length=8)
     OrderType = models.CharField(max_length=1, choices=ORDER_TYPE)
-    Address = models.ForeignKey(models.Address)
+    Address = models.ForeignKey(Address)
     CreatedDate = models.DateTimeField(auto_now=True)
     DeliveryDate = models.DateTimeField()
     OrderStatus = models.CharField(max_length=1, choices=ORDER_STATUS)
@@ -31,19 +31,19 @@ class OrderLine(models.Model):
     Quantity = models.IntegerField()
     Price = models.FloatField()
     DiscountPrice = models.FloatField()
-    Unit = models.CharField()
+    Unit = models.CharField(max_length=10)
 
 
 # DS: Base Attribute Value Table
 class ProductAttributeDimensions(models.Model):
     PRODUCT_DIMS = (
-        ('Dim1', 'Dimension 1')
-        ('Dim2', 'Dimension 2')
-        ('Dim3', 'Dimension 3')
-        ('Dim4', 'Dimension 4')
-        ('Dim5', 'Dimension 5')
-        ('Dim6', 'Dimension 6')
-        ('Dim7', 'Dimension 7')
+        ('Dim1', 'Dimension 1'),
+        ('Dim2', 'Dimension 2'),
+        ('Dim3', 'Dimension 3'),
+        ('Dim4', 'Dimension 4'),
+        ('Dim5', 'Dimension 5'),
+        ('Dim6', 'Dimension 6'),
+        ('Dim7', 'Dimension 7'),
         ('Dim8', 'Dimension 8')
     )
     productCategory = models.CharField(max_length=30)
@@ -67,9 +67,10 @@ class DiscountAttributeTypes(models.Model):
 # DS: Base Attribute Value Table
 class DiscountAttributeValues(models.Model):
     APPLY_TYPE = (
-        ('Add', 'Add to price')
+        ('Add', 'Add to price'),
         ('Apply', 'Apply to price')
     )
     productAttributeType = models.ForeignKey(DiscountAttributeTypes)
     value = models.FloatField()
-    applyType = models.CharField()
+    applyType = models.CharField(max_length=1, choices=APPLY_TYPE)
+

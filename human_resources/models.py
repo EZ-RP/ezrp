@@ -2,6 +2,11 @@ from django.db import models
 
 # Create your models here.
 
+
+class Roles(models.Model):
+    role_description = models.CharField(max_length=100)
+
+
 class Employee(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -13,16 +18,17 @@ class Employee(models.Model):
     payroll_id = models.IntegerField()
     pay_rate = models.IntegerField()
 
+
 class Leave(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     annual_leave = models.IntegerField()
     sick_leave = models.IntegerField()
     service_leave = models.IntegerField()
 
-class Employee_role(models.Model):
+
+class EmployeeRole(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     role_id = models.ForeignKey(Roles)
 
-class Roles(models.Model):
-    role_description = models.CharField(max_length=100)
+
 
