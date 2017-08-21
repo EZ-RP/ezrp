@@ -7,7 +7,7 @@ class Address(models.Model):
     suburb = models.CharField(max_length=150)
     state = models.CharField(max_length=150)
     postcode = models.CharField(max_length=10)
-    country = models.CharField(max_length=50)
+    country = models.CharField(max_length=50, default="Australia")
 
 class Pay_details(models.Model):
     account_number = models.CharField(max_length=10)
@@ -25,6 +25,6 @@ class AttributeType (models.Model):
 # DS: Base Attribute Value Table
 class AttributeValue (models.Model):
     value = models.CharField(max_length=50)
-    attributetype = models.ForeignKey(AttributeType)
+    attribute_type = models.ForeignKey(AttributeType)
 
 

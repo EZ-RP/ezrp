@@ -5,11 +5,11 @@ from django.db import models
 class Employee(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    middle_name = models.CharField(max_length=30)
+    middle_name = models.CharField(max_length=30, blank=True)
     date_of_birth = models.DateField()
-    role_id = models.IntegerField()
+    role_id = models.ForeignKey(Roles)
     start_date = models.DateField()
-    end_date = models.DateField()
+    end_date = models.DateField(blank=True)
     payroll_id = models.IntegerField()
     pay_rate = models.IntegerField()
 
