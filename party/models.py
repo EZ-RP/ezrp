@@ -1,6 +1,11 @@
 from django.db import models
 from base.models import Address
 
+"""Naming conventions:
+    - Class names                           = CamelCase
+    - Function or model field names         = lowercase_underscore"""
+
+
 class Party(models.Model):
     PARTY_TYPE = (
         ('C', 'Customer'),

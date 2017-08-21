@@ -1,6 +1,8 @@
 from django.db import models
 
-# Create your models here.
+"""Naming conventions:
+    - Class names                           = CamelCase
+    - Function or model field names         = lowercase_underscore"""
 
 
 class Roles(models.Model):

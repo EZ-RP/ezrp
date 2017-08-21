@@ -1,6 +1,11 @@
 from django.db import models
 
 
+"""Naming conventions:
+    - Class names                           = CamelCase
+    - Function or model field names         = lowercase_underscore"""
+
+
 class Address(models.Model):
     street = models.CharField(max_length=150)
     suburb = models.CharField(max_length=150)

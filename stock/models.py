@@ -1,8 +1,12 @@
 from django.db import models
-# Create your models here.
+
+
+"""Naming conventions:
+    - Class names                           = CamelCase
+    - Function or model field names         = lowercase_underscore"""
 
 class Inventory(models.Model):
-    itemID = models.CharField(max_length=30, primary_key=True)
-    availableQuantity = models.IntegerField
-    reservedQuantity = models.IntegerField
-    orderedQuantity = models.IntegerField
+    item_id = models.CharField(max_length=30, primary_key=True)
+    available_qty = models.IntegerField
+    reserved_qty = models.IntegerField
+    ordered_qty = models.IntegerField
