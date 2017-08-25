@@ -1,16 +1,20 @@
 from django.db import models
 
 
-# Create your models here.
+"""Naming conventions:
+    - Class names                           = CamelCase
+    - Function or model field names         = lowercase_underscore"""
+
+
 class Item(models.Model):
-    itemId = models.CharField(max_length=30, primary_key=True)
-    itemDescription = models.CharField(max_length=120)
+    item_id = models.CharField(max_length=30)
+    item_desc = models.CharField(max_length=120)
     units = models.CharField(max_length=30)
-    productCategory = models.CharField(max_length=30)
+    product_category = models.CharField(max_length=30)
 
 
-class Item_Attributes(models.Model):
-    itemId = models.ForeignKey(Item, on_delete=models.CASCADE)
+class ItemAttribute(models.Model):
+    item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
     height = models.IntegerField()
     width = models.IntegerField()
     thickness = models.IntegerField()

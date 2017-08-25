@@ -1,6 +1,8 @@
 from django.db import models
 
-# Create your models here.
+"""Naming conventions:
+    - Class names                           = CamelCase
+    - Function or model field names         = lowercase_underscore"""
 
 
 class Roles(models.Model):
@@ -29,6 +31,7 @@ class Leave(models.Model):
 class EmployeeRole(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     role_id = models.ForeignKey(Roles)
+
 
 
 

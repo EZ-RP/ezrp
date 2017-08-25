@@ -2,7 +2,11 @@ from django.db import models
 from base.models import Address
 
 
-# Create your models here.
+"""Naming conventions:
+    - Class names                           = CamelCase
+    - Function or model field names         = lowercase_underscore"""
+
+
 class Order(models.Model):
     ORDER_STATUS = (
         ('Created', 'Created'),
@@ -14,24 +18,24 @@ class Order(models.Model):
         ('S', 'Sale'),
         ('P', 'Purchase')
     )
-    OrderNumber = models.IntegerField()
-    AccountNumber = models.CharField(max_length=8)
-    OrderType = models.CharField(max_length=1, choices=ORDER_TYPE)
-    Address = models.ForeignKey(Address)
-    CreatedDate = models.DateTimeField(auto_now=True)
-    DeliveryDate = models.DateTimeField()
-    OrderStatus = models.CharField(max_length=1, choices=ORDER_STATUS)
-    InvoiceDate = models.DateTimeField()
+    order_number = models.IntegerField()
+    account_number = models.CharField(max_length=8)
+    order_type = models.CharField(max_length=1, choices=ORDER_TYPE)
+    address = models.ForeignKey(Address)
+    created_date = models.DateTimeField(auto_now=True)
+    delivery_date = models.DateTimeField()
+    order_status = models.CharField(max_length=1, choices=ORDER_STATUS)
+    invoice_date = models.DateTimeField()
 
 
 class OrderLine(models.Model):
-    OrderLineId = models.IntegerField()
-    OrderNumber = models.ForeignKey(Order)
-    ItemId = models.IntegerField()
-    Quantity = models.IntegerField()
-    Price = models.FloatField()
-    DiscountPrice = models.FloatField()
-    Unit = models.CharField(max_length=10)
+    order_line_id = models.IntegerField()
+    order_number = models.ForeignKey(Order)
+    item_id = models.IntegerField()
+    quantity = models.IntegerField()
+    price = models.FloatField()
+    discount_price = models.FloatField()
+    unit = models.CharField(max_length=10)
 
 
 # DS: Base Attribute Value Table
@@ -46,22 +50,22 @@ class ProductAttributeDimensions(models.Model):
         ('Dim7', 'Dimension 7'),
         ('Dim8', 'Dimension 8')
     )
-    productCategory = models.CharField(max_length=30)
+    product_category = models.CharField(max_length=30)
     dim = models.CharField(max_length=1, choices=PRODUCT_DIMS)
     required = models.BooleanField()
 
 
 # DS: Base Attribute Value Table
 class DiscountAttributeTypes(models.Model):
-    productCategory = models.CharField(max_length=30)
-    dimension1 = models.CharField(max_length=50)
-    dimension2 = models.CharField(max_length=50)
-    dimension3 = models.CharField(max_length=50)
-    dimension4 = models.CharField(max_length=50)
-    dimension5 = models.CharField(max_length=50)
-    dimension6 = models.CharField(max_length=50)
-    dimension7 = models.CharField(max_length=50)
-    dimension8 = models.CharField(max_length=50)
+    product_category = models.CharField(max_length=30)
+    dimension_1 = models.CharField(max_length=50)
+    dimension_2 = models.CharField(max_length=50)
+    dimension_3 = models.CharField(max_length=50)
+    dimension_4 = models.CharField(max_length=50)
+    dimension_5 = models.CharField(max_length=50)
+    dimension_6 = models.CharField(max_length=50)
+    dimension_7 = models.CharField(max_length=50)
+    dimension_8 = models.CharField(max_length=50)
 
 
 # DS: Base Attribute Value Table
@@ -70,7 +74,7 @@ class DiscountAttributeValues(models.Model):
         ('Add', 'Add to price'),
         ('Apply', 'Apply to price')
     )
-    productAttributeType = models.ForeignKey(DiscountAttributeTypes)
+    product_attribute_type = models.ForeignKey(DiscountAttributeTypes)
     value = models.FloatField()
-    applyType = models.CharField(max_length=1, choices=APPLY_TYPE)
+    apply_type = models.CharField(max_length=1, choices=APPLY_TYPE)
 
