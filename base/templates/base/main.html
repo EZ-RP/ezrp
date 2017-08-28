@@ -1,116 +1,25 @@
 <!doctype html>
+
+{% extends "base/template.html" %}
 <html>
 <head>
-	<meta charset="utf-8">
-	<title>EZRP - Solution to your resource planning needs</title>
-	<style>
-		h1 {
-			font-size: 48px;
-			font-style: italic;
-			margin-left: 100px;
-		}
-		h2 {
-			font-size: 48px;
-			font-style: italic;
-			margin-right: 100px;
-			margin-left: 550px;
-		}
-		h3 {
-			font-size: 24px;
-			font-style: italic;
-		}
-		.banner {
-			background:linear-gradient(#0D7E96, #2BCBEC);
-			height: 100px;
-			width: 800px;
-			margin: auto;
-			align-content: center;
-
-		}
-		.banner ul{
-			list-style-type: none;
-			width: 600px;
-			height: 100px;
-			margin: auto;
-			align-content: center;
-		}
-		.banner li {
-			float: left;
-			padding: 5px;
-			outline-style: solid;
-			outline-color: white;
-			background-color:#2BCBEC;
-			width: 100px;
-			height: 90px;
-			line-height:45px;
-			text-align: center;
-			font-size: 24px;
-		}
-		.content1 {
-			border-top:10px solid white;
-			background-color: #2BCBEC;
-			height: 300px;
-			width: 800px;
-			margin: auto;
-		}
-		.content2 {
-			border-top:10px solid white;
-			background-color:#0D7E96;
-			height: 300px;
-			width: 800px;
-			margin: auto;
-		}
-		.content3 {
-			border-top:10px solid white;
-			background-color: #2BCBEC;
-			height: 300px;
-			width: 800px;
-			margin: auto;
-		}
-		.content4 {
-	border-top: 10px solid white;
-	background-color: #0D7E96;
-	height: 300px;
-	width: 800px;
-	margin: auto;
-	text-wrap: unrestricted;
-		}
-		.footer {
-			border-top: 10px solid white;
-			bottom: 0px;
-			background:linear-gradient(#0D7E96, #2BCBEC);
-			height: 100px;
-			width: 800px;
-			margin: auto;
-		}
-	</style>
 </head>
-
 <body>
-	<div class="banner" >
-		<ul>
-			<li> <h3> Home </h3></li>
-			<li> <h3> Parties </h3></li>
-			<li> <h3> Stock </h3> </li>
-			<li> <h3> Product </h3> </li>
-			<li> <h3> HR </h3> </li>
-		</ul>
-
-	</div>
-
-	<div class="content1">
+	<div class="contentGrey">
 		<h1> Parties </h1>
 	</div>
-	<div class="content2">
+	<div class="contentGreen">
 		<h2> Stock </h2>
 	</div>
-	<div class="content3">
+	<div class="contentGrey">
 		<h1> Product </h1>
-</div>
-	<div class="content4">
+	</div>
+	<div class="contentGreen">
 		<h2> Human Resources </h2>
-		hellojsadkjhasdf
-</div>
+	</div>
+	<div class="contentGrey">
+		<h2> Orders </h2>
+	</div>
 	<div class="footer">
 	footer
 	</div>
