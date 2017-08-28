@@ -4,12 +4,13 @@
 {% extends "base/template.html" %}
 </head>
 <body>
-<div class="contentGrey">
-		<h1> Stock </h1>
-	</div>
-<div class="footer">
-	footer
-	</div>
-
+    {% block content %}
+        <div class="contentGrey">
+                <h1> Stock </h1>
+            </div>
+        <div class="footer">
+            footer
+            </div>
+    {% endblock content %}
 </body>
 </html>

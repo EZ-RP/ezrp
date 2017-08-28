@@ -3,12 +3,14 @@
 <head>
 {% extends "base/template.html" %}
 </head>
-
-<div class="contentGrey">
-		<h1> Human Resources </h1>
-	</div>
-<div class="footer">
-	footer
-	</div>
-
+<body>
+    {% block content %}
+        <div class="contentGrey">
+                <h1> Human Resources </h1>
+            </div>
+        <div class="footer">
+            footer
+            </div>
+    {% endblock content %}
+</body>
 </html>
