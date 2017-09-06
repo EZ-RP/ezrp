@@ -110,25 +110,28 @@
 <body style="background: #e4e4e4">
 	<div class="banner">
 		<ul>
-			<li> <a href="main.html"> Home </a> </li>
-			<li> <a href="party\Parties.html"> Parties </a>
+			<li> <a href="{% url 'base_Main' %}"> Home </a> </li>
+			<li> <a href="{% url 'party_Main' %}"> Parties </a>
 				<ul>
 					<li> <a href="#"> Vendors </a> </li>
 					<li> <a href="#"> Customers </a> </li>
 				</ul>
 
 			</li>
-			<li> <a href="stock/Stock.html"> Stock </a> </li>
-			<li> <a href="product/Product.html"> Product </a> </li>
-			<li> <a href="human_resources/humanResources.html"> HR </a>
+			<li> <a href="{% url 'stock_Main' %}"> Stock </a> </li>
+			<li> <a href="{% url 'product_Main' %}"> Product </a> </li>
+			<li> <a href="{% url 'humanResources_Main' %}"> HR </a>
 				<ul>
 					<li> <a href="#"> Employees </a> </li>
 				</ul>
 			</li>
-			<li> <a href="order/Orders.html"> Orders </a> </li>
+			<li> <a href="{% url 'order_Main' %}"> Orders </a> </li>
 		</ul>
 
 	</div>
 
+    <div id="content">
+        {% block content %}{% endblock content%}
+    </div>
 </body>
 </html>
