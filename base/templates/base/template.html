@@ -116,7 +116,6 @@
 					<li> <a href="{% url 'customers' %}"> Customers </a> </li>
 					<li> <a href="#"> Vendors </a> </li>
 				</ul>
-
 			</li>
 			<li> <a href="{% url 'stock_Main' %}"> Stock </a> </li>
 			<li> <a href="{% url 'product_Main' %}"> Product </a> </li>
@@ -125,7 +124,12 @@
 					<li> <a href="#"> Employees </a> </li>
 				</ul>
 			</li>
-			<li> <a href="{% url 'order_Main' %}"> Orders </a> </li>
+			<li> <a> Orders </a>
+				<ul>
+					<li> <a href="{% url 'sales' %}"> Sales </a> </li>
+					<li> <a href="{% url 'purchases' %}"> Purchases </a> </li>
+				</ul>
+            </li>
 		</ul>
 
 	</div>

@@ -6,11 +6,16 @@
 <body>
     {% block content %}
         <div class="contentGrey">
-                <h1> Orders </h1>
-            </div>
+            <h1> Sales </h1>
+            <a href="{% url 'all_sales' %}">Sales</a>
+        </div>
+        <div class="contentGrey">
+            <h1> Purchases </h1>
+            <a href="{% url 'all_purchases' %}">Purchases</a>
+        </div>
         <div class="footer">
             footer
-            </div>
+        </div>
     {% endblock content %}
 </body>
 </html>
