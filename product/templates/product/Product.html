@@ -2,12 +2,17 @@
 <html>
 <head>
 {% extends "base/template.html" %}
+    {% load render_table from django_tables2 %}
+    {% load static %}
 </head>
 <body>
     {% block content %}
         <div class="contentGrey">
                 <h1> Product </h1>
             </div>
+        <div class="contentGrey">
+        {% render_table product %}
+        </div>
         <div class="footer">
             footer
             </div>

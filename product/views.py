@@ -3,5 +3,5 @@ from django.http import HttpResponse
 # Create your views here.
 
 
-def main(request):
-    return render(request, 'product/Product.html')
+def product(request):
+    return render(request, 'product/product.html', {'product': product.objects.all()})
