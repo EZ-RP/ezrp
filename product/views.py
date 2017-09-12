@@ -4,4 +4,4 @@ from django.http import HttpResponse
 
 
 def product(request):
-    return render(request, 'product/product.html', {'product': product.objects.all()})
+    return render(request, 'product/product.html', {'product': Product.objects.all()})
