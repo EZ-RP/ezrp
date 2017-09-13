@@ -8,11 +8,12 @@
 <body>
     {% block content %}
         <div class="contentGrey">
-                <h1> Product </h1>
+            <h1> Product </h1>
+            <div class="contentGrey">
+                {% render_table product %}
             </div>
-        <div class="contentGrey">
-        {% render_table product %}
         </div>
+
         <div class="footer">
             footer
             </div>
