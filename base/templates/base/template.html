@@ -31,7 +31,7 @@
 		}
 		.banner ul{
 			list-style-type: none;
-			width: 700px;
+			width: 750px;
 			margin: 0;
 			padding: 0;
 			position: relative;
@@ -96,6 +96,14 @@
 			margin: auto;
 			min-width: 900px;
 		}
+        .contentBanner {
+        {#  background: linear-gradient(#585858, #e4e4e4); #}
+			border-top: 5px solid #e4e4e4;
+			min-height: 10px;
+			width: 70%;
+			margin: auto;
+			min-width: 900px;
+		}
 		.footer {
 			border-top: 5px solid #e4e4e4;
 			background: linear-gradient(#07450a, #0b6e10);
@@ -104,6 +112,15 @@
 			margin: auto;
 			min-width: 900px;
 		}
+        a.button{
+            -webkit-appearance: button;
+            -moz-appearance: button;
+            appearance: button;
+            width: 115px;
+            text-align: center;
+            text-decoration: none;
+            color: initial;
+		}
 	</style>
 </head>
 
@@ -111,6 +128,7 @@
 	<div class="banner">
 		<ul>
 			<li> <a href="{% url 'base_Main' %}"> Home </a> </li>
+            <li> <a href="{% url 'base_General' %}"> General </a> </li>
 			<li> <a>Party</a>
 				<ul>
 					<li> <a href="{% url 'customers' %}"> Customers </a> </li>
@@ -128,6 +146,7 @@
 				<ul>
 					<li> <a href="{% url 'sales' %}"> Sales </a> </li>
 					<li> <a href="{% url 'purchases' %}"> Purchases </a> </li>
+                    <li> <a href="{% url 'setup' %}"> Setup </a> </li>
 				</ul>
             </li>
 		</ul>
