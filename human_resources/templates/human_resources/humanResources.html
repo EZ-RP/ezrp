@@ -6,14 +6,24 @@
 <body>
     {% block content %}
         <div class="contentGrey">
+            <div>
                 <h1> Human Resources </h1>
-                <a href="{% url 'all_employees' %}">All employees</a>
-                <a href="{% url 'all_leave' %}">All employee leave</a>
-                <a href="{% url 'all_roles' %}">All employee roles</a>
+            </div><div>
+                <h3> Employees </h3>
+                <a class="button" href="{% url 'all_employees' %}">All Employees</a>
+                <a class="button">&nbsp;Create New Employee</a>
+            </div><div>
+                <h3> Leave </h3>
+                <a class="button" href="{% url 'all_leave' %}">All Leave</a>
+            </div><div>
+                <h3> Roles </h3>
+                <a class="button" href="{% url 'all_roles' %}">All Roles</a>
+                <a class="button">&nbsp;Create New Role</a>
             </div>
+        </div>
         <div class="footer">
             footer
-            </div>
+        </div>
     {% endblock content %}
 </body>
 </html>
