@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+    {% extends "base/template.html" %}
+    {% load render_table from django_tables2 %}
+    {% load static %}
+</head>
+<body>
+    {% block content %}
+        <div class="contentGrey">
+            <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
+            {% render_table leave %}
+        </div>
+        <div class="footer">
+            footer
+        </div>
+    {% endblock content %}
+</body>
+</html>

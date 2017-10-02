@@ -1,0 +1,6 @@
+- model: party.Party
+  account_number: 0000000001
+  fields:
+    business_number: 99999999
+    party_name: Test customer
+    party_type: C
