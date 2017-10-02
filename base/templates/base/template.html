@@ -83,7 +83,7 @@
 		.contentGreen {
 			background:linear-gradient(#07450a, #0b6e10);
 			border-top: 5px solid #e4e4e4;
-			height: 300px;
+			min-height: 300px;
 			width: 70%;
 			margin: auto;
 			min-width: 900px;
@@ -91,7 +91,7 @@
 		.contentGrey {
         {#  background: linear-gradient(#585858, #e4e4e4); #}
 			border-top: 5px solid #e4e4e4;
-			height: 300px;
+			min-height: 300px;
 			width: 70%;
 			margin: auto;
 			min-width: 900px;
@@ -116,7 +116,6 @@
 					<li> <a href="{% url 'customers' %}"> Customers </a> </li>
 					<li> <a href="#"> Vendors </a> </li>
 				</ul>
-
 			</li>
 			<li> <a href="{% url 'stock_Main' %}"> Stock </a> </li>
 			<li> <a href="{% url 'product_Main' %}"> Product </a> </li>
@@ -125,7 +124,12 @@
 					<li> <a href="#"> Employees </a> </li>
 				</ul>
 			</li>
-			<li> <a href="{% url 'order_Main' %}"> Orders </a> </li>
+			<li> <a> Orders </a>
+				<ul>
+					<li> <a href="{% url 'sales' %}"> Sales </a> </li>
+					<li> <a href="{% url 'purchases' %}"> Purchases </a> </li>
+				</ul>
+            </li>
 		</ul>
 
 	</div>

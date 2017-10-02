@@ -5,7 +5,7 @@ from .forms import PartyForm
 
 
 def all_customers(request):
-    return render(request, 'party/customer/all_customers.html', {'customers': Party.objects.all()})
+    return render(request, 'party/customer/all_customers.html', {'customers': product.objects.all()})
 
 
 def customers(request):
