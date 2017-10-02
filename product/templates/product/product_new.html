@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% block content %}
+        <h1>New Product</h1>
+    <form method="POST" class="product-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button class="save btn btn-default">Save</button>
+    </form>
+    {% endblock content %}
+</body>
+</html>

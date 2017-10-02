@@ -7,8 +7,9 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentGrey">
+        <div>
             <h1> Product </h1>
+            <button><a href="{% url 'product_new' %}">Create New Product</a></button>
             <div class="contentGrey">
                 <table class="table">{% render_table product %}</table>
             </div>
