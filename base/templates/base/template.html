@@ -121,7 +121,9 @@
 			<li> <a href="{% url 'product_Main' %}"> Product </a> </li>
 			<li> <a href="{% url 'humanResources_Main' %}"> HR </a>
 				<ul>
-					<li> <a href="#"> Employees </a> </li>
+					<li> <a href="{% url 'all_employees' %}"> Employees </a> </li>
+                    <li> <a href="{% url 'all_leave' %}"> Leave </a> </li>
+                    <li> <a href="{% url 'all_roles' %}"> Roles </a> </li>
 				</ul>
 			</li>
 			<li> <a> Orders </a>

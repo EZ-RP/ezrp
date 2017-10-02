@@ -28,7 +28,7 @@ class Leave(models.Model):
     service_leave = models.IntegerField()
 
 
-class EmployeeRole(models.Model):
+class Role(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
     role_id = models.ForeignKey(Roles)
 
