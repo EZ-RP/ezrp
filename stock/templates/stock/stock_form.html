@@ -8,8 +8,11 @@
 <body>
     {% block content %}
         <div class="contentGrey">
-        <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
-        {% render_table available %}
+
+        <form method="POST" class="InvForm">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
         </div>
     {% endblock content %}
 </body>

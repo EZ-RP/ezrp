@@ -1,120 +1,118 @@
-		h1 {
-			font-size: 48px;
-			font-style: italic;
-			margin-left: 100px;
-		}
-		h2 {
-			font-size: 48px;
-			font-style: italic;
-			margin-right: 100px;
-			margin-left: 550px;
-		}
-		h3 {
-			font-size: 24px;
-			font-style: italic;
-		}
-		.banner {
-			background: linear-gradient(#07450a, #0b6e10);
-			height: 55px;
-			width: 70%;
-			margin: 0 auto;
-			min-width: 900px;
-			max-width: 1000px;
-			text-align: center;
+h1 {
+	font-size: 48px;
+	font-style: italic;
+	margin-left: 100px;
+}
+h2 {
+	font-size: 48px;
+	font-style: italic;
+	margin-right: 100px;
+	margin-left: 550px;
+}
+h3 {
+	font-size: 24px;
+	font-style: italic;
+}
+.banner {
+	background: linear-gradient(#07450a, #0b6e10);
+	height: 55px;
+	width: 70%;
+	margin: 0 auto;
+	min-width: 900px;
+	text-align: center;
 
-		}
-		.banner ul{
-			list-style-type: none;
-			width: 750px;
-			margin: 0;
-			padding: 0;
-			position: relative;
-		}
-		.banner ul li {
-			width: 100px;
-			font-size: 24px;
-			color: white;
-			text-align: center;
-			display: inline-block;
+}
+.banner ul{
+	list-style-type: none;
+	width: 750px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+}
+.banner ul li {
+	width: 100px;
+	font-size: 24px;
+	color: white;
+	text-align: center;
+	display: inline-block;
 
-		}
-		.banner ul li:hover {
-			background:#e4e4e4;
-			color: black;
-			text-decoration: none;
+}
+.banner ul li:hover {
+	background:#e4e4e4;
+	color: black;
+	text-decoration: none;
 
-		}
-		.banner ul li a,visited {
-			text-decoration: none;
-			display: block;
-			padding: 15px;
-			color: white;
+}
+.banner ul li a,visited {
+	text-decoration: none;
+	display: block;
+	padding: 15px;
+	color: white;
 
-		}
-		.banner ul li a:hover {
-			text-decoration: none;
-			color: black;
+}
+.banner ul li a:hover {
+	text-decoration: none;
+	color: black;
 
-		}
-		.banner ul li:hover ul {
-			display: block;
-			position: absolute;
-		}
-		.banner ul ul {
-			display: none;
-			border: 3px solid #07450a;
-			border-top: 0;
-			width: auto;
+}
+.banner ul li:hover ul {
+	display: block;
+	position: absolute;
+}
+.banner ul ul {
+	display: none;
+	border: 3px solid #07450a;
+	border-top: 0;
+	width: auto;
 
-		}
-		.banner ul ul li {
-			background: #0b6e10;
-			width: auto;
-			min-width: 100px;
-			display: block;
+}
+.banner ul ul li {
+	background: #0b6e10;
+	width: auto;
+	min-width: 100px;
+	display: block;
 
-		}
-		.table {
-            text-decoration: none;
-        }
-        .contentGreen {
-			background:linear-gradient(#07450a, #0b6e10);
-			border-top: 5px solid #e4e4e4;
-			min-height: 300px;
-			width: 70%;
-			margin: auto;
-			min-width: 900px;
-		}
-		.contentGrey {
-        {#  background: linear-gradient(#585858, #e4e4e4); #}
-			border-top: 5px solid #e4e4e4;
-			min-height: 300px;
-			width: 70%;
-			margin: auto;
-			min-width: 900px;
-		}
-        .contentBanner {
-        {#  background: linear-gradient(#585858, #e4e4e4); #}
-			border-top: 5px solid #e4e4e4;
-			min-height: 10px;
-			width: 70%;
-			margin: auto;
-			min-width: 900px;
-		}
-		.footer {
-			border-top: 5px solid #e4e4e4;
-			background: linear-gradient(#07450a, #0b6e10);
-			height: 100px;
-			width: 70%;
-			margin: auto;
-			min-width: 900px;
-		}
-        a.button{
-            -webkit-appearance: button;
-            -moz-appearance: button;
-            appearance: button;
-            width: 115px;
-            text-align: center;
-            text-decoration: none;
-            color: initial;
-		}
+}
+.table {
+	text-decoration: none;
+}
+.contentGreen {
+	background:linear-gradient(#07450a, #0b6e10);
+	border-top: 5px solid #e4e4e4;
+	min-height: 300px;
+	width: 70%;
+	margin: auto;
+	min-width: 900px;
+}
+.contentGrey {
+	border-top: 5px solid #e4e4e4;
+	min-height: 300px;
+	width: 70%;
+	margin: auto;
+	min-width: 900px;
+}
+.contentBanner {
+	border-top: 5px solid #e4e4e4;
+	min-height: 10px;
+	width: 70%;
+	margin: auto;
+	min-width: 900px;
+}
+.footer {
+	border-top: 5px solid #e4e4e4;
+	background: linear-gradient(#07450a, #0b6e10);
+	color: white;
+	height: 100px;
+	width: 70%;
+	margin: auto;
+	min-width: 900px;
+}
+a.button{
+	-webkit-appearance: button;
+	-moz-appearance: button;
+	appearance: button;
+	width: 115px;
+	text-align: center;
+	text-decoration: none;
+	color: initial;
+}
