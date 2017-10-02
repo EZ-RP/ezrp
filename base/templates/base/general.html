@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+<head>
+{% extends "base/template.html" %}
+</head>
+<body>
+    {% block content %}
+        <div class="contentGrey">
+            <h1> General Setup </h1>
+            <div>
+                <a class="button" href="{% url 'all_addresses' %}">&nbsp;Addresses&nbsp;</a>
+            </div>
+            <div>
+                <a class="button" href="{% url 'all_paydetails' %}">&nbsp;Pay Details&nbsp;</a>
+            </div>
+            <div>
+                <a class="button" href="{% url 'all_attributetypes' %}">&nbsp;Attribute Types&nbsp;</a>
+            </div>
+            <div>
+                <a class="button" href="{% url 'all_attributevalues' %}">&nbsp;Attribute Values&nbsp;</a>
+            </div>
+            <div>
+                <a class="button" href="{% url 'about' %}">&nbsp;About&nbsp;</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2017 EZRP Team. Created as part of University of Newcastle Major Project
+        </div>
+    {% endblock content %}
+</body>
+</html>

@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+{% extends "base/template.html" %}
+    {% load render_table from django_tables2 %}
+    {% load static %}
+</head>
+<body>
+    {% block content %}
+        <div class="contentGrey">
+        {% render_table sales %}
+        </div>
+    {% endblock content %}
+</body>
+</html>

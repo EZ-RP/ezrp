@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    {% extends "base/template.html" %}
+</head>
+<body>
+    {% block content %}
+        <div class="contentGrey">
+            <h1> About </h1>
+            <h3>What is it?</h3>
+            <p>
+                EZRP is an online based Enterprise Resource Planning application which was designed in an open source platform.<br />
+                The open source platform for this project was inline with company requirements for heavy customisation and so the base<br />
+                version of this application is designed to be relatively generic and easy to use. <br />
+                <br />
+                The base version focuses on five main modules:<br />
+                - Human Resources<br />
+                - Parties (Customers & Vendors)<br />
+                - Orders (Sales & Purchase)<br />
+                - Products<br />
+                - Stock<br />
+            </p>
+            <h3>The Originals</h3>
+            <p>
+                The original team consists of five developers:<br />
+                <br />
+                Sam Fountain: Party Developer and Team Manager<br />
+                Dylan Swan: Order Developer and Team Leader<br />
+                Ben Daley: Product Developer and HTML Specialist<br />
+                Martin O'Connor: Human Resources Developer<br />
+                Nathan Hossary: Stock Developer<br />
+            </p>
+        </div>
+
+        <div class="footer">
+            © 2017 EZRP Team. Created as part of University of Newcastle Major Project
+        </div>
+    {% endblock content %}
+</body>
+</html>

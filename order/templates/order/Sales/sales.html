@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+{% extends "base/template.html" %}
+</head>
+<body>
+    {% block content %}
+        <div class="contentGrey">
+            <h1> Sales </h1>
+            <div>
+                <a class="button">&nbsp;Create Sale&nbsp;</a>
+            </div>
+            <div>
+                <a href="{% url 'all_sales' %}" class="button">&nbsp;All Sales&nbsp;</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            © 2017 EZRP Team. Created as part of University of Newcastle Major Project
+        </div>
+    {% endblock content %}
+</body>
+</html>
