@@ -4,6 +4,9 @@ from base.models import Address
 from base.models import PayDetails
 from base.models import AttributeType
 from base.models import AttributeValue
+from base.models import SystemParameters
+from .modelforms import AddressForm
+from .modelforms import SysParamForm
 
 
 def main(request):
@@ -33,3 +36,28 @@ def all_attributetypes(request):
 def all_attributevalues(request):
     return render(request, 'base/all_attributeValues.html', {'attributevalues': AttributeValue.objects.all()})
 
+
+def address_new(request):
+    if request.method == "POST":
+        form = AddressForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            form = AddressForm()
+    else:
+        form = AddressForm
+    return render(request, 'base/address_new.html', {'form': form})
+
+
+def all_parameters(request):
+    return render(request, 'base/all_parameters.html', {'parameters': SystemParameters.objects.all()})
+
+
+def parameters_new(request):
+    if request.method == "POST":
+        form = SysParamForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            form = SysParamForm()
+    else:
+        form = SysParamForm
+    return render(request, 'base/parameters_new.html', {'form': form})

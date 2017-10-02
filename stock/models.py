@@ -8,6 +8,6 @@ from django.db import models
 
 class Inventory(models.Model):
     item_id = models.CharField(max_length=30, primary_key=True)
-    available_qty = models.IntegerField()
-    reserved_qty = models.IntegerField()
-    ordered_qty = models.IntegerField()
+    available_qty = models.IntegerField(null=True, blank=True)
+    reserved_qty = models.IntegerField(null=True, blank=True)
+    ordered_qty = models.IntegerField(null=True, blank=True)

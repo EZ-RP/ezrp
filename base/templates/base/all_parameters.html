@@ -7,8 +7,11 @@
 </head>
 <body>
     {% block content %}
+        <div class="contentBanner">
+            <a href="{% url 'parameters_new' %}" class="button">&nbsp;Add parameter&nbsp;</a>
+        </div>
         <div class="contentGrey">
-        {% render_table purchases %}
+        {% render_table parameters %}
         </div>
     {% endblock content %}
 </body>

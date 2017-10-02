@@ -9,10 +9,10 @@ from base.models import Address
 
 class Order(models.Model):
     ORDER_STATUS = (
-        ('Created', 'Created'),
-        ('Confirmed', 'Confirmed'),
-        ('Delivered', 'Delivered'),
-        ('Invoiced', 'Invoiced')
+        ('C', 'Created'),
+        ('O', 'Ordered'),
+        ('D', 'Delivered'),
+        ('I', 'Invoiced')
     )
     ORDER_TYPE = (
         ('S', 'Sale'),
@@ -25,7 +25,7 @@ class Order(models.Model):
     created_date = models.DateTimeField(auto_now=True)
     delivery_date = models.DateTimeField()
     order_status = models.CharField(max_length=1, choices=ORDER_STATUS)
-    invoice_date = models.DateTimeField()
+    invoice_date = models.DateTimeField(null=True, blank=True)
 
 
 class OrderLine(models.Model):
@@ -58,14 +58,14 @@ class ProductAttributeDimensions(models.Model):
 # DS: Base Attribute Value Table
 class DiscountAttributeTypes(models.Model):
     product_category = models.CharField(max_length=30)
-    dimension_1 = models.CharField(max_length=50)
-    dimension_2 = models.CharField(max_length=50)
-    dimension_3 = models.CharField(max_length=50)
-    dimension_4 = models.CharField(max_length=50)
-    dimension_5 = models.CharField(max_length=50)
-    dimension_6 = models.CharField(max_length=50)
-    dimension_7 = models.CharField(max_length=50)
-    dimension_8 = models.CharField(max_length=50)
+    dimension_1 = models.CharField(max_length=50, null=True, blank=True)
+    dimension_2 = models.CharField(max_length=50, null=True, blank=True)
+    dimension_3 = models.CharField(max_length=50, null=True, blank=True)
+    dimension_4 = models.CharField(max_length=50, null=True, blank=True)
+    dimension_5 = models.CharField(max_length=50, null=True, blank=True)
+    dimension_6 = models.CharField(max_length=50, null=True, blank=True)
+    dimension_7 = models.CharField(max_length=50, null=True, blank=True)
+    dimension_8 = models.CharField(max_length=50, null=True, blank=True)
 
 
 # DS: Base Attribute Value Table

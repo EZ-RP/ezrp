@@ -8,10 +8,12 @@
 <body>
     {% block content %}
         <div class="contentBanner">
-            <a href="{% url 'address_new' %}" class="button">&nbsp;Add Address&nbsp;</a>
-        </div>
-        <div class="contentGrey">
-        {% render_table addresses %}
+            <h1> Create parameter </h1>
+
+            <form method="POST" class="SysParam-form">{% csrf_token %}
+                    {{ form.as_p }}
+                    <button class="save btn btn-default">Save</button>
+            </form>
         </div>
     {% endblock content %}
 </body>

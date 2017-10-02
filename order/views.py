@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from order.models import Order
-#from order.modelforms import OrderForm
+from .modelforms import OrderForm
 from django.http import HttpResponse
 # Create your views here.
 
@@ -25,5 +25,15 @@ def all_purchases(request):
     return render(request, 'order/Purchases/all_purchaseOrders.html', {'purchases': Order.objects.all()})
 
 
-#def test(request):
-    #return OrderForm()
+def sale_new(request):
+    if request.method == "POST":
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            order = form.save(commit=False)
+            order.order_type = 'S'
+            order.save()
+            form = OrderForm()
+    else:
+        form = OrderForm()
+    return render(request, 'order/Sales/sale_new.html', {'form': form})
+

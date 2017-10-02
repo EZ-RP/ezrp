@@ -13,6 +13,8 @@ class Address(models.Model):
     postcode = models.CharField(max_length=10)
     country = models.CharField(max_length=50, default="Australia")
 
+    def __str__(self):
+        return '%s %s %s %s' % (self.street, self.suburb, self.state, self.postcode)
 
 class PayDetails(models.Model):
     account_number = models.CharField(max_length=10)
@@ -30,5 +32,11 @@ class AttributeType (models.Model):
 class AttributeValue (models.Model):
     value = models.CharField(max_length=50)
     attribute_type = models.ForeignKey(AttributeType)
+
+
+# DS: SystemParameters Table
+class SystemParameters (models.Model):
+    description = models.CharField(max_length=200)
+    str_value = models.CharField(max_length=150)
 
 
