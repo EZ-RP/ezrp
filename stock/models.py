@@ -21,4 +21,11 @@ class Inventory(models.Model):
         else:
             return qty - self.available_qty
 
-
+    def return_reserved_qty(self, qty: float):
+        if self.reserved_qty >= qty:
+            self.available_qty += qty
+            self.reserved_qty -= qty
+            self.save()
+            return 0
+        else:
+            return qty - self.reserved_qty
