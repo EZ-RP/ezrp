@@ -5,11 +5,16 @@
 </head>
 <body>
     {% block content %}
+        <div class="contentGrey">
+        <form method="post">
+        {% csrf_token %}
         <h1>New customer</h1>
-    <form method="POST" class="customer-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button class="save btn btn-default button">Save</button>
-    </form>
+        {{ form_customer.as_p }}
+        <h3>Address</h3>
+        {{ form_address.as_p }}
+    <button>Save</button>
+        </form>
+        </div>
     {% endblock content %}
 </body>
 </html>

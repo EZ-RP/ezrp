@@ -22,3 +22,8 @@ class PartyAddress(models.Model):
 
     account_number = models.ForeignKey(Party, on_delete=models.CASCADE, verbose_name='Related account')
     address_id = models.ForeignKey(Address, verbose_name='Related address')
+
+    def add_address_ref(self, address: Address, party: Party):
+        self.account_number = party
+        self.address_id = address
+        self.save()
