@@ -9,15 +9,11 @@
     {% block content %}
         <div>
             <h1> Product </h1>
-            <button><a href="{% url 'product_new' %}">Create New Product</a></button>
+            <a class='button' href="{% url 'product_new' %}">New Product</a>
             <div class="contentGrey">
                 <table class="table">{% render_table product %}</table>
             </div>
         </div>
-
-        <div class="footer">
-            footer
-            </div>
     {% endblock content %}
 </body>
 </html>
