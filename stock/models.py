@@ -13,6 +13,12 @@ class Inventory(models.Model):
     ordered_qty = models.FloatField(null=True, blank=True)
 
     def reserve_qty(self, qty: float):
+        """
+        Call method to reserve a qty of an item.
+        Return value is the qty not reserved, if any, else zero
+        :param qty:
+        :return Qty not reserved:
+        """
         if self.available_qty >= qty:
             self.reserved_qty += qty
             self.available_qty -= qty
