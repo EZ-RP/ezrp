@@ -39,7 +39,7 @@ def employee_new(request):
         form_pay_details = PayDetailsForm()
     return render(request, 'human_resources/employee_new.html', {'form_employee': form_employee,
                                                                  'form_address': form_address,
-                                                                'form_pay_details': form_pay_details})
+                                                                 'form_pay_details': form_pay_details})
 
 
 def leave(request):
@@ -59,7 +59,7 @@ def role_new(request):
             role.save()
     else:
         form_role = RoleForm()
-    return render(request, 'human_resources/role_new.html', {'form_employee': form_role,})
+    return render(request, 'human_resources/role_new.html', {'form_role': form_role})
 
 
 def pay(request):
