@@ -33,7 +33,7 @@ class Employee(models.Model):
 
 
 class EmployeeAddress(models.Model):
-    employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name='Related account')
     address_id = models.ForeignKey(Address, verbose_name='Related address')
 
     def add_address_ref(self, address: Address, employee: Employee):
@@ -43,7 +43,7 @@ class EmployeeAddress(models.Model):
 
 
 class EmployeePayDetails(models.Model):
-    employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE, verbose_name='Related account')
     pay_details_id = models.ForeignKey(PayDetails, verbose_name='Related pay_details')
 
     def add_address_ref(self, pay_details: PayDetails, employee: Employee):

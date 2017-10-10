@@ -6,11 +6,16 @@
 <body>
     {% block content %}
         <div class="contentGrey">
-            <h1> Create Employee </h1>
-
-            <form method="POST" class="employee-form">{% csrf_token %}
-                {{ form.as_p }}
-                <button class="save btn btn-default">Save</button>
+            <form method="post">
+                {% csrf_token %}
+                <h1>New Employee</h1>
+                <h3>Employee Details</h3>
+                {{ form_employee.as_p }}
+                <h3>Employee Address</h3>
+                {{ form_address.as_p }}
+                <h3>Employee Pay Details</h3>
+                {{ form_pay_details.as_p }}
+                <button>Save</button>
             </form>
         </div>
     {% endblock content %}
