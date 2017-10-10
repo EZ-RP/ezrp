@@ -2,6 +2,7 @@ from django.shortcuts import render
 from human_resources.models import Employee
 from human_resources.models import Leave
 from human_resources.models import Roles
+from human_resources.models import Payday
 from .modelforms import EmployeeForm
 from .modelforms import RoleForm
 from django.http import HttpResponse
@@ -45,4 +46,7 @@ def role_new(request):
         form = RoleForm
     return render(request, 'human_resources/role_new.html', {'form': form})
 
+
+def pay(request):
+    return render(request, 'human_resources/all_pay.html', {'pay': Payday.objects.all()})
 
