@@ -28,15 +28,6 @@ def all_addresses(request):
 def all_paydetails(request):
     return render(request, 'base/all_payDetails.html', {'paydetails': PayDetails.objects.all()})
 
-
-def all_attributetypes(request):
-    return render(request, 'base/all_attributeTypes.html', {'attributetypes': AttributeType.objects.all()})
-
-
-def all_attributevalues(request):
-    return render(request, 'base/all_attributeValues.html', {'attributevalues': AttributeValue.objects.all()})
-
-
 def address_new(request):
     if request.method == "POST":
         form = AddressForm(request.POST)
@@ -50,6 +41,15 @@ def address_new(request):
 
 def all_parameters(request):
     return render(request, 'base/all_parameters.html', {'parameters': SystemParameters.objects.all()})
+
+
+# DS: removed until post release upgrade
+def all_attributetypes(request):
+    return render(request, 'base/all_attributeTypes.html', {'attributetypes': AttributeType.objects.all()})
+
+
+def all_attributevalues(request):
+    return render(request, 'base/all_attributeValues.html', {'attributevalues': AttributeValue.objects.all()})
 
 
 def parameters_new(request):

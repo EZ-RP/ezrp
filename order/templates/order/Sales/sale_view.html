@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+{% extends "base/template.html" %}
+    {% load render_table from django_tables2 %}
+    {% load static %}
+</head>
+<body>
+    {% block content %}
+        <div class="contentGrey">
+            <form method="POST">
+                {% csrf_token %}
+                <h1> Sale </h1>
+                {{ form_order.as_p }}
+                <h1> Add Line </h1>
+                {{ form_orderline.as_p }}
+                <button class="save btn btn-default">Save</button>
+                <h1> Lines </h1>
+                <div class="contentGrey">
+                </div>
+            </form>
+        </div>
+    {% endblock content %}
+</body>
+</html>
