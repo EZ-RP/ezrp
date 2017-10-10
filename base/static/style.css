@@ -75,6 +75,7 @@ h3 {
 }
 .table {
 	text-decoration: none;
+	font-size: large;
 }
 .contentGreen {
 	background:linear-gradient(#07450a, #0b6e10);

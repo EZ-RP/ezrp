@@ -6,12 +6,13 @@ from .forms import ProductForm
 
 def product_new(request):
     if request.method == "POST":
-        form = ProductForm(request.POST)
-        if form.is_valid():
+        form_product = ProductForm(request.POST)
+        if form_product.is_valid():
             product = form.save(commit=False)
             product.save()
     else:
-        form = PartyForm()
-    return render(request, 'party/customer/customer_new.html', {'form': form})
+        form_product = ProductForm()
+    return render(request, 'product/product_new.html', {'form_product': form_product})
+
 def product(request):
     return render(request, 'product/product.html', {'product': Item.objects.all()})
