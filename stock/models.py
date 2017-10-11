@@ -28,6 +28,12 @@ class Inventory(models.Model):
             return qty - self.available_qty
 
     def return_reserved_qty(self, qty: float):
+        """
+        Call method to return reserved qty of an item to available stock.
+        Return value is the qty not returned, if any, else zero
+        :param qty:
+        :return Qty not returned:
+        """
         if self.reserved_qty >= qty:
             self.available_qty += qty
             self.reserved_qty -= qty
@@ -35,3 +41,11 @@ class Inventory(models.Model):
             return 0
         else:
             return qty - self.reserved_qty
+
+    def quantity_received(self, qty: float):
+        """
+        Call method to increase available stock from a purchase order.
+        """
+        self.available_qty += qty
+        self.save()
+        return 0
