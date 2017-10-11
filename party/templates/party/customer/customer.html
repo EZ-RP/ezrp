@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+{% extends "base/template.html" %}
+</head>
+<body>
+    {% block content %}
+        <div class="contentGrey">
+        <form method="post">
+        {% csrf_token %}
+        {{ form_customer.as_p }}
+        </form>
+        </div>
+    {% endblock content %}
+</body>
+</html>

@@ -1,12 +1,15 @@
 from django.db import transaction
 from django.shortcuts import render
 from party.models import Party, PartyAddress
+from party.tables import CustomerTable
 from .forms import PartyForm
 from base.modelforms import AddressForm
+from django_tables2 import RequestConfig
 
 
 def all_customers(request):
-    customers = Party.objects.filter(party_type='C')
+    customers = CustomerTable(Party.objects.filter(party_type='C'))
+    RequestConfig(request).configure(customers)
     return render(request, 'party/customer/all_customers.html', {'customers': customers})
 
 
@@ -30,10 +33,17 @@ def customer_new(request):
             party_address = PartyAddress()
             PartyAddress.add_address_ref(party_address, address, party)
 
+
     else:
         form_customer = PartyForm()
         form_address = AddressForm()
     return render(request, 'party/customer/customer_new.html', {'form_customer': form_customer, 'form_address': form_address})
+
+
+def customer(request, account_number):
+    customer = Party.objects.get(account_number=account_number)
+    form_customer = PartyForm(instance=customer)
+    return render(request, 'party/customer/customer.html', {'form_customer': form_customer})
 
 
 def vendors(request):
