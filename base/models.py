@@ -16,6 +16,7 @@ class Address(models.Model):
     def __str__(self):
         return '%s %s %s %s' % (self.street, self.suburb, self.state, self.postcode)
 
+
 class PayDetails(models.Model):
     account_number = models.CharField(max_length=10)
     bsb_number = models.CharField(max_length=10)

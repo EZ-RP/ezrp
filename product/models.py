@@ -13,6 +13,7 @@ class Item(models.Model):
     product_category = models.CharField(max_length=30)
 
 
+# DS: removed until post release upgrade
 class ItemAttribute(models.Model):
     item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
     height = models.IntegerField()

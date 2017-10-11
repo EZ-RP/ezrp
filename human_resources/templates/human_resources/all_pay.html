@@ -1,17 +1,16 @@
 <!doctype html>
 <html>
 <head>
-{% extends "base/template.html" %}
+    {% extends "base/template.html" %}
     {% load render_table from django_tables2 %}
     {% load static %}
 </head>
 <body>
     {% block content %}
-        <div class="contentBanner">
-            <a href="{% url 'sale_view' %}" class="button">&nbsp;View Order&nbsp;</a>
-        </div>
+
         <div class="contentGrey">
-        {% render_table sales %}
+            <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
+            {% render_table pay %}
         </div>
     {% endblock content %}
 </body>
