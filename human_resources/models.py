@@ -16,10 +16,14 @@ class Roles(models.Model):
 
 
 class Employee(models.Model):
-    PAYROLL_ID = (
-        ('C', 'Casual'),
-        ('I', 'Independent'),
+    PAYROLL_TYPE = (
+        ('F', 'Full-Time'),
+        ('P', 'Part-time'),
         ('S', 'Salary')
+    )
+    STATUS_TYPE = (
+        ('O', 'Ongoing'),
+        ('T', 'Temporary')
     )
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -28,8 +32,13 @@ class Employee(models.Model):
     role_id = models.ForeignKey(Roles)
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
-    payroll_id = models.CharField(max_length=1, choices=PAYROLL_ID)
+    payroll_type = models.CharField(max_length=1, choices=PAYROLL_TYPE)
     pay_rate = models.IntegerField()
+    phone_number = models.IntegerField()
+    employment_status = models.CharField(max_length=1, choices=STATUS_TYPE)
+
+    def __str__(self):
+        return '%s %s %s' % (self.first_name, self.middle_name, self.last_name,)
 
 
 class EmployeeAddress(models.Model):
@@ -64,8 +73,3 @@ class Payday(models.Model):
     start_pay_date = models.DateField()
     end_pay_date = models.DateField()
     hours = models.FloatField()
-    pay = models.FloatField()
-
-    def pay(self):
-        rate = self.employee_id.pay_rate
-        return rate*self.hours

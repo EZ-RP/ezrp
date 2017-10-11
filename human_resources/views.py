@@ -1,7 +1,7 @@
 from django.db import transaction
 from django.shortcuts import render
 from human_resources.models import Employee, Leave, Roles, Payday, EmployeeAddress, EmployeePayDetails
-from .forms import EmployeeForm, RoleForm
+from .forms import EmployeeForm, RoleForm, PayForm
 from base.modelforms import AddressForm, PayDetailsForm
 # Create your views here.
 
@@ -65,3 +65,14 @@ def role_new(request):
 def pay(request):
     return render(request, 'human_resources/all_pay.html', {'pay': Payday.objects.all()})
 
+
+@transaction.atomic
+def pay_new(request):
+    if request.method == "POST":
+        form_pay = PayForm(request.POST)
+        if form_pay.is_valid():
+            new_pay = form_pay.save(commit=False)
+            new_pay.save()
+    else:
+        form_pay = PayForm()
+    return render(request, 'human_resources/pay_new.html', {'form_pay': form_pay})

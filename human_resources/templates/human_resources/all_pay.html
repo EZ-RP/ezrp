@@ -7,7 +7,9 @@
 </head>
 <body>
     {% block content %}
-
+        <div class="contentBanner">
+            <a href="{% url 'pay_new' %}" class="button">&nbsp;Add Pay&nbsp;</a>
+        </div>
         <div class="contentGrey">
             <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
             {% render_table pay %}
