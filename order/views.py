@@ -72,17 +72,17 @@ def saleline_new(request):
 
 def sale_view(request):
     if request.method == "POST":
-        form_order = OrderForm(request.POST)
+        form_order = OrderForm(request.GET)
         form_orderline = LineForm(request.POST)
         if form_order.is_valid() and form_orderline.is_valid():
 
             orderline = form_orderline.save(commit=False)
-            orderline.order_line_id = 1
+            orderline.order_line_id = form_order.order_number
             orderline.order_number = 1
             orderline.unit = "ea"
             orderline.save()
     else:
-        form_order = OrderForm()
+        form_order = OrderForm(request.GET)
         form_orderline = LineForm()
     return render(request, 'order/Sales/sale_view.html', {'form_order': form_order, 'form_orderline': form_orderline})
 

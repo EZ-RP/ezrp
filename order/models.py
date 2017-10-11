@@ -1,5 +1,6 @@
 from django.db import models
 from base.models import Address
+from party.models import Party
 from django.contrib.admin import widgets
 
 
@@ -20,7 +21,7 @@ class Order(models.Model):
         ('P', 'Purchase')
     )
     order_number = models.IntegerField()
-    account_number = models.CharField(max_length=8)
+    account_number = models.CharField(max_length=8) #models.ForeignKey(Party)  #
     order_type = models.CharField(max_length=1, choices=ORDER_TYPE)
     address = models.ForeignKey(Address)
     created_date = models.DateTimeField(auto_now=True)

@@ -8,7 +8,7 @@ from base.models import PayDetails
 
 
 class Roles(models.Model):
-    role_name = models.CharField(max_length=10)
+    role_name = models.CharField(max_length=10, default='default')
     role_description = models.CharField(max_length=100)
 
     def __str__(self):
@@ -32,10 +32,10 @@ class Employee(models.Model):
     role_id = models.ForeignKey(Roles)
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
-    payroll_type = models.CharField(max_length=1, choices=PAYROLL_TYPE)
-    pay_rate = models.IntegerField()
-    phone_number = models.IntegerField()
-    employment_status = models.CharField(max_length=1, choices=STATUS_TYPE)
+    payroll_type = models.CharField(max_length=1, choices=PAYROLL_TYPE, default='F')
+    pay_rate = models.IntegerField(blank=True)
+    phone_number = models.IntegerField(blank=True)
+    employment_status = models.CharField(max_length=1, choices=STATUS_TYPE, default='O')
 
     def __str__(self):
         return '%s %s %s' % (self.first_name, self.middle_name, self.last_name,)
