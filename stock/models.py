@@ -49,3 +49,56 @@ class Inventory(models.Model):
         self.available_qty += qty
         self.save()
         return 0
+
+    def remove_reserved_qty(self, qty: float):
+        """
+        Call method to remove the reserved qty of an item once it is shipped to the customer.
+        Return value is the qty not removed, if any, else zero
+        :param qty:
+        :return Qty not removed:
+        """
+        if self.reserved_qty >= qty:
+            self.reserved_qty -= qty
+            self.save()
+            return 0
+        else:
+            return qty - self.reserved_qty
+
+    def add_ordered_qty(self, qty: float):
+        """
+        Call method to increase ordered stock qty.
+        """
+        self.ordered_qty += qty
+        self.save()
+        return 0
+
+    def add_ordered_to_available(self, qty: float):
+        """
+        Call method to add ordered qty of an item to available stock.
+        Return value is the qty not added, if any, else zero
+        :param qty:
+        :return Qty not added:
+        """
+        if self.ordered_qty >= qty:
+            self.available_qty += qty
+            self.ordered_qty -= qty
+            self.save()
+            return 0
+        else:
+            return qty - self.ordered_qty
+
+    def add_ordered_to_reserved(self, qty: float):
+        """
+        Call method to add ordered qty of an item to reserved stock.
+        Return value is the qty not added, if any, else zero
+        :param qty:
+        :return Qty not added:
+        """
+        if self.ordered_qty >= qty:
+            self.reserved_qty += qty
+            self.ordered_qty -= qty
+            self.save()
+            return 0
+        else:
+            return qty - self.ordered_qty
+
