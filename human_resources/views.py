@@ -32,7 +32,7 @@ def employee_new(request):
             pay_details = form_pay_details.save(commit=False)
             pay_details.save()
             employee_pay_details = EmployeePayDetails()
-            EmployeePayDetails.add_address_ref(employee_pay_details, address, employee)
+            EmployeePayDetails.add_address_ref(employee_pay_details, pay_details, employee)
     else:
         form_employee = EmployeeForm()
         form_address = AddressForm()
