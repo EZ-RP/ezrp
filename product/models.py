@@ -8,7 +8,8 @@ from django.db import models
 
 class Item(models.Model):
     item_id = models.CharField(max_length=30)
-    item_desc = models.CharField(max_length=120)
+    name = models.CharField(max_length=30)
+    item_desc = models.CharField(verbose_name="Description",max_length=120)
     units = models.CharField(max_length=30)
     product_category = models.CharField(max_length=30)
 
