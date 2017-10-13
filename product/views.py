@@ -8,7 +8,7 @@ def product_new(request):
     if request.method == "POST":
         form_product = ProductForm(request.POST)
         if form_product.is_valid():
-            product = form.save(commit=False)
+            product = form_product.save(commit=False)
             product.save()
     else:
         form_product = ProductForm()
