@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+<head>
+{% extends "base/template.html" %}
+</head>
+<body>
+    {% block content %}
+        <div class="contentGrey">
+        <form method="post" d >
+        {% csrf_token %}
+        <h1> Sale </h1>
+        <fieldset disabled="true">
+        {{ form_sale.as_p }}
+        </fieldset>
+        </form>
+        <form method="POST">
+        {% csrf_token %}
+        <h1> Add Line </h1>
+        {{ form_orderline.as_p }}
+        <button class="save btn btn-default">Save</button>
+        </form>
+        </div>
+    {% endblock content %}
+</body>
+</html>

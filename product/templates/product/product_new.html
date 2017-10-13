@@ -6,11 +6,10 @@
 <body>
     {% block content %}
         <div class="contentGrey">
-            <form method="POST">
-                {% csrf_token %}
             <h1>New Product</h1>
+            <form method="POST" class="product-form">{% csrf_token %}
             {{ form_product.as_p }}
-            <button>Save</button>
+            <button class="save btn btn-default">Save</button>
             </form>
         </div>
     {% endblock content %}

@@ -7,12 +7,11 @@
 </head>
 <body>
     {% block content %}
-        <div>
-            <h1> Product </h1>
-            <a class='button' href="{% url 'product_new' %}">New Product</a>
-            <div class="contentGrey">
-                <table class="table">{% render_table product %}</table>
-            </div>
+        <div class="contentBanner">
+        <a class='button' href="{% url 'product_new' %}">New Product</a>
+        </div>
+        <div class="contentGrey">
+        {% render_table product %}
         </div>
     {% endblock content %}
 </body>

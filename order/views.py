@@ -5,6 +5,8 @@ from order.models import OrderLine
 from .modelforms import OrderForm
 from .modelforms import LineForm
 from django.http import HttpResponse
+from django_tables2 import RequestConfig
+from order.tables import SaleTable
 # Create your views here.
 
 
@@ -21,8 +23,11 @@ def setup(request):
 
 
 def all_sales(request):
-    return render(request, 'order/Sales/all_salesOrders.html',
-                  {'sales': Order.objects.filter(order_type="S")})
+    saless = SaleTable(Order.objects.filter(order_type="S"))
+    RequestConfig(request).configure(saless)
+    return render(request, 'order/Sales/all_salesOrders.html', {'sales': saless})
+    # return render(request, 'order/Sales/all_salesOrders.html',
+    #             {'sales': Order.objects.filter(order_type="S")})
 
 
 def all_saleslines(request):
@@ -37,7 +42,13 @@ def single_sales(request):
 
 def all_purchases(request):
     return render(request, 'order/Purchases/all_purchaseOrders.html',
-                {'purchases': Order.objects.filter(order_type="P")})
+                  {'purchases': Order.objects.filter(order_type="P")})
+
+
+def sale(request, order_number):
+    singlesale = Order.objects.get(order_number=order_number, order_type='S')
+    form_order = OrderForm(instance=singlesale)
+    return render(request, 'order/Sales/sale.html', {'form_sale': form_order})
 
 
 def sale_new(request):
