@@ -10,6 +10,7 @@ def product_new(request):
         if form_product.is_valid():
             prod = form_product.save(commit=False)
             prod.save()
+            return render(request, 'product/product.html', {'product': Item.objects.all()})
     else:
         form_product = ProductForm()
     return render(request, 'product/product_new.html', {'form_product': form_product})
