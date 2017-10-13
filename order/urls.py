@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^sales/single_salesOrders$', views.single_sales, name='single_sales'),
     url(r'^sales/all_saleslines/$', views.all_saleslines, name='all_saleslines'),
     url(r'^sales/saleline-new/$', views.saleline_new, name='saleline_new'),
-    url(r'^customers/(?P<order_number>\w+)/$', views.sale, name='sale')
-
+    url(r'^customers/(?P<order_number>\w+)/$', views.sale, name='sale'),
+    url(r'^sales/all_discounts/$', views.all_discounts, name='all_discounts'),
+    url(r'^sales/new-discount/$', views.new_discount, name='new_discount')
 ]

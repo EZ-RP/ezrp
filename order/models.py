@@ -40,6 +40,15 @@ class OrderLine(models.Model):
     unit = models.CharField(max_length=10)
 
 
+class Discounts(models.Model):
+    account_number = models.CharField(max_length=8)
+    product_category = models.CharField(max_length=30, null=True, blank=True)
+    item_id = models.IntegerField(null=True, blank=True)
+    quantity = models.IntegerField(null=True, blank=True)
+    start_date = models.DateTimeField()
+    end_date = models.DateTimeField(null=True, blank=True)
+
+
 # DS: Base Attribute Value Table -- removed until post release upgrade
 class ProductAttributeDimensions(models.Model):
     PRODUCT_DIMS = (
