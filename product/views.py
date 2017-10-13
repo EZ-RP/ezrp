@@ -8,8 +8,8 @@ def product_new(request):
     if request.method == "POST":
         form_product = ProductForm(request.POST)
         if form_product.is_valid():
-            product = form_product.save(commit=False)
-            product.save()
+            prod = form_product.save(commit=False)
+            prod.save()
     else:
         form_product = ProductForm()
     return render(request, 'product/product_new.html', {'form_product': form_product})
