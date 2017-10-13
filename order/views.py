@@ -2,8 +2,10 @@ from django.shortcuts import render
 from django.views.generic import ListView
 from order.models import Order
 from order.models import OrderLine
+from order.models import Discounts
 from .modelforms import OrderForm
 from .modelforms import LineForm
+from .modelforms import DiscountForm
 from django.http import HttpResponse
 from django_tables2 import RequestConfig
 from order.tables import SaleTable
@@ -20,6 +22,12 @@ def purchases(request):
 
 def setup(request):
     return render(request, 'order/orderSetup.html')
+
+
+def all_discounts(request):
+    discs = Discounts(Discounts.objects.all())
+    RequestConfig(request).configure(discs)
+    return render(request, 'order/Sales/all_discounts.html', {'discounts': discs})
 
 
 def all_sales(request):
@@ -49,6 +57,20 @@ def sale(request, order_number):
     singlesale = Order.objects.get(order_number=order_number, order_type='S')
     form_order = OrderForm(instance=singlesale)
     return render(request, 'order/Sales/sale.html', {'form_sale': form_order})
+
+
+def new_discount(request):
+    if request.method == "POST":
+        form = DiscountForm(request.POST)
+        if form.is_valid():
+            form.save()
+            #order = form.save(commit=False)
+            #order.order_type = 'S'
+            #order.save()
+            form = DiscountForm()
+    else:
+        form = DiscountForm()
+    return render(request, 'order/Sales/new_discount.html', {'form': form})
 
 
 def sale_new(request):
