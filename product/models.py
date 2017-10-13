@@ -7,7 +7,7 @@ from django.db import models
 
 
 class Item(models.Model):
-    item_id = models.CharField(max_length=30)
+    item_id = models.AutoField(primary_key= True)
     name = models.CharField(max_length=30)
     item_desc = models.CharField(verbose_name="Description",max_length=120)
     units = models.CharField(max_length=30)
@@ -15,13 +15,6 @@ class Item(models.Model):
 
 
 # DS: removed until post release upgrade
-class ItemAttribute(models.Model):
-    item_id = models.ForeignKey(Item, on_delete=models.CASCADE)
-    height = models.IntegerField()
-    width = models.IntegerField()
-    thickness = models.IntegerField()
-    grade = models.CharField(max_length= 30)
-    weight = models.IntegerField()
 
 
 
