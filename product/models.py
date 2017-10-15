@@ -7,14 +7,14 @@ from django.db import models
 
 
 class Item(models.Model):
-    item_id = models.AutoField(primary_key= True)
+    item_id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=30)
-    item_desc = models.CharField(verbose_name="Description",max_length=120)
+    item_desc = models.CharField(verbose_name="Description", max_length=120)
     units = models.CharField(max_length=30)
     product_category = models.CharField(max_length=30)
 
-
-# DS: removed until post release upgrade
+    def __str__(self):
+        return '%s %s' % (self.name, self.product_category)
 
 
 

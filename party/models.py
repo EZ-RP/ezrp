@@ -17,6 +17,8 @@ class Party(models.Model):
     party_name = models.CharField(max_length=100)
     party_type = models.CharField(max_length=1, choices=PARTY_TYPE)
 
+    def __str__(self):
+        return '%s %s' % (self.account_number, self.party_name)
 
 class PartyAddress(models.Model):
 
@@ -27,3 +29,4 @@ class PartyAddress(models.Model):
         self.account_number = party
         self.address_id = address
         self.save()
+

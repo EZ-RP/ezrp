@@ -33,8 +33,8 @@ class Employee(models.Model):
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
     payroll_type = models.CharField(max_length=1, choices=PAYROLL_TYPE, default='F')
-    pay_rate = models.IntegerField(blank=True)
-    phone_number = models.IntegerField(blank=True)
+    pay_rate = models.IntegerField(null=True, blank=True)
+    phone_number = models.IntegerField(null=True, blank=True)
     employment_status = models.CharField(max_length=1, choices=STATUS_TYPE, default='O')
 
     def __str__(self):

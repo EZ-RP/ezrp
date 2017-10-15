@@ -3,10 +3,18 @@ from django_tables2.utils import A  # alias for Accessor
 import django_tables2 as tables
 from order.models import Order
 
+# Sales custom tables
+
 
 class SaleTable(tables.Table):
-    order_number = tables.LinkColumn('sale', args=[A('pk')])
+    order_number = tables.LinkColumn('sale', args=[A('pk')]),
+    edit_link = tables.LinkColumn('sale_edit', args=[A('pk')],
+                                  verbose_name='Edit Sale', text='Edit', accessor='pk', attrs={'class': 'edit_link'})
+    delete_link = tables.LinkColumn('sale_delete', args=[A('pk')],
+                                    verbose_name='Delete Sale',
+                                    text='Delete', accessor='pk', attrs={'class': 'delete_link'})
 
     class Meta:
+        attrs = {'class': 'paleblue'}
         model = Order
 

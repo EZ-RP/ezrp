@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-{% extends "base/template.html" %}
+    {% extends "base/template.html" %}
     {% load render_table from django_tables2 %}
     {% load static %}
 </head>
@@ -9,14 +9,20 @@
     {% block content %}
         <div class="contentGrey">
             <form method="POST">
+                <form method="POST" class="order-form">
                 {% csrf_token %}
                 <h1> Sale </h1>
-                {{ form_order.as_p }}
+                {{ form.as_p }}
+                </form>
+            <form method="POST" class="orderline-form">{% csrf_token %}
                 <h1> Add Line </h1>
-                {{ form_orderline.as_p }}
-                <button class="save btn btn-default">Save</button>
+                {{ form.as_p }}
+                <button class="save btn btn-default">&nbsp;Add&nbsp;</button>
+            </form>
                 <h1> Lines </h1>
                 <div class="contentGrey">
+                    {% csrf_token %}
+                    {% render_table saleslines %}
                 </div>
             </form>
         </div>

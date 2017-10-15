@@ -23,18 +23,6 @@ class PayDetails(models.Model):
     account_name = models.CharField(max_length=20)
 
 
-# DS: Base Attribute Type Table
-class AttributeType (models.Model):
-    name = models.CharField(max_length=50)
-    description = models.CharField(max_length=150)
-
-
-# DS: Base Attribute Value Table
-class AttributeValue (models.Model):
-    value = models.CharField(max_length=50)
-    attribute_type = models.ForeignKey(AttributeType)
-
-
 # DS: SystemParameters Table
 class SystemParameters (models.Model):
     description = models.CharField(max_length=200)

@@ -11,23 +11,11 @@ from django_tables2 import RequestConfig
 from order.tables import SaleTable
 # Create your views here.
 
+# Sales views
+
 
 def sales(request):
     return render(request, 'order/Sales/sales.html')
-
-
-def purchases(request):
-    return render(request, 'order/Purchases/purchases.html')
-
-
-def setup(request):
-    return render(request, 'order/orderSetup.html')
-
-
-def all_discounts(request):
-    discs = Discounts(Discounts.objects.all())
-    RequestConfig(request).configure(discs)
-    return render(request, 'order/Sales/all_discounts.html', {'discounts': discs})
 
 
 def all_sales(request):
@@ -48,29 +36,32 @@ def single_sales(request):
                   {'sales': Order.objects.filter(order_number=1)})
 
 
-def all_purchases(request):
-    return render(request, 'order/Purchases/all_purchaseOrders.html',
-                  {'purchases': Order.objects.filter(order_type="P")})
-
-
 def sale(request, order_number):
     singlesale = Order.objects.get(order_number=order_number, order_type='S')
     form_order = OrderForm(instance=singlesale)
     return render(request, 'order/Sales/sale.html', {'form_sale': form_order})
 
 
-def new_discount(request):
-    if request.method == "POST":
-        form = DiscountForm(request.POST)
-        if form.is_valid():
-            form.save()
-            #order = form.save(commit=False)
-            #order.order_type = 'S'
-            #order.save()
-            form = DiscountForm()
-    else:
-        form = DiscountForm()
-    return render(request, 'order/Sales/new_discount.html', {'form': form})
+def sale_edit(request, order_number):
+    singlesale = Order.objects.get(order_number=order_number, order_type='S')
+    form_order = OrderForm(instance=singlesale)
+    return render(request, 'order/Sales/sale.html', {'form_sale': form_order})
+
+
+def sale_delete(request, order_number):
+    # Order.objects.filter(order_number=order_number).delete()
+    Order.objects.get(order_number=order_number).delete()
+    # return HttpResponse('order/Sales/all_salesOrders.html')
+
+
+def bug_edit(request, order_number):
+    singlesale = Order.objects.get(order_number=order_number, order_type='S')
+    return HttpResponse('This is an edit page!')
+
+
+def bug_delete(request, order_number):
+    singlesale = Order.objects.get(order_number=order_number, order_type='S')
+    return HttpResponse('This is a delete page!')
 
 
 def sale_new(request):
@@ -93,7 +84,7 @@ def saleline_new(request):
             orderline = form.save(commit=False)
             orderline.order_number = Order.objects.get(order_number=1)
             if OrderLine.objects.count() > 0:
-                orderline.order_line_id = OrderLine.objects.latest('order_line_id')
+                orderline.order_line_id = OrderLine.objects.latest('order_line_id').get_latest_by(order_number=orderline.order_number)
             else:
                 orderline.order_line_id = 1
             orderline.save()
@@ -108,10 +99,13 @@ def sale_view(request):
         form_order = OrderForm(request.GET)
         form_orderline = LineForm(request.POST)
         if form_order.is_valid() and form_orderline.is_valid():
-
             orderline = form_orderline.save(commit=False)
-            orderline.order_line_id = form_order.order_number
-            orderline.order_number = 1
+            if OrderLine.objects.count() > 0:
+                lineid = OrderLine.objects.latest('order_line_id').get_latest_by(order_number=orderline.order_number)
+                orderline.order_line_id = lineid
+            else:
+                orderline.order_line_id = 1
+            orderline.order_number = form_order.order_number
             orderline.unit = "ea"
             orderline.save()
     else:
@@ -119,4 +113,42 @@ def sale_view(request):
         form_orderline = LineForm()
     return render(request, 'order/Sales/sale_view.html', {'form_order': form_order, 'form_orderline': form_orderline})
 
+
+# Purchase views
+
+
+def purchases(request):
+    return render(request, 'order/Purchases/purchases.html')
+
+
+def all_purchases(request):
+    return render(request, 'order/Purchases/all_purchaseOrders.html',
+                  {'purchases': Order.objects.filter(order_type="P")})
+
+
+# Discount views
+
+
+def setup(request):
+    return render(request, 'order/orderSetup.html')
+
+
+def all_discounts(request):
+    discs = Discounts(Discounts.objects.all())
+    RequestConfig(request).configure(discs)
+    return render(request, 'order/Sales/all_discounts.html', {'discounts': discs})
+
+
+def new_discount(request):
+    if request.method == "POST":
+        form = DiscountForm(request.POST)
+        if form.is_valid():
+            form.save()
+            #order = form.save(commit=False)
+            #order.order_type = 'S'
+            #order.save()
+            form = DiscountForm()
+    else:
+        form = DiscountForm()
+    return render(request, 'order/Sales/new_discount.html', {'form': form})
 

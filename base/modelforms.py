@@ -4,9 +4,9 @@ from base.models import Address, PayDetails, SystemParameters
 
 # Create the form class.
 class AddressForm(forms.ModelForm):
-     class Meta:
-         model = Address
-         fields = ('street', 'suburb', 'state', 'postcode', 'country')
+    class Meta:
+        model = Address
+        fields = ('street', 'suburb', 'state', 'postcode', 'country')
 
 
 class PayDetailsForm(forms.ModelForm):
@@ -16,7 +16,7 @@ class PayDetailsForm(forms.ModelForm):
 
 
 class SysParamForm(forms.ModelForm):
-     class Meta:
-         model = SystemParameters
-         fields = ('description', 'str_value')
+    class Meta:
+        model = SystemParameters
+        fields = ('description', 'str_value')
 
