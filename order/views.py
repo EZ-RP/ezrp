@@ -43,9 +43,47 @@ def sale(request, order_number):
 
 
 def sale_edit(request, order_number):
-    singlesale = Order.objects.get(order_number=order_number, order_type='S')
-    form_order = OrderForm(instance=singlesale)
-    return render(request, 'order/Sales/sale.html', {'form_sale': form_order})
+
+    show_line_form = False
+
+    if (request.GET.get('add_line')):
+
+        show_line_form = True
+
+    if request.method == "POST":
+
+        form_orderlines = LineForm(request.POST)
+
+        if form_orderlines.is_valid():
+
+            order_line = form_orderlines.save(commit=False)
+            order_line.order_number = Order.objects.get(order_number=order_number)
+            order_line.order_line_id = OrderLine.get_next_line_id(order_line)
+            order_line.save()
+            form_orderlines = LineForm()
+            show_line_form = False
+
+            singlesale = Order.objects.get(order_number=order_number, order_type='S')
+            form_order = OrderForm(instance=singlesale)
+            saleslines = OrderLine.objects.filter(order_number=order_number)
+    else:
+
+        singlesale = Order.objects.get(order_number=order_number, order_type='S')
+        form_order = OrderForm(instance=singlesale)
+        form_orderlines = LineForm()
+        saleslines  = OrderLine.objects.filter(order_number=singlesale)
+
+        if not show_line_form:
+
+            if saleslines.exists():
+
+                show_line_form = False
+
+            else:
+
+                show_line_form = True
+
+    return render(request, 'order/Sales/sale.html', {'form_sale': form_order, 'form_orderline': form_orderlines, 'saleslines': saleslines, 'show_line_form': show_line_form})
 
 
 def sale_delete(request, order_number):

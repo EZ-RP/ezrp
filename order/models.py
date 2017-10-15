@@ -39,6 +39,12 @@ class OrderLine(models.Model):
     discount_price = models.FloatField()
     unit = models.CharField(max_length=10)
 
+    def get_next_line_id(self):
+        last_line = OrderLine.objects.filter(order_number=self.order_number).order_by('-order_line_id').first()
+        if last_line != None:
+            return last_line.order_line_id + 1
+        else:
+            return 1
 
 class Discounts(models.Model):
     account_number = models.CharField(max_length=8)
