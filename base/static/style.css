@@ -66,7 +66,7 @@ h3 {
 
 }
 .banner ul ul li {
-	background: #0b6e10;
+	background: #;
 	width: auto;
 	min-width: 100px;
 	display: block;
@@ -75,6 +75,24 @@ h3 {
 .table {
 	text-decoration: none;
 	font-size: large;
+
+}
+.table thead {
+	text-decoration: none;
+	font-size: large;
+}
+.table thead:visited {
+	text-decoration: none;
+}
+.table tr {
+	text-decoration: none;
+	font-size: large;
+}
+.table tr.odd {
+	text-decoration: none;
+	font-size: large;
+	background: rgb(11, 110, 16, 0.4);
+
 }
 .contentGreen {
 	background:linear-gradient(#07450a, #0b6e10);
@@ -104,6 +122,9 @@ h3 {
 	color: white;
 	height: 100px;
 	width: 70%;
+	bottom: 0;
+	right: 0;
+	left: 0;
 	margin: auto;
 	min-width: 900px;
 }
