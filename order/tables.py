@@ -7,10 +7,10 @@ from order.models import Order
 
 
 class SaleTable(tables.Table):
-    order_number = tables.LinkColumn('sale', args=[A('pk')]),
-    edit_link = tables.LinkColumn('sale_edit', args=[A('pk')],
+    order_number = tables.LinkColumn('sale', args=[A('order_number')]),
+    edit_link = tables.LinkColumn('sale_edit', args=[A('order_number')],
                                   verbose_name='Edit Sale', text='Edit', accessor='pk', attrs={'class': 'edit_link'})
-    delete_link = tables.LinkColumn('sale_delete', args=[A('pk')],
+    delete_link = tables.LinkColumn('sale_delete', args=[A('order_number')],
                                     verbose_name='Delete Sale',
                                     text='Delete', accessor='pk', attrs={'class': 'delete_link'})
 

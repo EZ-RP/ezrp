@@ -51,7 +51,9 @@ def sale_edit(request, order_number):
 def sale_delete(request, order_number):
     # Order.objects.filter(order_number=order_number).delete()
     Order.objects.get(order_number=order_number).delete()
-    # return HttpResponse('order/Sales/all_salesOrders.html')
+    saless = SaleTable(Order.objects.filter(order_type="S"))
+    RequestConfig(request).configure(saless)
+    return render(request, 'order/Sales/all_salesOrders.html', {'sales': saless})
 
 
 def bug_edit(request, order_number):
