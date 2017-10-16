@@ -7,8 +7,8 @@
     {% block content %}
         <div class="contentGrey">
                 <h1> Stock </h1>
-        <a href="{% url 'all_available' %}">Available Stock</a>
-        <a href="{% url 'stock_form' %}">Stock Form</a>
+                <a class='button' href="{% url 'all_available' %}">All Stock</a>
+                <a class='button' href="{% url 'stock_form' %}">Stock Form</a>
             </div>
     {% endblock content %}
 </body>
