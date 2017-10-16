@@ -5,4 +5,4 @@ from product.models import Item
 class ProductTable(tables.Table):
     class Meta:
         model = Item
-        attrs = {'class': 'table'}
+        attrs = {'class': 'tableStyle'}
