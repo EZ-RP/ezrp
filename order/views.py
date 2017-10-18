@@ -9,7 +9,9 @@ from .modelforms import DiscountForm
 from django.http import HttpResponse
 from django_tables2 import RequestConfig
 from order.tables import SaleTable
-# Create your views here.
+from order.tables import SalesLineTable
+from order.tables import DiscountTable
+
 
 # Sales views
 
@@ -22,18 +24,17 @@ def all_sales(request):
     saless = SaleTable(Order.objects.filter(order_type="S"))
     RequestConfig(request).configure(saless)
     return render(request, 'order/Sales/all_salesOrders.html', {'sales': saless})
-    # return render(request, 'order/Sales/all_salesOrders.html',
-    #             {'sales': Order.objects.filter(order_type="S")})
 
 
 def all_saleslines(request):
-    return render(request, 'order/Sales/all_salesLines.html',
-                  {'saleslines': OrderLine.objects.all()})
-
-
-def single_sales(request):
-    return render(request, 'order/Sales/all_salesOrders.html',
-                  {'sales': Order.objects.filter(order_number=1)})
+    salesliness = SalesLineTable(
+        OrderLine.objects.filter(
+            order_number=Order.objects.values_list(
+                'order_number').filter(order_type="S")))
+    RequestConfig(request).configure(salesliness)
+    return render(request, 'order/Sales/all_salesLines.html', {'saleslines': salesliness})
+    # return render(request, 'order/Sales/all_salesLines.html',
+                  # {'saleslines': OrderLine.objects.all()})
 
 
 def sale(request, order_number):
@@ -87,21 +88,20 @@ def sale_edit(request, order_number):
 
 
 def sale_delete(request, order_number):
-    # Order.objects.filter(order_number=order_number).delete()
     Order.objects.get(order_number=order_number).delete()
     saless = SaleTable(Order.objects.filter(order_type="S"))
     RequestConfig(request).configure(saless)
     return render(request, 'order/Sales/all_salesOrders.html', {'sales': saless})
 
 
-def bug_edit(request, order_number):
-    singlesale = Order.objects.get(order_number=order_number, order_type='S')
-    return HttpResponse('This is an edit page!')
-
-
-def bug_delete(request, order_number):
-    singlesale = Order.objects.get(order_number=order_number, order_type='S')
-    return HttpResponse('This is a delete page!')
+def salesline_delete(request, lineid):
+    OrderLine.objects.get(id=lineid).delete()
+    salesliness = SalesLineTable(
+        OrderLine.objects.filter(
+            order_number=Order.objects.values_list(
+                'order_number').filter(order_type="S")))
+    RequestConfig(request).configure(salesliness)
+    return render(request, 'order/Sales/all_salesOrders.html', {'saleliness': salesliness})
 
 
 def sale_new(request):
@@ -166,6 +166,18 @@ def all_purchases(request):
                   {'purchases': Order.objects.filter(order_type="P")})
 
 
+# Production views
+
+
+def production(request):
+    return render(request, 'order/Production/production.html')
+
+
+def all_production(request):
+    return render(request, 'order/Production/all_productionOrders.html',
+                  {'production': Order.objects.filter(order_type="M")})
+
+
 # Discount views
 
 
@@ -174,9 +186,11 @@ def setup(request):
 
 
 def all_discounts(request):
-    discs = Discounts(Discounts.objects.all())
+    # return render(request, 'order/Sales/all_discounts.html',
+    #               {'discounts': Discounts.objects.all()})
+    discs = DiscountTable(Discounts.objects.all())
     RequestConfig(request).configure(discs)
-    return render(request, 'order/Sales/all_discounts.html', {'discounts': discs})
+    return render(request, 'order/all_discounts.html', {'discounts': discs})
 
 
 def new_discount(request):
@@ -184,11 +198,8 @@ def new_discount(request):
         form = DiscountForm(request.POST)
         if form.is_valid():
             form.save()
-            #order = form.save(commit=False)
-            #order.order_type = 'S'
-            #order.save()
             form = DiscountForm()
     else:
         form = DiscountForm()
-    return render(request, 'order/Sales/new_discount.html', {'form': form})
+    return render(request, 'order/new_discount.html', {'form': form})
 
