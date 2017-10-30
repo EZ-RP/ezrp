@@ -8,7 +8,7 @@
 <body>
     {% block content %}
         <div class="contentBanner">
-            <a href="{% url 'sale_view' %}" class="button">&nbsp;View Order&nbsp;</a>
+            <a href="{% url 'sale_new' %}" class="button">&nbsp;Create Sale&nbsp;</a>
         </div>
         <div class="contentGrey">
         {% render_table sales %}

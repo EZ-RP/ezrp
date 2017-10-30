@@ -2,13 +2,12 @@
 <html>
 <head>
 {% extends "base/template.html" %}
-    {% load render_table from django_tables2 %}
-    {% load static %}
 </head>
 <body>
     {% block content %}
         <div class="contentGrey">
-        {% render_table saleslines %}
+            <h1> Purchases </h1>
+            <a href="{% url 'all_production' %}">&nbsp;Production&nbsp;</a>
         </div>
     {% endblock content %}
 </body>

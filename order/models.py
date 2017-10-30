@@ -18,7 +18,8 @@ class Order(models.Model):
     )
     ORDER_TYPE = (
         ('S', 'Sale'),
-        ('P', 'Purchase')
+        ('P', 'Purchase'),
+        ('M', 'Production')
     )
     order_number = models.IntegerField()
     account_number = models.ForeignKey(Party)  # models.CharField(max_length=8)
@@ -33,7 +34,7 @@ class Order(models.Model):
 class OrderLine(models.Model):
     order_line_id = models.IntegerField()
     order_number = models.ForeignKey(Order)
-    item_id = models.ForeignKey(Item) #models.IntegerField()
+    item_id = models.ForeignKey(Item)
     quantity = models.IntegerField()
     price = models.FloatField()
     discount_price = models.FloatField()
@@ -45,6 +46,7 @@ class OrderLine(models.Model):
             return last_line.order_line_id + 1
         else:
             return 1
+
 
 class Discounts(models.Model):
     account_number = models.CharField(max_length=8)
