@@ -3,6 +3,10 @@ from django.shortcuts import render
 from human_resources.models import Employee, Leave, Roles, Payday, EmployeeAddress, EmployeePayDetails
 from .forms import EmployeeForm, RoleForm, PayForm
 from base.modelforms import AddressForm, PayDetailsForm
+from django.http import HttpResponse
+from django_tables2 import RequestConfig
+from human_resources.tables import EmployeeTable
+
 # Create your views here.
 
 
@@ -10,9 +14,11 @@ def main(request):
     return render(request, 'human_resources/humanResources.html')
 
 
+#Employees
 def employees(request):
-    return render(request, 'human_resources/all_employees.html', {'employees': Employee.objects.all()})
-
+    employee = EmployeeTable(Employee.objects.all())
+    RequestConfig(request).configure(employee)
+    return render(request, 'human_resources/Employee/all_employees.html', {'employees': employee})
 
 @transaction.atomic
 def employee_new(request):
@@ -37,9 +43,22 @@ def employee_new(request):
         form_employee = EmployeeForm()
         form_address = AddressForm()
         form_pay_details = PayDetailsForm()
-    return render(request, 'human_resources/employee_new.html', {'form_employee': form_employee,
+    return render(request, 'human_resources/Employee/employee_new.html', {'form_employee': form_employee,
                                                                  'form_address': form_address,
                                                                  'form_pay_details': form_pay_details})
+
+
+def employee(request, first_name):
+    single_employee = Employee.objects.get(first_name=first_name)
+    form_employee = EmployeeForm(instance=single_employee)
+    return render(request, 'human_resources/Employee/employee.html', {'form_employee': form_employee})
+
+def employee_delete(request, first_name):
+    # Order.objects.filter(order_number=order_number).delete()
+    Employee.objects.get(first_name=first_name).delete()
+    single_employee = EmployeeTable(Employee.objects.all())
+    RequestConfig(request).configure(single_employee)
+    return render(request, 'human_resources/Employee/all_employees.html', {'employee': single_employee})
 
 
 def leave(request):
@@ -47,7 +66,7 @@ def leave(request):
 
 
 def roles(request):
-    return render(request, 'human_resources/all_roles.html', {'roles': Roles.objects.all()})
+    return render(request, 'human_resources/Role/all_roles.html', {'roles': Roles.objects.all()})
 
 
 @transaction.atomic
@@ -59,11 +78,11 @@ def role_new(request):
             role.save()
     else:
         form_role = RoleForm()
-    return render(request, 'human_resources/role_new.html', {'form_role': form_role})
+    return render(request, 'human_resources/Role/role_new.html', {'form_role': form_role})
 
 
 def pay(request):
-    return render(request, 'human_resources/all_pay.html', {'pay': Payday.objects.all()})
+    return render(request, 'human_resources/Pay/all_pay.html', {'pay': Payday.objects.all()})
 
 
 @transaction.atomic
@@ -75,4 +94,4 @@ def pay_new(request):
             new_pay.save()
     else:
         form_pay = PayForm()
-    return render(request, 'human_resources/pay_new.html', {'form_pay': form_pay})
+    return render(request, 'human_resources/Pay/pay_new.html', {'form_pay': form_pay})
