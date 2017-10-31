@@ -49,12 +49,14 @@ class OrderLine(models.Model):
 
 
 class Discounts(models.Model):
-    account_number = models.CharField(max_length=8)
+    account_number = models.ForeignKey(Party)  # models.CharField(max_length=8)
     product_category = models.CharField(max_length=30, null=True, blank=True)
     item_id = models.IntegerField(null=True, blank=True)
     quantity = models.IntegerField(null=True, blank=True)
     start_date = models.DateTimeField()
     end_date = models.DateTimeField(null=True, blank=True)
+    value = models.FloatField(null=True, blank=True)
+
 
 
 

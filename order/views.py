@@ -11,6 +11,7 @@ from django_tables2 import RequestConfig
 from order.tables import SaleTable
 from order.tables import SalesLineTable
 from order.tables import DiscountTable
+from order.confirmationhelperclass import confirmorder
 
 
 # Sales views
@@ -47,12 +48,13 @@ def sale_edit(request, order_number):
 
     show_line_form = False
 
-    if (request.GET.get('add_line')):
+    if request.GET.get('confirm_order'):
+        confirmorder(Order.objects.first(order_number=order_number))
 
+    if request.GET.get('add_line'):
         show_line_form = True
 
     if request.method == "POST":
-
         form_orderlines = LineForm(request.POST)
 
         if form_orderlines.is_valid():
@@ -60,6 +62,17 @@ def sale_edit(request, order_number):
             order_line = form_orderlines.save(commit=False)
             order_line.order_number = Order.objects.get(order_number=order_number)
             order_line.order_line_id = OrderLine.get_next_line_id(order_line)
+
+            # orde = Order.objects.first(order_number=order_number)
+            # dsc = Discounts.objects.first(account_number=orde.account_number, item_id=order_line.item_id)
+
+            # if dsc is None:
+            #    order_line.discount_price = order_line.price
+            # else:
+            prc = order_line.price
+            # dscp = dsc.
+            order_line.discount_price = prc * (1 - 0.1)
+
             order_line.save()
             form_orderlines = LineForm()
             show_line_form = False
