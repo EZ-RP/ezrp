@@ -34,7 +34,7 @@ class Employee(models.Model):
     end_date = models.DateField(null=True, blank=True)
     payroll_type = models.CharField(max_length=1, choices=PAYROLL_TYPE, default='F')
     pay_rate = models.IntegerField(null=True, blank=True)
-    phone_number = models.IntegerField(null=True, blank=True)
+    phone_number = models.CharField(max_length=15, null=True, blank=True)
     employment_status = models.CharField(max_length=1, choices=STATUS_TYPE, default='O')
 
     def __str__(self):
@@ -73,3 +73,4 @@ class Payday(models.Model):
     start_pay_date = models.DateField()
     end_pay_date = models.DateField()
     hours = models.FloatField()
+    cost = models.FloatField(default=0)

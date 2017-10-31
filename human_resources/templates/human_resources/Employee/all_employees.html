@@ -11,7 +11,6 @@
             <a href="{% url 'employee_new' %}" class="button">&nbsp;Add Employee&nbsp;</a>
         </div>
         <div class="contentGrey">
-            <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
             {% render_table employees %}
         </div>
     {% endblock content %}

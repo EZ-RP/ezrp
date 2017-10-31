@@ -1,0 +1,22 @@
+<!doctype html>
+<html>
+<head>
+    {% extends "base/template.html" %}
+    {% load render_table from django_tables2 %}
+    {% load static %}
+</head>
+<body>
+    {% block content %}
+        <div class="contentGrey">
+        <form method="post" d >
+            {% csrf_token %}
+            <h1> Employee </h1>
+            <fieldset disabled="true">
+                {{ form_employee.as_p }}
+            </fieldset>
+
+        </form>
+
+    {% endblock content %}
+</body>
+</html>
