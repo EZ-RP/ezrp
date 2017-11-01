@@ -14,12 +14,12 @@ class OrderForm(forms.ModelForm):
 class LineForm(forms.ModelForm):
     class Meta:
         model = OrderLine
-        fields = ('item_id', 'quantity', 'price', 'discount_price')
+        fields = ('item_id', 'quantity', 'price')  # , 'discount_price'
 
 
 class DiscountForm(forms.ModelForm):
     class Meta:
         model = Discounts
-        fields = ('account_number', 'product_category', 'item_id', 'quantity','start_date', 'end_date')
+        fields = ('account_number', 'product_category', 'item_id', 'quantity', 'start_date', 'end_date', 'value')
 
 

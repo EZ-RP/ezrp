@@ -14,7 +14,7 @@
             <fieldset disabled="true">
                 {{ form_sale.as_p }}
             </fieldset>
-        <h1> Add Line </h1>
+            <h1> Add Line </h1>
             {% if  show_line_form%}
              {{ form_orderline.as_p }}
                 <button class="save btn btn-default">Save</button>
@@ -23,6 +23,9 @@
         </form>
         <form action="#" method="get">
             <input type="submit" class="btn" value="Add line" name="add_line">
+        </form>
+        <form action="#" method="get">
+            <input type="submit" class="btn" value="Confirm Order" name="confirm_order">
         </form>
         {% render_table saleslines %}
         </div>
