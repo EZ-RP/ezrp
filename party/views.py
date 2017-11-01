@@ -5,12 +5,14 @@ from party.tables import CustomerTable
 from .forms import PartyForm
 from base.modelforms import AddressForm
 from django_tables2 import RequestConfig
+from party.filters import PartyFilter
 
 
 def all_customers(request):
-    customers = CustomerTable(Party.objects.filter(party_type='C'))
+    filter = PartyFilter(request.GET, Party.objects.filter(party_type='C'))
+    customers = CustomerTable(filter.qs)
     RequestConfig(request).configure(customers)
-    return render(request, 'party/customer/all_customers.html', {'customers': customers})
+    return render(request, 'party/customer/all_customers.html', {'customers': customers, 'filter': filter})
 
 
 def customers(request):
