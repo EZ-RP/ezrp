@@ -10,17 +10,9 @@
 <body style="background: #e4e4e4">
 	<div class="banner">
 		<ul>
-			<li> <a href="{% url 'base_Main' %}"> Home </a> </li>
-            <li> <a href="{% url 'base_General' %}"> General </a> </li>
-			<li> <a>Party</a>
-				<ul>
-					<li> <a href="{% url 'customers' %}"> Customers </a> </li>
-					<li> <a href="#"> Vendors </a> </li>
-				</ul>
-			</li>
-			<li> <a href="{% url 'stock_Main' %}"> Stock </a> </li>
-			<li> <a href="{% url 'product_Main' %}"> Product </a> </li>
-			<li> <a> Orders </a>
+            <a href="{% url 'base_Main' %}"> <li> Home </li> </a>
+            <a href="{% url 'base_General' %}"> <li> General </li> </a>
+            <li> <a> Orders </a>
 				<ul>
 					<li> <a href="{% url 'sales' %}"> Sales </a> </li>
 					<li> <a href="{% url 'purchases' %}"> Purchases </a> </li>
@@ -28,7 +20,15 @@
                     <li> <a href="{% url 'setup' %}"> Setup </a> </li>
 				</ul>
             </li>
-			<li> <a href="{% url 'humanResources_Main' %}"> HR </a></li>
+            <a href="{% url 'product_Main' %}"> <li>  Product </li> </a>
+            <a href="{% url 'stock_Main' %}"> <li>  Stock  </li> </a>
+			<li> <a>Party</a>
+				<ul>
+					<li> <a href="{% url 'customers' %}"> Customers </a> </li>
+					<li> <a href="#"> Vendors </a> </li>
+				</ul>
+			</li>
+            <a href="{% url 'humanResources_Main' %}"> <li> HR </li> </a>
 		</ul>
 
 	</div>

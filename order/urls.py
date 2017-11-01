@@ -2,6 +2,8 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+    # Main Page
+    url(r'^orders/$', views.orders, name='orders'),
     # sales urls
     url(r'^sales/$', views.sales, name='sales'),
     url(r'^sales/all_sales/$', views.all_sales, name='all_sales'),

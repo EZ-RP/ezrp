@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% extends "base/template.html" %}
+</head>
+<body>
+    {% block content %}
+        <div class="contentGrey">
+        <div>
+            <h1>Orders</h1>
+        </div>
+        <div>
+            <a class="buttonStylePage" href="{% url 'sales' %}">Sales</a>
+        </div>
+
+        </div>
+
+    {% endblock content %}
+</body>
+</html>

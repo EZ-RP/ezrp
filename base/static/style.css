@@ -19,39 +19,41 @@ h3 {
 	width: 70%;
 	margin: 0 auto;
 	min-width: 900px;
-	text-align: center;
-
+	justify-content: center;
 }
 .banner ul{
 	list-style-type: none;
-	width: 750px;
+	display: inline-block;
+	width: 800px;
 	margin: 0;
 	padding: 0;
-	position: relative;
+	position: absolute;
 }
 .banner ul li {
-	width: 100px;
+	width: 110px;
 	font-size: 24px;
 	color: white;
 	text-align: center;
+	line-height: 55px;
+	height: 55px;
 	display: inline-block;
+	position: relative;
 }
 .banner ul li:hover {
-	background:#e4e4e4;
-	color: black;
+	background:linear-gradient(#053007, #095e0d);
 	text-decoration: none;
+	color: white;
 
 }
 .banner ul li a,visited {
 	text-decoration: none;
 	display: block;
-	padding: 15px;
 	color: white;
 
 }
 .banner ul li a:hover {
 	text-decoration: none;
-	color: black;
+	color: white;
 
 }
 .banner ul li:hover ul {
@@ -60,15 +62,17 @@ h3 {
 }
 .banner ul ul {
 	display: none;
+	position: relative;
 	border: 3px solid #07450a;
+	-moz-animation: 0.25s down;
 	border-top: 0;
 	width: auto;
 
 }
 .banner ul ul li {
 	background: #0b6e10;
-	width: auto;
-	min-width: 100px;
+	width: 110px;
+	min-width: 110px;
 	display: block;
 
 }
@@ -77,11 +81,11 @@ h3 {
 	font-size: large;
 
 }
-.tableStyle thead {
+.tableStyle th {
 	text-decoration: none;
 	font-size: large;
 }
-.tableStyle thead,visited {
+.tableStyle th:visited {
 	text-decoration: none;
 }
 .tableStyle tr {
@@ -147,10 +151,33 @@ a.buttonStyle {
 	width: auto;
 	color: white;
 	border-radius: 5px;
+	right: 0;
 }
 a.buttonStyle:visited {
 	text-decoration: none;
 	color: white;
+}
+a.buttonStylePage {
+	-webkit-appearance: button;
+	-moz-appearance: button;
+	appearance: button;
+	padding: 10px;
+	background: linear-gradient(#07450a, #0b6e10);
+	text-decoration: none;
+	width: 100px;
+	color: white;
+	border-radius: 5px;
+	font-size: 72 px;
+	right: 0;
+}
+a.buttonStylePage:visited {
+	text-decoration: none;
+	color: white;
+}
+a.buttonStylePage:hover {
+	text-decoration: none;
+	color: white;
+	background: #e4e4e4;
 }
 .column {
     float: left;
@@ -161,4 +188,9 @@ a.buttonStyle:visited {
     content: "";
     display: table;
     clear: both;
+}
+@-moz-keyframes down {
+	from { transform: scaleY(0); }
+  	to   { transform: scaleY(1); }
+	
 }

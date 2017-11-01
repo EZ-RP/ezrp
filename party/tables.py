@@ -8,3 +8,4 @@ class CustomerTable(tables.Table):
 
     class Meta:
         model = Party
+        attrs = {'class': 'tableStyle'}
