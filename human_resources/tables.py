@@ -10,6 +10,6 @@ class EmployeeTable(tables.Table):
     #Employee = tables.LinkColumn('employee,);
 
     class Meta:
-        attrs = {'class': 'paleblue'}
+        attrs = {'class': 'tableStyle'}
         model = Employee
 

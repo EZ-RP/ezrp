@@ -14,8 +14,11 @@ from order.tables import DiscountTable
 from order.confirmationhelperclass import confirmorder
 
 
-# Sales views
+# Main Page
+def orders(request):
+    return  render(request, 'order/ordersMain.html')
 
+# Sales views
 
 def sales(request):
     return render(request, 'order/Sales/sales.html')

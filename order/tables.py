@@ -17,7 +17,7 @@ class SaleTable(tables.Table):
                                     attrs={'class': 'delete_link'})
 
     class Meta:
-        attrs = {'class': 'paleblue'}
+        attrs = {'class': 'tableStyle'}
         model = Order
 
 
@@ -30,7 +30,7 @@ class SalesLineTable(tables.Table):
                                     attrs={'class': 'delete_link'})
 
     class Meta:
-        attrs = {'class': 'paleblue'}
+        attrs = {'class': 'tableStyle'}
         model = OrderLine
 
 
@@ -43,5 +43,5 @@ class DiscountTable(tables.Table):
                                     attrs={'class': 'delete_disc'})
 
     class Meta:
-        attrs = {'class': 'paleblue'}
+        attrs = {'class': 'tableStyle'}
         model = Discounts
