@@ -48,37 +48,38 @@ def employee_new(request):
                                                                  'form_pay_details': form_pay_details})
 
 
-def employee(request, first_name):
-    single_employee = Employee.objects.get(first_name=first_name)
+def employee(request, id):
+    single_employee = Employee.objects.get(id=id)
     form_employee = EmployeeForm(instance=single_employee)
     return render(request, 'human_resources/Employee/employee.html', {'form_employee': form_employee})
 
-def employee_delete(request, first_name):
-    # Order.objects.filter(order_number=order_number).delete()
-    Employee.objects.get(first_name=first_name).delete()
+
+def employee_edit(request, id):
+
+    if request.method == "POST":
+
+        form_employees = EmployeeForm(request.POST)
+
+        if form_employees.is_valid():
+
+            employee_line = form_employees.save(commit=False)
+            employee_line.employee_number = Employee.objects.get(id=id)
+            employee_line.save()
+
+            form_employee = EmployeeForm();
+    else:
+
+        single_employee = Employee.objects.get(id=id)
+        form_employee = EmployeeForm(instance=single_employee)
+
+    return render(request, 'human_resources/Employee/employee.html', {'form_employee': form_employee})
+
+
+def employee_delete(request, id):
+    Employee.objects.get(id=id).delete()
     single_employee = EmployeeTable(Employee.objects.all())
     RequestConfig(request).configure(single_employee)
-    return render(request, 'human_resources/Employee/all_employees.html', {'employee': single_employee})
-
-
-def leave(request):
-    return render(request, 'human_resources/all_leave.html', {'leave': Leave.objects.all()})
-
-
-def roles(request):
-    return render(request, 'human_resources/Role/all_roles.html', {'roles': Roles.objects.all()})
-
-
-@transaction.atomic
-def role_new(request):
-    if request.method == "POST":
-        form_role = RoleForm(request.POST)
-        if form_role.is_valid():
-            role = form_role.save(commit=False)
-            role.save()
-    else:
-        form_role = RoleForm()
-    return render(request, 'human_resources/Role/role_new.html', {'form_role': form_role})
+    return render(request, 'human_resources/Employee/all_employees.html', {'employees': single_employee})
 
 
 def pay(request):
@@ -95,3 +96,23 @@ def pay_new(request):
     else:
         form_pay = PayForm()
     return render(request, 'human_resources/Pay/pay_new.html', {'form_pay': form_pay})
+
+
+def leave(request):
+    return render(request, 'human_resources/Leave/all_leave.html', {'leave': Leave.objects.all()})
+
+
+def roles(request):
+    return render(request, 'human_resources/Role/all_roles.html', {'roles': Roles.objects.all()})
+
+
+@transaction.atomic
+def role_new(request):
+    if request.method == "POST":
+        form_role = RoleForm(request.POST)
+        if form_role.is_valid():
+            role = form_role.save(commit=False)
+            role.save()
+    else:
+        form_role = RoleForm()
+    return render(request, 'human_resources/Role/role_new.html', {'form_role': form_role})

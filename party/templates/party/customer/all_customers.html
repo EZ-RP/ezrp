@@ -4,10 +4,17 @@
 {% extends "base/template.html" %}
     {% load render_table from django_tables2 %}
     {% load static %}
+    {% load bootstrap3 %}
 </head>
 <body>
     {% block content %}
         <div class="contentGrey">
+        {% if filter %}
+        <form action="" method="get" class="form form-inline">
+            {% bootstrap_form filter.form layout='inline' %}
+            {% bootstrap_button 'filter' %}
+        </form>
+        {% endif %}
         {% render_table customers %}
         </div>
     {% endblock content %}

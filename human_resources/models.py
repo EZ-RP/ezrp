@@ -18,12 +18,12 @@ class Roles(models.Model):
 class Employee(models.Model):
     PAYROLL_TYPE = (
         ('F', 'Full-Time'),
-        ('P', 'Part-time'),
-        ('S', 'Salary')
+        ('P', 'Part-time')
     )
     STATUS_TYPE = (
         ('O', 'Ongoing'),
-        ('T', 'Temporary')
+        ('T', 'Temporary'),
+        ('D', 'Discontinued')
     )
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -33,7 +33,7 @@ class Employee(models.Model):
     start_date = models.DateField()
     end_date = models.DateField(null=True, blank=True)
     payroll_type = models.CharField(max_length=1, choices=PAYROLL_TYPE, default='F')
-    pay_rate = models.IntegerField(null=True, blank=True)
+    pay_rate = models.FloatField(null=True, blank=True)
     phone_number = models.CharField(max_length=15, null=True, blank=True)
     employment_status = models.CharField(max_length=1, choices=STATUS_TYPE, default='O')
 
@@ -63,9 +63,11 @@ class EmployeePayDetails(models.Model):
 
 class Leave(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    annual_leave = models.IntegerField()
-    sick_leave = models.IntegerField()
-    service_leave = models.IntegerField()
+    annual_leave_accrued = models.IntegerField()
+    annual_leave_taken = models.IntegerField(default=0)
+    sick_leave_accrued = models.IntegerField()
+    sick_leave_taken = models.IntegerField(default=0)
+    service_leave_accrued = models.IntegerField()
 
 
 class Payday(models.Model):
@@ -74,3 +76,4 @@ class Payday(models.Model):
     end_pay_date = models.DateField()
     hours = models.FloatField()
     cost = models.FloatField(default=0)
+
