@@ -1,4 +1,6 @@
 from django.db import models
+from product.models import Item
+
 from product.models import *
 
 """Naming conventions:

@@ -6,9 +6,12 @@
 <body>
     {% block content %}
         <div class="contentGrey">
-                <h1> Stock </h1>
-                <a class='button' href="{% url 'all_available' %}">View Stock</a>
-            </div>
+        <form method="post">
+        {% csrf_token %}
+        {{ form_stock.as_p }}
+        <input type="submit" />
+        </form>
+        </div>
     {% endblock content %}
 </body>
 </html>

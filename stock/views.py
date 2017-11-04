@@ -29,10 +29,27 @@ def stockform(request):
     return render(request, 'stock/stock_form.html', {'form': form})
 
 
-def stock_delete(request, item_id):
-    Inventory.objects.get(item_id=item_id).delete()
+def stock_delete(request, lineid):
+    Inventory.objects.get(id=lineid).delete()
     items = StockTable(Inventory.objects.all())
     RequestConfig(request).configure(items)
     return render(request, 'stock/all_available.html', {'available': items})
 
 
+def stock_edit(request, lineid):
+
+    if request.method == "POST":
+        stock = Inventory.objects.get(id=lineid)
+        form_stocks = InvForm(request.POST, instance= stock)
+
+        if form_stocks.is_valid():
+
+            form_stocks.save(commit=True)
+
+            form_stock = InvForm()
+    else:
+        single_stock = Inventory.objects.get(id=lineid)
+
+        form_stock = InvForm(instance=single_stock)
+
+    return render(request, 'stock/edit_stock.html', {'form_stock': form_stock})
