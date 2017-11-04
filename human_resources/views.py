@@ -63,15 +63,13 @@ def employee_edit(request, id):
         if form_employees.is_valid():
 
             employee_line = form_employees.save(commit=False)
-            employee_line.employee_number = Employee.objects.get(id=id)
+            employee_line.pk = id
             employee_line.save()
-            Employee.pk = employee_line
-            Employee.pk.save()
 
-            form_employee = EmployeeForm()
+            form_employee = EmployeeForm(instance=employee_line)
     else:
-
         single_employee = Employee.objects.get(id=id)
+
         form_employee = EmployeeForm(instance=single_employee)
 
     return render(request, 'human_resources/Employee/employee.html', {'form_employee': form_employee})
