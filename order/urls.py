@@ -14,7 +14,7 @@ urlpatterns = [
     url(r'^sales/(?P<order_number>\w+)/$', views.sale, name='sale'),
     url(r'^sales/edit/(?P<order_number>\d+)/$', views.sale_edit, name='sale_edit'),
     url(r'^sales/delete/(?P<order_number>\d+)/$', views.sale_delete, name='sale_delete'),
-    url(r'^sales/edit/(?P<order_number>\d+)/$', views.sale_edit, name='salesline_edit'),
+    # url(r'^sales/edit/(?P<order_number>\d+)/$', views.sale_edit, name='salesline_edit'),
     url(r'^sales/delete/(?P<id>\d+)/$', views.salesline_delete, name='salesline_delete'),
 
     # Purchase urls

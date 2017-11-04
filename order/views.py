@@ -12,6 +12,7 @@ from order.tables import SaleTable
 from order.tables import SalesLineTable
 from order.tables import DiscountTable
 from order.confirmationhelperclass import confirmorder
+from django.contrib import messages
 
 
 # Main Page
@@ -50,9 +51,18 @@ def sale(request, order_number):
 def sale_edit(request, order_number):
 
     show_line_form = False
+    storage = messages.get_messages(request)
+    storage.used = True
 
     if request.GET.get('confirm_order'):
-        confirmorder(Order.objects.first(order_number=order_number))
+        ord = Order.objects.get(order_number=order_number)
+        result = confirmorder(ord)
+
+        if result.confirmation_status == "Ordered":
+            ord.order_status = "O"
+        else:
+            for er in result.confirmation_errors:
+                messages.error(request, er, extra_tags='email')
 
     if request.GET.get('add_line'):
         show_line_form = True
@@ -66,16 +76,17 @@ def sale_edit(request, order_number):
             order_line.order_number = Order.objects.get(order_number=order_number)
             order_line.order_line_id = OrderLine.get_next_line_id(order_line)
 
-            # orde = Order.objects.first(order_number=order_number)
-            # dsc = Discounts.objects.first(account_number=orde.account_number, item_id=order_line.item_id)
+            orde = Order.objects.get(order_number=order_number)
+            dsc = Discounts.objects.get(account_number=orde.account_number, item_id=order_line.item_id.id)
 
-            # if dsc is None:
-            #    order_line.discount_price = order_line.price
-            # else:
-            prc = order_line.price
-            # dscp = dsc.
-            order_line.discount_price = prc * (1 - 0.1)
+            if dsc is None:
+                order_line.discount_price = order_line.price
+            else:
+                prc = order_line.price
+                dscp = dsc.value
+                order_line.discount_price = prc * (1 - dscp)
 
+            order_line.unit = order_line.item_id.unit
             order_line.save()
             form_orderlines = LineForm()
             show_line_form = False
@@ -125,6 +136,7 @@ def sale_new(request):
         form = OrderForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
+            order.order_number = Order.get_next_order_number(order)
             order.order_type = 'S'
             order.save()
             form = OrderForm()
@@ -210,10 +222,20 @@ def all_discounts(request):
 
 
 def new_discount(request):
+    storage = messages.get_messages(request)
+    storage.used = True
+
     if request.method == "POST":
         form = DiscountForm(request.POST)
         if form.is_valid():
-            form.save()
+            disc = form.save(commit=False)
+
+            if disc.value < 1:
+                disc.save()
+            else:
+                messages.error(request, "Discount not saved, check value is less than 1 or less than 100%",
+                               extra_tags='email')
+
             form = DiscountForm()
     else:
         form = DiscountForm()

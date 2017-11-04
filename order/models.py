@@ -30,6 +30,13 @@ class Order(models.Model):
     order_status = models.CharField(max_length=1, choices=ORDER_STATUS)
     invoice_date = models.DateTimeField(null=True, blank=True)
 
+    def get_next_order_number(self):
+        last_order = Order.objects.all().order_by('-order_number').first()
+        if last_order != None:
+            return last_order.order_number + 1
+        else:
+            return 1
+
 
 class OrderLine(models.Model):
     order_line_id = models.IntegerField()

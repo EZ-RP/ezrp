@@ -5,5 +5,5 @@ from product.models import *
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Item
-        fields = ('name', 'item_desc', 'units', 'product_category')
+        fields = ('product_category', 'name', 'item_desc', 'unit', 'fulfilment_type')
 

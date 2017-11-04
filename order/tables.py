@@ -22,7 +22,7 @@ class SaleTable(tables.Table):
 
 
 class SalesLineTable(tables.Table):
-    edit_link = tables.LinkColumn('salesline_edit', args=[A('order_number')],
+    edit_link = tables.LinkColumn('sale_edit', args=[A('order_number')],
                                   verbose_name='Edit Sale', text='Edit', accessor='order_number',
                                   attrs={'class': 'edit_link'})
     delete_link = tables.LinkColumn('salesline_delete', args=[A('pk')],

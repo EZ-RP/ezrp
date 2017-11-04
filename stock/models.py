@@ -1,5 +1,5 @@
 from django.db import models
-
+from product.models import *
 
 """Naming conventions:
     - Class names                           = CamelCase
@@ -7,10 +7,17 @@ from django.db import models
 
 
 class Inventory(models.Model):
-    item_id = models.CharField(max_length=30, primary_key=True)
+    item_id = models.ForeignKey(Item)  # models.CharField(max_length=30, primary_key=True)
     available_qty = models.FloatField(null=True, blank=True)
     reserved_qty = models.FloatField(null=True, blank=True)
     ordered_qty = models.FloatField(null=True, blank=True)
+
+    def get_next_id(self):
+        last_inv = Inventory.objects.all().order_by('-id').first()
+        if last_inv != None:
+            return last_inv.id + 1
+        else:
+            return 1
 
     def reserve_qty(self, qty: float):
         """

@@ -13,7 +13,7 @@ class OrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ('order_number', 'account_number', 'address', 'order_status', 'delivery_date')
+        fields = ('account_number', 'address', 'order_status', 'delivery_date') # 'order_number',
         widgets = {
             'delivery_date': forms.SelectDateWidget()
         }
