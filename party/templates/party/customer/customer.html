@@ -2,6 +2,7 @@
 <html>
 <head>
 {% extends "base/template.html" %}
+    {% load render_table from django_tables2 %}
 </head>
 <body>
     {% block content %}
@@ -9,7 +10,16 @@
         <form method="post">
         {% csrf_token %}
         {{ form_customer.as_p }}
+
+        {% if  show_address_form%}
+         {{ form_address.as_p }}
+            <button class="save btn btn-default">Save</button>
+        {% endif %}
         </form>
+        <form action="#" method="get">
+            <input type="submit" class="btn" value="Add address" name="add_address">
+        </form>
+        {% render_table address %}
         </div>
     {% endblock content %}
 </body>

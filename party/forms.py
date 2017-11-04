@@ -7,3 +7,9 @@ class PartyForm(forms.ModelForm):
         model = Party
         fields = ('party_name', 'account_number', 'business_number')
 
+
+class AddressForm(forms.ModelForm):
+
+    class Meta:
+        model = Address
+        fields = ('street', 'suburb', 'state', 'postcode')
