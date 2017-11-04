@@ -22,7 +22,7 @@ class SaleTable(tables.Table):
 
 
 class SalesLineTable(tables.Table):
-    edit_link = tables.LinkColumn('sale_edit', args=[A('order_number')],
+    edit_link = tables.LinkColumn('sale_edit', args=[A('order_number.order_number')],
                                   verbose_name='Edit Sale', text='Edit', accessor='order_number',
                                   attrs={'class': 'edit_link'})
     delete_link = tables.LinkColumn('salesline_delete', args=[A('pk')],
@@ -35,10 +35,10 @@ class SalesLineTable(tables.Table):
 
 
 class DiscountTable(tables.Table):
-    edit_link = tables.LinkColumn('disc_edit', args=[A('pk')],
+    edit_link = tables.LinkColumn('discount_edit', args=[A('pk')],
                                   verbose_name='Edit Disc', text='Edit', accessor='pk',
                                   attrs={'class': 'edit_disc'})
-    delete_link = tables.LinkColumn('disc_delete', args=[A('pk')],
+    delete_link = tables.LinkColumn('discount_delete', args=[A('pk')],
                                     verbose_name='Delete Disc', text='Delete', accessor='pk',
                                     attrs={'class': 'delete_disc'})
 

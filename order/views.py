@@ -38,8 +38,6 @@ def all_saleslines(request):
                 'order_number').filter(order_type="S")))
     RequestConfig(request).configure(salesliness)
     return render(request, 'order/Sales/all_salesLines.html', {'saleslines': salesliness})
-    # return render(request, 'order/Sales/all_salesLines.html',
-                  # {'saleslines': OrderLine.objects.all()})
 
 
 def sale(request, order_number):
@@ -240,4 +238,27 @@ def new_discount(request):
     else:
         form = DiscountForm()
     return render(request, 'order/new_discount.html', {'form': form})
+
+
+def discount_delete(request, lineid):
+    Discounts.objects.get(id=lineid).delete()
+    discs = DiscountTable(Discounts.objects.all())
+    RequestConfig(request).configure(discs)
+    return render(request, 'order/all_discounts.html', {'discounts': discs})
+
+
+def discount_edit(request, lineid):
+    if request.method == "POST":
+        disc = Discounts.objects.get(id=lineid)
+        form_disc = DiscountForm(request.POST, instance=disc)
+        if form_disc.is_valid():
+            form_disc.save(commit=True)
+
+            discs = DiscountTable(Discounts.objects.all())
+            RequestConfig(request).configure(discs)
+            return render(request, 'order/all_discounts.html', {'discounts': discs})
+    else:
+        singledisc = Discounts.objects.get(id=lineid)
+        form_disc = DiscountForm(instance=singledisc)
+        return render(request, 'order/new_discount.html', {'form': form_disc})
 
