@@ -11,12 +11,11 @@
         <form method="post"  >
             {% csrf_token %}
             <h1> Employee </h1>
-            <fieldset disabled="true">
                 {{ form_employee.as_p }}
-            </fieldset>
+        <h3> </h3>
 
+                <button>Save</button>
         </form>
-
     {% endblock content %}
 </body>
 </html>
