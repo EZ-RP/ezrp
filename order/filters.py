@@ -7,7 +7,7 @@ class OrderFilter(df.FilterSet):
     class Meta:
         model = Order
         fields = {
-            'order_status': ['contains'],
+            'order_status': ['icontains'],
             'created_date': ['contains'],
             'invoice_date': ['contains'],
         }

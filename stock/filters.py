@@ -8,7 +8,7 @@ class StockFilter(df.FilterSet):
         model = Inventory
         fields = {
             'item_id__item_number': ['contains'],
-            'item_id__name': ['contains'],
+            'item_id__name': ['icontains'],
         }
 
 
