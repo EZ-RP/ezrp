@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+{% extends "base/template.html" %}
+</head>
+<body>
+    {% block content %}
+        <div class="contentGrey">
+            <h1> Create Production </h1>
+
+            <form method="POST" class="order-form">{% csrf_token %}
+                {{ form.as_p }}
+                <button class="save btn btn-default">&nbsp;Add&nbsp;</button>
+            </form>
+        </div>
+    {% endblock content %}
+</body>
+</html>

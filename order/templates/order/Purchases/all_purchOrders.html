@@ -9,7 +9,7 @@
 <body>
     {% block content %}
         <div class="contentBanner">
-            <a href="{% url 'sale_new' %}" class="button">&nbsp;Create Sale&nbsp;</a>
+            <a href="{% url 'purch_new' %}" class="button">&nbsp;Create Purchase&nbsp;</a>
         </div>
         <div class="contentGrey">
         {% if filter %}
@@ -18,7 +18,7 @@
                 {% bootstrap_button 'filter' %}
             </form>
         {% endif %}
-        {% render_table sales %}
+        {% render_table purchases %}
         </div>
     {% endblock content %}
 </body>
