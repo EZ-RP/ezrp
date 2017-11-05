@@ -108,11 +108,11 @@ h3 {
 .tableStyle tr.odd {
 	text-decoration: none;
 	font-size: large;
-	background: rgb(11, 110, 16, 0.4);
+	background: rgba(11, 110, 16, 0.4);
 
 }
 .contentGreen {
-	background:linear-gradient(#07450a, #0b6e10);
+	background-color: #555555;
 	border-top: 5px solid #e4e4e4;
 	min-height: 300px;
 	width: 70%;
@@ -144,6 +144,9 @@ h3 {
 	left: 0;
 	margin: auto;
 	min-width: 900px;
+}
+.footer.text {
+	margin: auto;
 }
 a.button {
 	-webkit-appearance: button;

@@ -12,7 +12,7 @@
 		<ul>
              <li> <a href="{% url 'base_Main' %}"> Home </a> </li>
              <li> <a href="{% url 'base_General' %}"> General </a> </li>
-            <li> <a> Orders </a>
+            <li> <a href="{% url 'orders' %}"> Orders </a>
 				<ul>
 					<li> <a href="{% url 'sales' %}"> Sales </a> </li>
 					<li> <a href="{% url 'purchases' %}"> Purchases </a> </li>
@@ -22,10 +22,10 @@
             </li>
             <li> <a href="{% url 'product_Main' %}">  Product </a> </li>
             <li> <a href="{% url 'all_available' %}">  Stock </a> </li>
-			<li> <a>Party</a>
+			<li> <a href="{% url 'party_main' %}"> Party </a>
 				<ul>
-					<li> <a href="{% url 'customers' %}"> Customers </a> </li>
-					<li> <a href="{% url 'vendors' %}"> Vendors </a> </li>
+					<li> <a href="{% url 'all_customers' %}"> Customers </a> </li>
+					<li> <a href="{% url 'all_vendors' %}"> Vendors </a> </li>
 				</ul>
 			</li>
             <li> <a href="{% url 'humanResources_Main' %}"> HR  </a> </li>

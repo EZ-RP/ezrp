@@ -5,6 +5,7 @@ from .forms import ProductForm
 from product.tables import ProductTable
 from stock.models import *
 from product.models import *
+from product.filters import ProductFilter
 # Create your views here.
 
 
@@ -30,7 +31,27 @@ def product(request):
     })
 
 
-def edit_product(request, id):
-    product = Item.objects.get(id=id)
-    form_product = ProductForm(instance=product)
-    return render(request, 'product/product_new.html', {'form_product': form_product})
+def edit_product(request, lineid):
+    if request.method == "POST":
+        prod = Item.objects.get(id=lineid)
+        form_prods = ProductForm(request.POST, instance= prod)
+
+        if form_prods.is_valid():
+
+            form_prods.save(commit=True)
+
+            form_prod = ProductForm()
+    else:
+        single_prod = Item.objects.get(id=lineid)
+
+        form_prod = ProductForm(instance=single_prod)
+
+    return render(request, 'product/edit_product.html', {'form_prod': form_prod})
+
+def all_product(request):
+    filter = ProductFilter(request.GET, Item.objects.all())
+    product = ProductTable(filter.qs)
+    RequestConfig(request).configure(product)
+    return render(request, 'product/product.html', {'product': product, 'filter': filter})
+
+

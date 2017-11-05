@@ -8,7 +8,7 @@
 <body>
     {% block content %}
         <div class="contentBanner">
-            <a class="button" href="{% url 'role_new' %}" >&nbsp;Add Role&nbsp;</a>
+            <a style="text-decoration: none;" href="{% url 'role_new' %}" > <button class="buttonStyle"> Add Role </button></a>
         </div>
         <div class="contentGrey">
             <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />

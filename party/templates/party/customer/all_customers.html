@@ -8,13 +8,15 @@
 </head>
 <body>
     {% block content %}
+        <div class="contentBanner">
+            <a style="text-decoration: none;" href="{% url 'customer_new' %}"> <button class="buttonStyle"> Create Customer </button></a>
+        </div>
         <div class="contentGrey">
         {% if filter %}
         <form action="" method="get" class="form form-horizontal">
             {% bootstrap_form filter.form layout='horizontal' %}
             {% bootstrap_button 'filter' %}
         </form>
-            <a style="text-decoration: none;" href="{% url 'customer_new' %}"> <button class="buttonStyle"> Create customer </button></a>
         {% endif %}
         {% render_table customers %}
         </div>

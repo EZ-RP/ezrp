@@ -10,13 +10,10 @@
             <div class="row">
                 <div class="column">
                     <div>
-                        <a href="{% url 'sale_new' %}" class="button">&nbsp;Create Sale&nbsp;</a>
+                        <a style="text-decoration: none;" href="{% url 'all_sales' %}"> <button class="buttonStyleGeneral"> Sales </button></a>
                     </div>
                     <div>
-                        <a href="{% url 'all_sales' %}" class="button">&nbsp;All Sales&nbsp;</a>
-                    </div>
-                    <div>
-                        <a href="{% url 'all_saleslines' %}" class="button">&nbsp;All Sales lines&nbsp;</a>
+                        <a style="text-decoration: none;" href="{% url 'all_saleslines' %}"> <button class="buttonStyleGeneral"> Sale lines </button></a>
                     </div>
                 </div>
             </div>

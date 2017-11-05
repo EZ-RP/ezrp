@@ -19,6 +19,8 @@ def all_customers(request):
 def customers(request):
     return render(request, 'party/customer/customers.html')
 
+def partyMain(request):
+    return render(request, 'party/partyMain.html')
 
 @transaction.atomic
 def customer_new(request):

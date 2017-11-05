@@ -6,19 +6,12 @@
 <body>
     {% block content %}
         <div class="contentGrey">
-            <h1> Parties </h1>
-        </div>
-        <div class="contentGreen">
-            <h2> Stock </h2>
-        </div>
-        <div class="contentGrey">
-            <h1> Product </h1>
-        </div>
-        <div class="contentGreen">
-            <h2> Human Resources </h2>
-        </div>
-        <div class="contentGrey">
-            <h2> Orders </h2>
+            <a style="text-decoration: none;" href="{% url 'party_main' %}"><button class="buttonStyleGeneral"> Parties </button></a>
+            <a style="text-decoration: none;" href="{% url 'all_available' %}"><button class="buttonStyleGeneral"> Available Stock </button></a>
+            <a style="text-decoration: none;" href="{% url 'product_Main' %}"><button class="buttonStyleGeneral"> Products </button></a>
+            <a style="text-decoration: none;" href="{% url 'humanResources_Main' %}"><button class="buttonStyleGeneral"> Human Resources </button></a>
+            <a style="text-decoration: none;" href="{% url 'orders' %}"><button class="buttonStyleGeneral"> Orders </button></a>
+            <a style="text-decoration: none;" href="{% url 'about' %}"><button class="buttonStyleGeneral"> About </button></a>
         </div>
     {% endblock content %}
 </body>

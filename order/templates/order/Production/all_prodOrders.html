@@ -9,7 +9,7 @@
 <body>
     {% block content %}
         <div class="contentBanner">
-            <a href="{% url 'prod_new' %}" class="button">&nbsp;Create Production&nbsp;</a>
+            <a style="text-decoration: none;" href="{% url 'prod_new' %}"> <button class="buttonStyle"> Create Production </button></a>
         </div>
         <div class="contentGrey">
         {% if filter %}

@@ -2,6 +2,9 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
+    #Party Main page
+    url(r'^party/$', views.partyMain, name='party_main'),
+
     # Customer URL patterns
     url(r'^customers/$', views.customers, name='customers'),
     url(r'^customers/all_customers/$', views.all_customers, name='all_customers'),

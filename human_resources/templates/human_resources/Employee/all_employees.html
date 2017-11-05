@@ -8,7 +8,7 @@
 <body>
     {% block content %}
         <div class="contentBanner">
-            <a href="{% url 'employee_new' %}" class="button">&nbsp;Add Employee&nbsp;</a>
+            <a style="text-decoration: none;" href="{% url 'employee_new' %}"> <button class="buttonStyle"> Add Employee </button></a>
         </div>
         <div class="contentGrey">
             {% render_table employees %}
