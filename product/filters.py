@@ -10,3 +10,4 @@ class ProductFilter(df.FilterSet):
             'item_number': ['contains'],
             'name': ['icontains'],
         }
+

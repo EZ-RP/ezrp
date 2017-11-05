@@ -12,15 +12,15 @@
         <div><h1>Product</h1></div>
         <div style="margin-right: 0;">
             <a style="text-decoration: none;" href="{% url 'product_new' %}"> <button class='buttonStyle' >New Product</button> </a>
-            {% if filter %}
-        <form action="" method="get" class="form form-inline">
-            {% bootstrap_form filter.form layout='inline' %}
-            {% bootstrap_button 'filter' %}
-        </form>
-        {% endif %}
         </div>
         </div>
         <div class="contentGrey">
+                {% if filter %}
+                    <form action="" method="get" class="form form-inline">
+                    {% bootstrap_form filter.form layout='inline' %}
+                    {% bootstrap_button 'filter' %}
+                    </form>
+                {% endif %}
                 {% render_table prodtable %}
         </div>
     {% endblock content %}

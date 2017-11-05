@@ -6,7 +6,7 @@ from order.models import OrderLine
 from order.models import Discounts
 
 
-class OrderTable(tables.Table):
+class SalesTable(tables.Table):
     edit_link = tables.LinkColumn('sale_edit', args=[A('order_number')],
                                   verbose_name='Edit order', text='Edit', accessor='pk',
                                   attrs={'class': 'edit_link'})
@@ -19,11 +19,62 @@ class OrderTable(tables.Table):
         model = Order
 
 
-class OrderLineTable(tables.Table):
+class SalesLineTable(tables.Table):
     edit_link = tables.LinkColumn('sale_edit', args=[A('order_number.order_number')],
                                   verbose_name='Edit Line', text='Edit', accessor='order_number',
                                   attrs={'class': 'edit_link'})
     delete_link = tables.LinkColumn('salesline_delete', args=[A('pk')],
+                                    verbose_name='Delete Line', text='Delete', accessor='pk',
+                                    attrs={'class': 'delete_link'})
+
+    class Meta:
+        attrs = {'class': 'tableStyle'}
+        model = OrderLine
+
+class PurchTable(tables.Table):
+    edit_link = tables.LinkColumn('purch_edit', args=[A('order_number')],
+                                  verbose_name='Edit order', text='Edit', accessor='pk',
+                                  attrs={'class': 'edit_link'})
+    delete_link = tables.LinkColumn('purch_delete', args=[A('order_number')],
+                                    verbose_name='Delete order', text='Delete', accessor='pk',
+                                    attrs={'class': 'delete_link'})
+
+    class Meta:
+        attrs = {'class': 'tableStyle'}
+        model = Order
+
+
+class PurchLineTable(tables.Table):
+    edit_link = tables.LinkColumn('purch_edit', args=[A('order_number.order_number')],
+                                  verbose_name='Edit Line', text='Edit', accessor='order_number',
+                                  attrs={'class': 'edit_link'})
+    delete_link = tables.LinkColumn('purchline_delete', args=[A('pk')],
+                                    verbose_name='Delete Line', text='Delete', accessor='pk',
+                                    attrs={'class': 'delete_link'})
+
+    class Meta:
+        attrs = {'class': 'tableStyle'}
+        model = OrderLine
+
+
+class ProdTable(tables.Table):
+    edit_link = tables.LinkColumn('prod_edit', args=[A('order_number')],
+                                  verbose_name='Edit order', text='Edit', accessor='pk',
+                                  attrs={'class': 'edit_link'})
+    delete_link = tables.LinkColumn('prod_delete', args=[A('order_number')],
+                                    verbose_name='Delete order', text='Delete', accessor='pk',
+                                    attrs={'class': 'delete_link'})
+
+    class Meta:
+        attrs = {'class': 'tableStyle'}
+        model = Order
+
+
+class ProdLineTable(tables.Table):
+    edit_link = tables.LinkColumn('prod_edit', args=[A('order_number.order_number')],
+                                  verbose_name='Edit Line', text='Edit', accessor='order_number',
+                                  attrs={'class': 'edit_link'})
+    delete_link = tables.LinkColumn('prodline_delete', args=[A('pk')],
                                     verbose_name='Delete Line', text='Delete', accessor='pk',
                                     attrs={'class': 'delete_link'})
 

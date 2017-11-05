@@ -21,13 +21,13 @@ def sales(request):
 
 def all_sales(request):
     filter = OrderFilter(request.GET, Order.objects.filter(order_type="S"))
-    saless = OrderTable(filter.qs)
+    saless = SalesTable(filter.qs)
     RequestConfig(request).configure(saless)
     return render(request, 'order/Sales/all_salesOrders.html', {'sales': saless, 'filter': filter})
 
 
 def all_saleslines(request):
-    salesliness = OrderLineTable(
+    salesliness = SalesLineTable(
         OrderLine.objects.filter(
             order_number=Order.objects.values_list(
                 'order_number').filter(order_type="S")))
@@ -113,14 +113,15 @@ def sale_edit(request, order_number):
 
 def sale_delete(request, order_number):
     Order.objects.get(order_number=order_number).delete()
-    saless = OrderTable(Order.objects.filter(order_type="S"))
+    filter = OrderFilter(request.GET, Order.objects.filter(order_type="S"))
+    saless = SalesTable(filter.qs)
     RequestConfig(request).configure(saless)
     return render(request, 'order/Sales/all_salesOrders.html', {'sales': saless})
 
 
 def salesline_delete(request, lineid):
     OrderLine.objects.get(id=lineid).delete()
-    salesliness = OrderLineTable(
+    salesliness = SalesLineTable(
         OrderLine.objects.filter(
             order_number=Order.objects.values_list(
                 'order_number').filter(order_type="S")))
@@ -169,13 +170,13 @@ def purchases(request):
 
 def all_purchases(request):
     filter = OrderFilter(request.GET, Order.objects.filter(order_type="P"))
-    purchs = OrderTable(filter.qs)
+    purchs = PurchTable(filter.qs)
     RequestConfig(request).configure(purchs)
-    return render(request, 'order/Purchases/all_purchOrders.html',{'purchases': purchs, 'filter': filter})
+    return render(request, 'order/Purchases/all_purchOrders.html', {'purchases': purchs, 'filter': filter})
 
 
 def all_purchlines(request):
-    purchliness = OrderLineTable(
+    purchliness = PurchLineTable(
         OrderLine.objects.filter(
             order_number=Order.objects.values_list(
                 'order_number').filter(order_type="P")))
@@ -185,14 +186,14 @@ def all_purchlines(request):
 
 def purch_delete(request, order_number):
     Order.objects.get(order_number=order_number).delete()
-    purchs = OrderTable(Order.objects.filter(order_type="P"))
+    purchs = PurchTable(Order.objects.filter(order_type="P"))
     RequestConfig(request).configure(purchs)
     return render(request, 'order/Purchases/all_purchOrders.html', {'purch': purchs})
 
 
 def purchline_delete(request, lineid):
     OrderLine.objects.get(id=lineid).delete()
-    purchliness = OrderLineTable(
+    purchliness = PurchLineTable(
         OrderLine.objects.filter(
             order_number=Order.objects.values_list(
                 'order_number').filter(order_type="P")))
@@ -283,13 +284,13 @@ def production(request):
 
 def all_production(request):
     filter = OrderFilter(request.GET, Order.objects.filter(order_type="M"))
-    prods = OrderTable(filter.qs)
+    prods = ProdTable(filter.qs)
     RequestConfig(request).configure(prods)
     return render(request, 'order/Production/all_prodOrders.html', {'production': prods, 'filter': filter})
 
 
 def all_prodlines(request):
-    prodliness = OrderLineTable(
+    prodliness = ProdLineTable(
         OrderLine.objects.filter(
             order_number=Order.objects.values_list(
                 'order_number').filter(order_type="M")))
@@ -299,14 +300,14 @@ def all_prodlines(request):
 
 def prod_delete(request, order_number):
     Order.objects.get(order_number=order_number).delete()
-    prods = OrderTable(Order.objects.filter(order_type="M"))
+    prods = ProdTable(Order.objects.filter(order_type="M"))
     RequestConfig(request).configure(prods)
     return render(request, 'order/Production/all_prodOrders.html', {'prod': prods})
 
 
 def prodline_delete(request, lineid):
     OrderLine.objects.get(id=lineid).delete()
-    prodliness = OrderLineTable(
+    prodliness = ProdLineTable(
         OrderLine.objects.filter(
             order_number=Order.objects.values_list(
                 'order_number').filter(order_type="M")))
@@ -387,7 +388,7 @@ def prod_edit(request, order_number):
 
                 show_line_form = True
 
-    return render(request, 'order/Production/sale.html', {'form_prod': form_order, 'form_orderline': form_orderlines, 'prodlines': prodlines, 'show_line_form': show_line_form})
+    return render(request, 'order/Production/Prod.html', {'form_prod': form_order, 'form_orderline': form_orderlines, 'prodlines': prodlines, 'show_line_form': show_line_form})
 
 
 # Discount views

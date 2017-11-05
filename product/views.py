@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from product.models import Item
 from django.http import HttpResponse
+from django_tables2 import RequestConfig
 from .forms import ProductForm
 from product.tables import ProductTable
 from stock.models import *
@@ -24,11 +25,10 @@ def product_new(request):
 
 
 def product(request):
-    prodtable = ProductTable(Item.objects.all())
-
-    return render(request, 'product/product.html', {
-        'prodtable': prodtable
-    })
+    filter = ProductFilter(request.GET, Item.objects.all())
+    prod = ProductTable(filter.qs)
+    RequestConfig(request).configure(prod)
+    return render(request, 'product/product.html', {'prodtable': prod, 'filter': filter})
 
 
 def edit_product(request, lineid):
@@ -48,10 +48,11 @@ def edit_product(request, lineid):
 
     return render(request, 'product/edit_product.html', {'form_prod': form_prod})
 
+
 def all_product(request):
     filter = ProductFilter(request.GET, Item.objects.all())
     product = ProductTable(filter.qs)
     RequestConfig(request).configure(product)
-    return render(request, 'product/product.html', {'product': product, 'filter': filter})
+    return render(request, 'product/product.html', {'prodtable': product, 'filter': filter})
 
 
