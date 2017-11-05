@@ -8,7 +8,7 @@
 <body>
     {% block content %}
         <div class="contentBanner">
-            <a href="{% url 'address_new' %}" class="button">&nbsp;Add Address&nbsp;</a>
+            <a style="text-decoration: none" href="{% url 'address_new' %}"><button class="buttonStyle"> Add Address </button></a>
         </div>
         <div class="contentGrey">
         {% render_table addresses %}

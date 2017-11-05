@@ -14,7 +14,7 @@
             {% bootstrap_form filter.form layout='horizontal' %}
             {% bootstrap_button 'filter' %}
         </form>
-        <a href="{% url 'customer_new' %}" class="button">&nbsp;Create customer&nbsp;</a>
+            <a style="text-decoration: none;" href="{% url 'customer_new' %}"> <button class="buttonStyle"> Create customer </button></a>
         {% endif %}
         {% render_table customers %}
         </div>

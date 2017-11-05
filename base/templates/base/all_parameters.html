@@ -8,7 +8,7 @@
 <body>
     {% block content %}
         <div class="contentBanner">
-            <a href="{% url 'parameters_new' %}" class="button">&nbsp;Add parameter&nbsp;</a>
+            <a style="text-decoration: none;" href="{% url 'parameters_new' %}"><button class="buttonStyle"> Add parameter </button></a>
         </div>
         <div class="contentGrey">
         {% render_table parameters %}

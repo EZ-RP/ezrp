@@ -156,22 +156,21 @@ a.button {
 }
 .buttonStyle {
 	-webkit-appearance: button;
-	-moz-appearance: button;
 	-webkit-transition: 0.4s;
 	-moz-transition: 0.4s;
 	appearance: button;
-	padding: 10px;
+	height: 30px;
+	width:150px;
 	background: linear-gradient(#07450a, #0b6e10);
 	text-decoration: none;
-	width: auto;
 	color: white;
 	border-radius: 8px;
-	right: 0;
 	box-shadow: 0 1px 1px #777;
 }
 .buttonStyle:hover {
 	background: linear-gradient(#333, #888888);
 	box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 5px 25px 0 rgba(0,0,0,0.19);
+	cursor: pointer;
 }
 .buttonStyle:visited {
 	text-decoration: none;

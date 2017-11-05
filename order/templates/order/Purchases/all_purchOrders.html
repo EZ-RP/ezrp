@@ -9,7 +9,7 @@
 <body>
     {% block content %}
         <div class="contentBanner">
-            <a href="{% url 'purch_new' %}" class="button">&nbsp;Create Purchase&nbsp;</a>
+            <a style="text-decoration: none;" href="{% url 'purch_new' %}"> <button class="buttonStyle"> Create Purchase</button></a>
         </div>
         <div class="contentGrey">
         {% if filter %}
