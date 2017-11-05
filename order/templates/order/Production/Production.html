@@ -6,8 +6,20 @@
 <body>
     {% block content %}
         <div class="contentGrey">
-            <h1> Purchases </h1>
-            <a href="{% url 'all_production' %}">&nbsp;Production&nbsp;</a>
+            <h1> Production </h1>
+            <div class="row">
+                <div class="column">
+                    <div>
+                        <a href="{% url 'prod_new' %}" class="button">&nbsp;Create Production&nbsp;</a>
+                    </div>
+                    <div>
+                        <a href="{% url 'all_production' %}" class="button">&nbsp;All Production&nbsp;</a>
+                    </div>
+                    <div>
+                        <a href="{% url 'all_prodlines' %}" class="button">&nbsp;All Production lines&nbsp;</a>
+                    </div>
+                </div>
+            </div>
         </div>
     {% endblock content %}
 </body>

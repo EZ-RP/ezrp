@@ -8,7 +8,7 @@ class PartyFilter(df.FilterSet):
         model = Party
         fields = {
             'account_number': ['contains'],
-            'party_name': ['contains'],
+            'party_name': ['icontains'],
         }
 
 

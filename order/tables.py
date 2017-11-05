@@ -5,10 +5,8 @@ from order.models import Order
 from order.models import OrderLine
 from order.models import Discounts
 
-# Sales custom tables
 
-
-class SaleTable(tables.Table):
+class OrderTable(tables.Table):
     edit_link = tables.LinkColumn('sale_edit', args=[A('order_number')],
                                   verbose_name='Edit Sale', text='Edit', accessor='pk',
                                   attrs={'class': 'edit_link'})
@@ -21,7 +19,7 @@ class SaleTable(tables.Table):
         model = Order
 
 
-class SalesLineTable(tables.Table):
+class OrderLineTable(tables.Table):
     edit_link = tables.LinkColumn('sale_edit', args=[A('order_number.order_number')],
                                   verbose_name='Edit Sale', text='Edit', accessor='order_number',
                                   attrs={'class': 'edit_link'})

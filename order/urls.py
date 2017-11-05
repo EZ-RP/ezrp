@@ -11,7 +11,6 @@ urlpatterns = [
     url(r'^sales/sale-new/$', views.sale_new, name='sale_new'),
     url(r'^sales/sale-view/$', views.sale_view, name='sale_view'),
     url(r'^sales/all_saleslines/$', views.all_saleslines, name='all_saleslines'),
-    url(r'^sales/saleline-new/$', views.saleline_new, name='saleline_new'),
     url(r'^sales/(?P<order_number>\w+)/$', views.sale, name='sale'),
     url(r'^sales/edit/(?P<order_number>\d+)/$', views.sale_edit, name='sale_edit'),
     url(r'^sales/delete/(?P<order_number>\d+)/$', views.sale_delete, name='sale_delete'),
@@ -20,10 +19,22 @@ urlpatterns = [
     # Purchase urls
     url(r'^purchases/$', views.purchases, name='purchases'),
     url(r'^purchases/all_purchases/$', views.all_purchases, name='all_purchases'),
+    url(r'^purchases/purch-new/$', views.purch_new, name='purch_new'),
+    url(r'^purchases/all_purchlines/$', views.all_purchlines, name='all_purchlines'),
+    url(r'^purchases/(?P<order_number>\w+)/$', views.purch, name='purch'),
+    url(r'^purchases/edit/(?P<order_number>\d+)/$', views.purch_edit, name='purch_edit'),
+    url(r'^purchases/delete/(?P<order_number>\d+)/$', views.purch_delete, name='purch_delete'),
+    url(r'^purchases/delete/(?P<id>\d+)/$', views.purchline_delete, name='purchline_delete'),
 
     # Production urls
     url(r'^production/$', views.production, name='production'),
     url(r'^production/all_production/$', views.all_production, name='all_production'),
+    url(r'^production/prod-new/$', views.prod_new, name='prod_new'),
+    url(r'^production/all_prodlines/$', views.all_prodlines, name='all_prodlines'),
+    url(r'^production/(?P<order_number>\w+)/$', views.prod, name='prod'),
+    url(r'^production/edit/(?P<order_number>\d+)/$', views.prod_edit, name='prod_edit'),
+    url(r'^production/delete/(?P<order_number>\d+)/$', views.prod_delete, name='prod_delete'),
+    url(r'^production/delete/(?P<id>\d+)/$', views.prodline_delete, name='prodline_delete'),
 
     # Discount urls
     url(r'^orderSetup/$', views.setup, name='setup'),

@@ -6,10 +6,12 @@
 <body>
     {% block content %}
         <div class="contentGrey">
-        <h1> Edit Stock </h1>
         <form method="post">
         {% csrf_token %}
-        {{ form_stock.as_p }}
+        <h1>New vendor</h1>
+        {{ form_vendor.as_p }}
+        <h3>Address</h3>
+        {{ form_address.as_p }}
         <input type="submit" />
         </form>
         </div>

@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+<head>
+{% extends "base/template.html" %}
+</head>
+<body>
+    {% block content %}
+        <div class="contentGrey">
+                <h1> Vendors </h1>
+                <a class='button' href="{% url 'all_vendors' %}">All vendors</a>
+                <a class='button' href="{% url 'vendor_new' %}">New vendor</a>
+            </div>
+    {% endblock content %}
+</body>
+</html>
+

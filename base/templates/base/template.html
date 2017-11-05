@@ -21,11 +21,11 @@
 				</ul>
             </li>
             <a href="{% url 'product_Main' %}"> <li>  Product </li> </a>
-            <a href="{% url 'stock_Main' %}"> <li>  Stock  </li> </a>
+            <a href="{% url 'all_available' %}"> <li>  Stock  </li> </a>
 			<li> <a>Party</a>
 				<ul>
 					<li> <a href="{% url 'customers' %}"> Customers </a> </li>
-					<li> <a href="#"> Vendors </a> </li>
+					<li> <a href="{% url 'vendors' %}"> Vendors </a> </li>
 				</ul>
 			</li>
             <a href="{% url 'humanResources_Main' %}"> <li> HR </li> </a>

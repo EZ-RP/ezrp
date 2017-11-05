@@ -13,11 +13,10 @@ class OrderForm(forms.ModelForm):
 
     class Meta:
         model = Order
-        fields = ('account_number', 'address', 'order_status', 'delivery_date') # 'order_number',
+        fields = ('account_number', 'address', 'order_status', 'delivery_date')  # 'order_number',
         widgets = {
             'delivery_date': forms.SelectDateWidget()
         }
-
 
 
 class LineForm(forms.ModelForm):
@@ -30,5 +29,8 @@ class DiscountForm(forms.ModelForm):
     class Meta:
         model = Discounts
         fields = ('account_number', 'product_category', 'item_id', 'quantity', 'start_date', 'end_date', 'value')
-
+        widgets = {
+            'start_date': forms.SelectDateWidget(),
+            'end_date': forms.SelectDateWidget(),
+        }
 
