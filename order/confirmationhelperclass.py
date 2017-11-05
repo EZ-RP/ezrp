@@ -1,5 +1,6 @@
-from order.models import Order
-from order.models import OrderLine
+import time
+from order.models import *
+from order.models import *
 from product.models import Item
 from stock.models import Inventory
 from order.confirmationresult import *
@@ -7,28 +8,64 @@ from order.confirmationresult import *
 
 def confirmorder(corder):
     result = ConfirmResult()
-    # Order = OrderLine.objects.first(order_number=corder)
+    tdate = time.strftime("%Y-%m-%d")
 
-    # for sl in OrderLine.objects.filter(order_number=corder):
-    #    prod = Item.objects.first(item_id=sl.item_id)
-    #    inv = Inventory.objects.first(item_id=sl.item_id)
-    #
-    #    if prod is None or inv is None:
-    #        result.confirmation_status = "Not Ordered"
-    #        result.add_error(result, "Error: product or inventory record not found")
-    #    else:
-    #        if inv.available_qty >= sl.quantity:
-    #            Inventory.reserve_qty(inv, sl.quantity)
-    #            result.confirmation_status = "Ordered"
+    for sl in OrderLine.objects.filter(order_number=corder):
+        prod = Item.objects.filter(item_number=sl.item_id.id).first()
+        inv = Inventory.objects.filter(item_id=sl.item_id.id).first()
 
-    #        elif inv.available_qty < sl.quantity:
-    #            Inventory.add_ordered_qty(inv, sl.quantity)
-    #            result.confirmation_status = "Not Ordered"
-    #            result.add_error(result, "Error: Not enough Stock Available, a fulfilment order has been placed")
+        if prod is None or inv is None:
+            result.confirmation_status = "Not Ordered"
+            result.add_error("Error: product or inventory record not found")
+        else:
+            if corder.order_type == "S":
+                if inv.available_qty >= sl.quantity:
+                    Inventory.reserve_qty(inv, sl.quantity)
+                    result.confirmation_status = "Ordered"
+
+                elif inv.available_qty < sl.quantity:
+                    if prod.fulfilment_type == "P":
+                        fulord = Order(account_number=corder.account_number, order_type='P')
+                        fulord.order_number = Order.get_next_order_number(fulord)
+                        fulord.address = corder.address
+                        fulord.created_date = tdate
+                        fulord.delivery_date = tdate
+                        fulord.order_status = "C"
+                        fulord.save()
+                        fulline = OrderLine(order_number=fulord)
+                        fulline.order_line_id = OrderLine.get_next_line_id(fulline)
+                        fulline.item_id = sl.item_id
+                        fulline.quantity = sl.quantity
+                        fulline.price = sl.price
+                        fulline.discount_price = sl.price
+                        fulline.unit = sl.unit
+                        fulline.save()
+                    elif prod.fulfilment_type == "M":
+                        fulord = Order(account_number=corder.account_number, order_type='M')
+                        fulord.order_number = Order.get_next_order_number(fulord)
+                        fulord.address = corder.address
+                        fulord.created_date = tdate
+                        fulord.delivery_date = tdate
+                        fulord.order_status = "C"
+                        fulord.save()
+                        fulline = OrderLine(order_number=fulord)
+                        fulline.order_line_id = OrderLine.get_next_line_id(fulline)
+                        fulline.item_id = sl.item_id
+                        fulline.quantity = sl.quantity
+                        fulline.price = sl.price
+                        fulline.discount_price = sl.price
+                        fulline.unit = sl.unit
+                        fulline.save()
+
+                    result.confirmation_status = "Not Ordered"
+                    result.add_error("Error: Not enough Stock Available a fulfilment order has been placed")
+            else:
+                Inventory.add_ordered_qty(inv, sl.quantity)
+                result.confirmation_status = "Ordered"
 
     # test return
-    result.confirmation_status = "Not Ordered"
-    result.add_error("Error: product or inventory record not found")
+    # result.confirmation_status = "Not Ordered"
+    # result.add_error("Error: product or inventory record not found")
 
     return result
 

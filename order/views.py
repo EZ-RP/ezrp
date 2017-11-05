@@ -1,12 +1,12 @@
 import time
 from django.shortcuts import render
 from django_tables2 import RequestConfig
-from order.confirmationhelperclass import confirmorder
 from django.contrib import messages
 from .models import *
 from .modelforms import *
 from .tables import *
 from .filters import *
+from .confirmationhelperclass import *
 
 
 # Main Page
@@ -53,6 +53,7 @@ def sale_edit(request, order_number):
 
         if result.confirmation_status == "Ordered":
             ord.order_status = "O"
+            ord.save()
         else:
             for er in result.confirmation_errors:
                 messages.error(request, er, extra_tags='email')
@@ -70,7 +71,7 @@ def sale_edit(request, order_number):
             order_line.order_line_id = OrderLine.get_next_line_id(order_line)
 
             orde = Order.objects.get(order_number=order_number)
-            tdate = time.strftime("%Y/%m/%d")
+            tdate = time.strftime("%Y-%m-%d")
 
             if Discounts.objects.filter(account_number=orde.account_number, item_id=order_line.item_id.id,
                                         startdate__lte=tdate, enddate__gt=tdate).exists():
@@ -92,7 +93,7 @@ def sale_edit(request, order_number):
             saleslines = OrderLine.objects.filter(order_number=order_number)
     else:
 
-        singlesale = Order.objects.get(order_number=order_number, order_type='S')
+        singlesale = Order.objects.get(order_number=order_number)  # , order_type='S'
         form_order = OrderForm(instance=singlesale)
         form_orderlines = LineForm()
         saleslines  = OrderLine.objects.filter(order_number=singlesale)
