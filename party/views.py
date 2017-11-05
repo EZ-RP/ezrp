@@ -38,6 +38,8 @@ def customer_new(request):
             party_address = PartyAddress()
             PartyAddress.add_address_ref(party_address, address, party)
 
+            return all_customers(request)
+
 
     else:
         form_customer = PartyForm()
