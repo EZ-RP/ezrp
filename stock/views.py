@@ -3,6 +3,7 @@ from stock.models import Inventory
 from .forms import InvForm
 from django_tables2 import RequestConfig
 from stock.tables import StockTable
+from stock.filters import StockFilter
 from django.http import HttpResponse
 # Create your views here.
 
@@ -53,3 +54,10 @@ def stock_edit(request, lineid):
         form_stock = InvForm(instance=single_stock)
 
     return render(request, 'stock/edit_stock.html', {'form_stock': form_stock})
+
+
+def all_stock(request):
+    filter = StockFilter(request.GET, Inventory.objects.all())
+    stock = StockTable(filter.qs)
+    RequestConfig(request).configure(stock)
+    return render(request, 'stock/all_available.html', {'available': stock, 'filter': filter})

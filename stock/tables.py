@@ -17,5 +17,6 @@ class StockTable(tables.Table):
 
     class Meta:
         attrs = {'class': 'tableStyle'}
+        fields = ['item_id.item_number', 'item_id.name', 'available_qty', 'reserved_qty', 'ordered_qty']
         model = Inventory
 
