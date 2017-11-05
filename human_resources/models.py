@@ -63,11 +63,13 @@ class EmployeePayDetails(models.Model):
 
 class Leave(models.Model):
     employee_id = models.ForeignKey(Employee, on_delete=models.CASCADE)
-    annual_leave_accrued = models.IntegerField()
+    total_weeks_worked = models.IntegerField(default=0)
+    total_hours_worked = models.IntegerField(default=0)
+    annual_leave_accrued = models.IntegerField(default=0)
     annual_leave_taken = models.IntegerField(default=0)
-    sick_leave_accrued = models.IntegerField()
+    sick_leave_accrued = models.IntegerField(default=0)
     sick_leave_taken = models.IntegerField(default=0)
-    service_leave_accrued = models.IntegerField()
+    service_leave_accrued = models.IntegerField(default=0)
 
 
 class Payday(models.Model):

@@ -8,7 +8,7 @@ urlpatterns = [
     url(r'^Employee/all_employees/$', views.employees, name='all_employees'),
     url(r'^Employee/employee_new/$', views.employee_new, name='employee_new'),
     url(r'^Employee/(?P<id>\w+)/$', views.employee, name='employee'),
-    url(r'Employee/delete/(?P<id>\d+)/', views.employee_delete, name='employee_delete'),
+    url(r'^Employee/delete/(?P<id>\d+)/$', views.employee_delete, name='employee_delete'),
     url(r'^Employee/edit/(?P<id>\d+)/$', views.employee_edit, name='employee_edit'),
 
     #Pay
@@ -17,6 +17,7 @@ urlpatterns = [
 
     #Leave
     url(r'^Leave/all_leave/$', views.leave, name='all_leave'),
+    url(r'^Leave/edit/(?P<id>\d+)/$', views.leave_edit, name='leave_edit'),
 
     #Roles
     url(r'^Role/role_new/$', views.role_new, name='role_new'),
