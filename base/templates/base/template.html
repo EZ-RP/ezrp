@@ -10,8 +10,8 @@
 <body style="background: #e4e4e4">
 	<div class="banner">
 		<ul>
-            <a href="{% url 'base_Main' %}"> <li> Home </li> </a>
-            <a href="{% url 'base_General' %}"> <li> General </li> </a>
+             <li> <a href="{% url 'base_Main' %}"> Home </a> </li>
+             <li> <a href="{% url 'base_General' %}"> General </a> </li>
             <li> <a> Orders </a>
 				<ul>
 					<li> <a href="{% url 'sales' %}"> Sales </a> </li>
@@ -20,15 +20,15 @@
                     <li> <a href="{% url 'setup' %}"> Setup </a> </li>
 				</ul>
             </li>
-            <a href="{% url 'product_Main' %}"> <li>  Product </li> </a>
-            <a href="{% url 'all_available' %}"> <li>  Stock  </li> </a>
+            <li> <a href="{% url 'product_Main' %}">  Product </a> </li>
+            <li> <a href="{% url 'all_available' %}">  Stock </a> </li>
 			<li> <a>Party</a>
 				<ul>
 					<li> <a href="{% url 'customers' %}"> Customers </a> </li>
 					<li> <a href="{% url 'vendors' %}"> Vendors </a> </li>
 				</ul>
 			</li>
-            <a href="{% url 'humanResources_Main' %}"> <li> HR </li> </a>
+            <li> <a href="{% url 'humanResources_Main' %}"> HR  </a> </li>
 		</ul>
 
 	</div>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="footer">
-           <br/> © 2017 EZRP Team. <br/> Created as part of a University of Newcastle Major Project
+           <br/> 2017 EZRP Team. <br/> Created as part of a University of Newcastle Major Project
     </div>
 
 </body>

@@ -10,17 +10,12 @@
                 <h1> Human Resources </h1>
             </div><div>
                 <h3> Employees </h3>
-                <a class="button" href="{% url 'all_employees' %}">All Employees</a>
-                <a class="button" href="{% url 'employee_new' %}">&nbsp;Create New Employee</a>
-             </div><div>
-                <a class="button" href="{% url 'all_pay' %}">All Pay</a>
-                <a class="button" href="{% url 'pay_new' %}">&nbsp;Add Pay&nbsp;</a>
-            </div><div>
-                <a class="button" href="{% url 'all_leave' %}">All Leave</a>
+                <a style="text-decoration: none;" href="{% url 'all_employees' %}"> <button class="buttonStyleGeneral">All Employees</button> </a>
+                <a style="text-decoration: none;" href="{% url 'all_pay' %}"> <button class="buttonStyleGeneral">Pay Details</button> </a>
+                <a style="text-decoration: none;" href="{% url 'all_leave' %}"> <button class="buttonStyleGeneral">All Leave</button> </a>
             </div><div>
                 <h3> Roles </h3>
-                <a class="button" href="{% url 'all_roles' %}">All Roles</a>
-                <a class="button" href="{% url 'role_new' %}">Create New Role</a>
+                <a style="text-decoration: none;" href="{% url 'all_roles' %}"> <button class="buttonStyleGeneral" >All Roles</button> </a>
             </div>
         </div>
     {% endblock content %}

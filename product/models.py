@@ -18,6 +18,10 @@ class Item(models.Model):
     product_category = models.CharField(max_length=30)
     fulfilment_type = models.CharField(max_length=1, choices=FULFILMENT_TYPE)
 
+    class Meta:
+        managed = True
+        db_table = 'product_item'
+
     def __str__(self):
         return '%s %s' % (self.name, self.product_category)
 

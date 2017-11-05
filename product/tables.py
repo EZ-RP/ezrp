@@ -1,6 +1,7 @@
 from django_tables2.utils import A
 import django_tables2 as tables
 from product.models import Item
+from stock.models import Inventory
 
 
 class ProductTable(tables.Table):
@@ -15,4 +16,9 @@ class ProductTable(tables.Table):
     """
     class Meta:
         model = Item
+        attrs = {'class': 'tableStyle'}
+
+class ProdStockTable(tables.Table):
+    class Meta:
+        model = Inventory
         attrs = {'class': 'tableStyle'}

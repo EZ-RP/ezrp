@@ -1,3 +1,7 @@
+* {
+	font-family: arial, sans-serif;
+}
+
 h1 {
 	font-size: 48px;
 	font-style: italic;
@@ -30,14 +34,17 @@ h3 {
 	position: absolute;
 }
 .banner ul li {
-	width: 110px;
+	width: 105px;
 	font-size: 24px;
 	color: white;
 	text-align: center;
 	line-height: 55px;
 	height: 55px;
 	display: inline-block;
+	margin-right: -8px;
 	position: relative;
+	border-left: groove #095e0d;
+	border-right: ridge #095e0d;
 }
 .banner ul li:hover {
 	background:linear-gradient(#053007, #095e0d);
@@ -56,25 +63,31 @@ h3 {
 	color: white;
 
 }
-.banner ul li:hover ul {
+.banner ul li:hover ul  {
 	display: block;
 	position: absolute;
 }
 .banner ul ul {
 	display: none;
 	position: relative;
-	border: 3px solid #07450a;
-	-moz-animation: 0.25s down;
 	border-top: 0;
 	width: auto;
 
 }
-.banner ul ul li {
+.banner li ul li {
 	background: #0b6e10;
-	width: 110px;
+	overflow: hidden;
+	width: 130px;
 	min-width: 110px;
 	display: block;
+	max-height: 0;
+	border-top: groove #095e0d;
+	transition: height 200ms ease;
+	-moz-transition:height 200ms ease;
 
+}
+.banner ul > li:hover ul li {
+    max-height:100px;
 }
 .tableStyle {
 	text-decoration: none;
@@ -141,19 +154,53 @@ a.button {
 	text-decoration: none;
 	color: initial;
 }
-a.buttonStyle {
+.buttonStyle {
 	-webkit-appearance: button;
 	-moz-appearance: button;
+	-webkit-transition: 0.4s;
+	-moz-transition: 0.4s;
 	appearance: button;
 	padding: 10px;
 	background: linear-gradient(#07450a, #0b6e10);
 	text-decoration: none;
 	width: auto;
 	color: white;
-	border-radius: 5px;
+	border-radius: 8px;
 	right: 0;
+	box-shadow: 0 1px 1px #777;
 }
-a.buttonStyle:visited {
+.buttonStyle:hover {
+	background: linear-gradient(#333, #888888);
+	box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 5px 25px 0 rgba(0,0,0,0.19);
+}
+.buttonStyle:visited {
+	text-decoration: none;
+	color: white;
+}
+.buttonStyleGeneral {
+	-webkit-appearance: button;
+	-webkit-transition: 0.4s;
+	-moz-transition: 0.4s;
+	background: linear-gradient(#07450a, #0b6e10);
+	display:inline-block;
+	text-decoration: none;
+	width: 400px;
+	height: 200px;
+	margin: 10px;
+	font-size: 24px;
+	text-align: center;
+	color: white;
+	border-radius: 16px;
+	right: 0;
+	border-color: transparent;
+	box-shadow: 0 1px 1px #777;
+}
+.buttonStyleGeneral:hover {
+	background: -moz-linear-gradient(#333, #888888);
+	box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 5px 25px 0 rgba(0,0,0,0.19);
+	cursor: pointer;
+}
+.buttonStyleGeneral:visited {
 	text-decoration: none;
 	color: white;
 }
@@ -167,7 +214,7 @@ a.buttonStylePage {
 	width: 100px;
 	color: white;
 	border-radius: 5px;
-	font-size: 72 px;
+	font-size: 72px;
 	right: 0;
 }
 a.buttonStylePage:visited {
@@ -189,8 +236,38 @@ a.buttonStylePage:hover {
     display: table;
     clear: both;
 }
-@-moz-keyframes down {
-	from { transform: scaleY(0); }
-  	to   { transform: scaleY(1); }
-	
-}
+    @keyframes scaletranslate
+	{
+		0%   {transform: scale(0,0) translate(0,-1.8em);}
+		95% {transform: scale(1.1,1.1) translate(0,0.8em);}
+		100% {transform: scale(1,1) translate(0,0em);}
+	}
+
+@-o-keyframes scaletranslate
+	{
+		0%   {-o-transform: scale(0,0) translate(0,-1.8em);}
+		95% {-o-transform: scale(1.1,1.1) translate(0,0.8em);}
+		100% {-o-transform: scale(1,1) translate(0,0em);}
+	}
+
+@-moz-keyframes scaletranslate
+	{
+		0%   {-moz-transform: scale(0,0) translate(0,-1.8em);}
+		95% {-moz-transform: scale(1.1,1.1) translate(0,0.8em);}
+		100% {-moz-transform: scale(1,1) translate(0,0em);}
+	}
+
+@-webkit-keyframes scaletranslate {
+	0% {
+		-webkit-transform: scale(0, 0) translate(0, -1.8em);
+	}
+	95% {
+		-webkit-transform: scale(1.1, 1.1) translate(0, 0.8em);
+	}
+	100% {
+		-webkit-transform: scale(1, 1) translate(0, 0em);
+	}
+	}
+
+
+

@@ -9,7 +9,9 @@
     {% block content %}
         <div class="contentBanner">
         <div><h1>Product</h1></div>
-        <a class='buttonStyle' href="{% url 'product_new' %}">New Product</a>
+        <div style="margin-right: 0;">
+            <button class='buttonStyle' href="{% url 'product_new' %}">New Product</button>
+        </div>
         </div>
         <div class="contentGrey">
                 {% render_table prodtable %}

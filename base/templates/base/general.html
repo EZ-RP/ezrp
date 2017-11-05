@@ -8,16 +8,12 @@
         <div class="contentGrey">
             <h1> General Setup </h1>
             <div>
-                <a class="button" href="{% url 'all_addresses' %}">&nbsp;Addresses&nbsp;</a>
-            </div>
-            <div>
-                <a class="button" href="{% url 'all_paydetails' %}">&nbsp;Pay Details&nbsp;</a>
-            </div>
-            <div>
-                <a class="button" href="{% url 'all_parameters' %}">&nbsp;System Parameters&nbsp;</a>
-            </div>
-            <div>
-                <a class="button" href="{% url 'about' %}">&nbsp;About&nbsp;</a>
+                <a style="text-decoration: none;" href="{% url 'all_addresses' %}"> <button class="buttonStyleGeneral"> Addresses </button> </a>
+                <a style="text-decoration: none;" href="{% url 'all_paydetails' %}"> <button class="buttonStyleGeneral">&nbsp;Pay Details&nbsp;</button> </a>
+
+                <a style="text-decoration: none;" href="{% url 'all_parameters' %}"> <button class="buttonStyleGeneral">&nbsp;System Parameters&nbsp;</button> </a>
+
+                <a style="text-decoration: none;" href="{% url 'about' %}"> <button class="buttonStyleGeneral">&nbsp;About&nbsp;</button> </a>
             </div>
         </div>
     {% endblock content %}
