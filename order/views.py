@@ -281,6 +281,7 @@ def production(request):
 
 
 def all_production(request):
+    filter = OrderFilter(request.GET, Order.objects.filter(order_type="M"))
     prods = OrderTable(filter.qs)
     RequestConfig(request).configure(prods)
     return render(request, 'order/Production/all_prodOrders.html', {'production': prods, 'filter': filter})

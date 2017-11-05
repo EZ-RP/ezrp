@@ -10,7 +10,9 @@
         <form method="post">
         {% csrf_token %}
         {{ form_customer.as_p }}
-
+            <input type="submit" class="btn" value="save" name="add_address">
+        </form>
+        <form method="post">
         {% if  show_address_form%}
          {{ form_address.as_p }}
             <button class="save btn btn-default">Save</button>

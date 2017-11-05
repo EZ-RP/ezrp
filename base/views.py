@@ -3,6 +3,7 @@ from django.shortcuts import render
 from base.models import Address
 from base.models import PayDetails
 from base.models import SystemParameters
+from base.tables import *
 from .modelforms import AddressForm
 from .modelforms import SysParamForm
 
@@ -24,7 +25,14 @@ def all_addresses(request):
 
 
 def all_paydetails(request):
-    return render(request, 'base/all_payDetails.html', {'paydetails': PayDetails.objects.all()})
+    paydetails = PayDetailsTable(PayDetails.objects.all())
+    return render(request, 'base/all_payDetails.html', {'paydetails': paydetails})
+
+
+def pay_details_delete(request, id):
+    PayDetails.objects.get(id=id).delete()
+    return all_paydetails(request)
+
 
 def address_new(request):
     if request.method == "POST":

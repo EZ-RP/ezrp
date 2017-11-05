@@ -66,6 +66,12 @@ def customer(request, account_number):
 
             show_address_form = False
 
+    form_customer = PartyForm(request.POST)
+
+    if form_customer.is_valid():
+
+        form_customer.save()
+
     customer = Party.objects.get(account_number=account_number)
     address = CustomerAddress(PartyAddress.objects.filter(account_number=account_number))
     form_customer = PartyForm(instance=customer)

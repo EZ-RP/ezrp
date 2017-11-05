@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from .forms import ProductForm
 from product.tables import ProductTable
 from stock.models import *
+from product.models import *
 # Create your views here.
 
 
@@ -27,3 +28,9 @@ def product(request):
     return render(request, 'product/product.html', {
         'prodtable': prodtable
     })
+
+
+def edit_product(request, id):
+    product = Item.objects.get(id=id)
+    form_product = ProductForm(instance=product)
+    return render(request, 'product/product_new.html', {'form_product': form_product})

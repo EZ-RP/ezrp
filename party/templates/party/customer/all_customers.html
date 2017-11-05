@@ -10,10 +10,11 @@
     {% block content %}
         <div class="contentGrey">
         {% if filter %}
-        <form action="" method="get" class="form form-inline">
-            {% bootstrap_form filter.form layout='inline' %}
+        <form action="" method="get" class="form form-horizontal">
+            {% bootstrap_form filter.form layout='horizontal' %}
             {% bootstrap_button 'filter' %}
         </form>
+        <a href="{% url 'customer_new' %}" class="button">&nbsp;Create customer&nbsp;</a>
         {% endif %}
         {% render_table customers %}
         </div>

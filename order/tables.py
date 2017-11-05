@@ -8,10 +8,10 @@ from order.models import Discounts
 
 class OrderTable(tables.Table):
     edit_link = tables.LinkColumn('sale_edit', args=[A('order_number')],
-                                  verbose_name='Edit Sale', text='Edit', accessor='pk',
+                                  verbose_name='Edit order', text='Edit', accessor='pk',
                                   attrs={'class': 'edit_link'})
     delete_link = tables.LinkColumn('sale_delete', args=[A('order_number')],
-                                    verbose_name='Delete Sale', text='Delete', accessor='pk',
+                                    verbose_name='Delete order', text='Delete', accessor='pk',
                                     attrs={'class': 'delete_link'})
 
     class Meta:
@@ -21,7 +21,7 @@ class OrderTable(tables.Table):
 
 class OrderLineTable(tables.Table):
     edit_link = tables.LinkColumn('sale_edit', args=[A('order_number.order_number')],
-                                  verbose_name='Edit Sale', text='Edit', accessor='order_number',
+                                  verbose_name='Edit Line', text='Edit', accessor='order_number',
                                   attrs={'class': 'edit_link'})
     delete_link = tables.LinkColumn('salesline_delete', args=[A('pk')],
                                     verbose_name='Delete Line', text='Delete', accessor='pk',

@@ -25,7 +25,10 @@ SECRET_KEY = '^cm!o#h+-6*$vqxkif^ekqu^j&+c-12-pwt@h-se25xnz9%!s3'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'ezrp.ddns.me',
+    '127.0.0.1'
+]
 
 
 # Application definition
