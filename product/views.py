@@ -15,10 +15,12 @@ def product_new(request):
         form_product = ProductForm(request.POST)
         if form_product.is_valid():
             prod = form_product.save(commit=False)
-            prod.item_number = Item.get_next_id(prod)
+            prod.item_number = 1
             prod.save()
             stck = Inventory(item_id=prod)
             stck.save()
+
+            return all_product(request)
     else:
         form_product = ProductForm()
     return render(request, 'product/product_new.html', {'form_product': form_product})

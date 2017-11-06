@@ -9,7 +9,7 @@ class EmployeeForm(forms.ModelForm):
         fields = ('start_date', 'first_name', 'middle_name', 'last_name', 'date_of_birth',
                   'phone_number', 'employment_status', 'role_id', 'payroll_type', 'pay_rate')
         widgets = {
-            'start_date': forms.SelectDateWidget(),
+            'start_date': forms.SelectDateWidget(years=range(1980, 2050)),
             'date_of_birth': forms.SelectDateWidget()
         }
 
@@ -25,8 +25,8 @@ class PayForm(forms.ModelForm):
         model = Payday
         fields = ('employee_id', 'start_pay_date', 'end_pay_date', 'hours')
         widgets = {
-            'start_pay_date': forms.SelectDateWidget(),
-            'end_pay_date': forms.SelectDateWidget()
+            'start_pay_date': forms.SelectDateWidget(years=range(1980, 2050)),
+            'end_pay_date': forms.SelectDateWidget(years=range(1980, 2050))
         }
 
 class LeaveForm(forms.ModelForm):
