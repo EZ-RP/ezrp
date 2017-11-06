@@ -20,7 +20,7 @@ def product_new(request):
             stck = Inventory(item_id=prod)
             stck.save()
 
-            return all_product(request)
+            #return all_product(request)
     else:
         form_product = ProductForm()
     return render(request, 'product/product_new.html', {'form_product': form_product})
