@@ -29,7 +29,7 @@ def all_sales(request):
 def all_saleslines(request):
     salesliness = SalesLineTable(
         OrderLine.objects.filter(
-            order_number=Order.objects.values_list(
+            order_number__in=Order.objects.values_list(
                 'order_number').filter(order_type="S")))
     RequestConfig(request).configure(salesliness)
     return render(request, 'order/Sales/all_salesLines.html', {'saleslines': salesliness})
@@ -179,7 +179,7 @@ def all_purchases(request):
 def all_purchlines(request):
     purchliness = PurchLineTable(
         OrderLine.objects.filter(
-            order_number=Order.objects.values_list(
+            order_number__in=Order.objects.values_list(
                 'order_number').filter(order_type="P")))
     RequestConfig(request).configure(purchliness)
     return render(request, 'order/Purchases/all_purchLines.html', {'purchlines': purchliness})
@@ -294,7 +294,7 @@ def all_production(request):
 def all_prodlines(request):
     prodliness = ProdLineTable(
         OrderLine.objects.filter(
-            order_number=Order.objects.values_list(
+            order_number__in=Order.objects.values_list(
                 'order_number').filter(order_type="M")))
     RequestConfig(request).configure(prodliness)
     return render(request, 'order/Production/all_prodLines.html', {'prodlines': prodliness})
