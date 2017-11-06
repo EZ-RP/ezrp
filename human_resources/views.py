@@ -5,7 +5,7 @@ from .forms import EmployeeForm, RoleForm, PayForm, LeaveForm
 from base.modelforms import AddressForm, PayDetailsForm
 from django.http import HttpResponse
 from django_tables2 import RequestConfig
-from human_resources.tables import EmployeeTable, LeaveTable
+from human_resources.tables import *
 
 # Create your views here.
 
@@ -87,7 +87,8 @@ def employee_delete(request, id):
 
 
 def pay(request):
-    return render(request, 'human_resources/Pay/all_pay.html', {'pay': Payday.objects.all()})
+    pay = PayTable(Payday.objects.all())
+    return render(request, 'human_resources/Pay/all_pay.html', {'pay': pay})
 
 
 @transaction.atomic
@@ -182,7 +183,8 @@ def leave_edit(request, id):
 
 
 def roles(request):
-    return render(request, 'human_resources/Role/all_roles.html', {'roles': Roles.objects.all()})
+    roles = RolesTable(Roles.objects.all())
+    return render(request, 'human_resources/Role/all_roles.html', {'roles': roles})
 
 
 @transaction.atomic

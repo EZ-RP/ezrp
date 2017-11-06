@@ -1,7 +1,7 @@
 from django_tables2.utils import A  # alias for Accessor
 # from django_tables2 import tables
 import django_tables2 as tables
-from human_resources.models import Employee, Leave
+from human_resources.models import *
 
 # Employees custom tables
 
@@ -26,3 +26,16 @@ class LeaveTable(tables.Table):
     class Meta:
         attrs = {'class': 'tableStyle'}
         model = Leave
+
+
+class RolesTable(tables.Table):
+
+    class Meta:
+        attrs = {'class': 'tableStyle'}
+        model = Roles
+
+
+class PayTable(tables.Table):
+    class Meta:
+        attrs = {'class': 'tableStyle'}
+        model = Payday
