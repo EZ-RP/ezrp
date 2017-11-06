@@ -96,7 +96,7 @@ def sale_edit(request, order_number):
         singlesale = Order.objects.get(order_number=order_number)  # , order_type='S'
         form_order = OrderForm(instance=singlesale)
         form_orderlines = LineForm()
-        saleslines  = OrderLine.objects.filter(order_number=singlesale)
+        saleslines = OrderLine.objects.filter(order_number=singlesale)
 
         if not show_line_form:
 
@@ -108,7 +108,8 @@ def sale_edit(request, order_number):
 
                 show_line_form = True
 
-    return render(request, 'order/Sales/sale.html', {'form_sale': form_order, 'form_orderline': form_orderlines, 'saleslines': saleslines, 'show_line_form': show_line_form})
+    return render(request, 'order/Sales/sale.html', {'form_sale': form_order, 'form_orderline': form_orderlines,
+                                                     'saleslines': saleslines, 'show_line_form': show_line_form})
 
 
 def sale_delete(request, order_number):
@@ -274,7 +275,8 @@ def purch_edit(request, order_number):
 
                 show_line_form = True
 
-    return render(request, 'order/Purchases/purch.html', {'form_purch': form_order, 'form_orderline': form_orderlines, 'purchlines': purchlines, 'show_line_form': show_line_form})
+    return render(request, 'order/Purchases/purch.html', {'form_purch': form_order, 'form_orderline': form_orderlines,
+                                                          'purchlines': purchlines, 'show_line_form': show_line_form})
 
 
 # Production views
@@ -388,7 +390,8 @@ def prod_edit(request, order_number):
 
                 show_line_form = True
 
-    return render(request, 'order/Production/Prod.html', {'form_prod': form_order, 'form_orderline': form_orderlines, 'prodlines': prodlines, 'show_line_form': show_line_form})
+    return render(request, 'order/Production/Prod.html', {'form_prod': form_order, 'form_orderline': form_orderlines,
+                                                          'prodlines': prodlines, 'show_line_form': show_line_form})
 
 
 # Discount views
