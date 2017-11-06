@@ -26,7 +26,7 @@ class Item(models.Model):
         return '%s %s' % (self.name, self.product_category)
 
     def get_next_id(self):
-        last_item = Item.objects.all().order_by('-id').first()
+        last_item = Item.objects.all().order_by('-item_number').first()
         if last_item != None:
             return last_item.id + 1
         else:
