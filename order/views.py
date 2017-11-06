@@ -275,7 +275,7 @@ def purch_edit(request, order_number):
 
                 show_line_form = True
 
-    return render(request, 'order/Purchases/purch.html', {'form_purch': form_order, 'form_orderline': form_orderlines,
+    return render(request, 'order/Purchases/Purch.html', {'form_purch': form_order, 'form_orderline': form_orderlines,
                                                           'purchlines': purchlines, 'show_line_form': show_line_form})
 
 
