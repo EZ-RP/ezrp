@@ -42,7 +42,7 @@ def edit_product(request, lineid):
 
             form_prods.save(commit=True)
 
-            form_prod = ProductForm()
+            return all_product(request)
     else:
         single_prod = Item.objects.get(id=lineid)
 

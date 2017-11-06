@@ -74,9 +74,9 @@ def sale_edit(request, order_number):
             tdate = time.strftime("%Y-%m-%d")
 
             if Discounts.objects.filter(account_number=orde.account_number, item_id=order_line.item_id.id,
-                                        startdate__lte=tdate, enddate__gt=tdate).exists():
+                                        start_date__lte=tdate, end_date__gt=tdate).exists():
                 dsc = Discounts.objects.get(account_number=orde.account_number, item_id=order_line.item_id.id,
-                                            startdate__lte=tdate, enddate__gt=tdate)
+                                            start_date__lte=tdate, end_date__gt=tdate)
                 prc = order_line.price
                 dscp = dsc.value
                 order_line.discount_price = prc * (1 - dscp)

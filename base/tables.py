@@ -12,3 +12,11 @@ class PayDetailsTable(tables.Table):
     class Meta:
         model = PayDetails
         attrs = {'class': 'tableStyle'}
+
+
+class AddressTable(tables.Table):
+
+
+    class Meta:
+        model = Address
+        attrs = {'class': 'tableStyle'}

@@ -6,6 +6,7 @@ from base.models import SystemParameters
 from base.tables import *
 from .modelforms import AddressForm
 from .modelforms import SysParamForm
+from base.tables import *
 
 
 def main(request):
@@ -21,7 +22,8 @@ def about(request):
 
 
 def all_addresses(request):
-    return render(request, 'base/all_addresses.html', {'addresses': Address.objects.all()})
+    addresses = AddressTable(Address.objects.all())
+    return render(request, 'base/all_addresses.html', {'addresses': addresses})
 
 
 def all_paydetails(request):

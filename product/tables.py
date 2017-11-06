@@ -16,7 +16,7 @@ class ProductTable(tables.Table):
     """
     class Meta:
         model = Item
-        fields = ['id', 'name', 'description', 'unit', 'product_category', 'fulfillment_type']
+        fields = ['id', 'name', 'item_desc', 'unit', 'product_category', 'fulfilment_type']
         attrs = {'class': 'tableStyle'}
 
 class ProdStockTable(tables.Table):
