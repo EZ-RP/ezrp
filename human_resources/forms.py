@@ -10,7 +10,7 @@ class EmployeeForm(forms.ModelForm):
                   'phone_number', 'employment_status', 'role_id', 'payroll_type', 'pay_rate')
         widgets = {
             'start_date': forms.SelectDateWidget(years=range(1980, 2050)),
-            'date_of_birth': forms.SelectDateWidget()
+            'date_of_birth': forms.SelectDateWidget(years=range(1980, 2050))
         }
 
 class RoleForm(forms.ModelForm):
