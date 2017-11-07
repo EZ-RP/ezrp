@@ -234,6 +234,7 @@ def purch_edit(request, order_number):
 
         if result.confirmation_status == "Ordered":
             ord.order_status = "O"
+            ord.save()
         else:
             for er in result.confirmation_errors:
                 messages.error(request, er, extra_tags='email')
@@ -349,6 +350,7 @@ def prod_edit(request, order_number):
 
         if result.confirmation_status == "Ordered":
             ord.order_status = "O"
+            ord.save()
         else:
             for er in result.confirmation_errors:
                 messages.error(request, er, extra_tags='email')
