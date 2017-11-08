@@ -28,12 +28,17 @@
             {% endif %}
 
         </form>
-        <form action="#" method="get">
-            <input type="submit" class="btn" value="Add line" name="add_line">
-        </form>
-        <form action="#" method="get">
-            <input type="submit" class="btn" value="Confirm Order" name="confirm_order">
-        </form>
+        <div class="Inline-contentGrey" layout="inline-block">
+            <form action="#" method="get">
+                <input type="submit" class="btn" value="Add line" name="add_line">
+            </form>
+            <form action="#" method="get">
+                <input type="submit" class="btn" value="Confirm Order" name="confirm_order">
+            </form>
+            <form action="#" method="get">
+                <input type="submit" class="btn" value="Invoice Order" name="invoice_order">
+            </form>
+        </div>
         {% render_table saleslines %}
         </div>
     {% endblock content %}

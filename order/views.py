@@ -48,12 +48,24 @@ def sale_edit(request, order_number):
     storage.used = True
 
     if request.GET.get('confirm_order'):
-        ord = Order.objects.get(order_number=order_number)
-        result = confirmorder(ord)
+        cord = Order.objects.get(order_number=order_number)
+        result = confirmorder(cord)
 
         if result.confirmation_status == "Ordered":
-            ord.order_status = "O"
-            ord.save()
+            cord.order_status = "O"
+            cord.save()
+        else:
+            for er in result.confirmation_errors:
+                messages.error(request, er, extra_tags='email')
+
+    if request.GET.get('invoice_order'):
+        iord = Order.objects.get(order_number=order_number)
+        result = invoiceorder(iord)
+
+        if result.confirmation_status == "Invoiced":
+            iord.order_status = "I"
+            iord.invoice_date = time.strftime("%Y-%m-%dT%H:%M:%S")
+            iord.save()
         else:
             for er in result.confirmation_errors:
                 messages.error(request, er, extra_tags='email')
@@ -239,6 +251,18 @@ def purch_edit(request, order_number):
             for er in result.confirmation_errors:
                 messages.error(request, er, extra_tags='email')
 
+    if request.GET.get('invoice_order'):
+        iord = Order.objects.get(order_number=order_number)
+        result = invoiceorder(iord)
+
+        if result.confirmation_status == "Invoiced":
+            iord.order_status = "I"
+            iord.invoice_date = time.strftime("%Y-%m-%dT%H:%M:%S")
+            iord.save()
+        else:
+            for er in result.confirmation_errors:
+                messages.error(request, er, extra_tags='email')
+
     if request.GET.get('add_line'):
         show_line_form = True
 
@@ -351,6 +375,18 @@ def prod_edit(request, order_number):
         if result.confirmation_status == "Ordered":
             ord.order_status = "O"
             ord.save()
+        else:
+            for er in result.confirmation_errors:
+                messages.error(request, er, extra_tags='email')
+
+    if request.GET.get('invoice_order'):
+        iord = Order.objects.get(order_number=order_number)
+        result = invoiceorder(iord)
+
+        if result.confirmation_status == "Invoiced":
+            iord.order_status = "I"
+            iord.invoice_date = time.strftime("%Y-%m-%dT%H:%M:%S")
+            iord.save()
         else:
             for er in result.confirmation_errors:
                 messages.error(request, er, extra_tags='email')

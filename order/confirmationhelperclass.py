@@ -75,3 +75,28 @@ def confirmorder(corder):
     return result
 
 
+def invoiceorder(iorder):
+    result = ConfirmResult()
+
+    if iorder.order_status == "O":
+        for sl in OrderLine.objects.filter(order_number=iorder):
+            prod = Item.objects.filter(id=sl.item_id.id).first()
+            inv = Inventory.objects.filter(item_id=sl.item_id.id).first()
+
+            if prod is None or inv is None:
+                result.add_error("Error: product or inventory record not found")
+            else:
+                if iorder.order_type == "S":
+                    Inventory.remove_reserved_qty(inv, sl.quantity)
+                else:
+                    Inventory.add_ordered_to_available(inv, sl.quantity)
+
+            if len(result.confirmation_errors) > 0:
+                result.confirmation_status = "Not Invoiced"
+            else:
+                result.confirmation_status = "Invoiced"
+    else:
+        result.confirmation_status = "Not Invoiced"
+        result.add_error("Error: Order is already invoiced")
+
+    return result
