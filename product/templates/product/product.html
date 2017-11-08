@@ -8,13 +8,14 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentBanner">
+        <div class="contentBanner" style="text-align: center">
         <div><h1>Product</h1></div>
-        <div style="margin-right: 0;">
-            <a style="text-decoration: none;" href="{% url 'product_new' %}"> <button class='buttonStyle' >New Product</button> </a>
+
         </div>
-        </div>
-        <div class="contentGrey">
+        <div class="contentGrey" style="text-align: left">
+            <div style="margin-right: 0;">
+                <a style="text-decoration: none;" href="{% url 'product_new' %}"> <button class='buttonStyle' >New Product</button> </a>
+            </div>
                 {% if filter %}
                     <form action="" method="get" class="form form-inline">
                     {% bootstrap_form filter.form layout='inline' %}

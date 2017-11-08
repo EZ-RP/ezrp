@@ -6,12 +6,16 @@
 <body>
     {% block content %}
         <div class="contentGrey">
+            <div>
             <a style="text-decoration: none;" href="{% url 'party_main' %}"><button class="buttonStyleGeneral"> Parties </button></a>
             <a style="text-decoration: none;" href="{% url 'all_available' %}"><button class="buttonStyleGeneral"> Available Stock </button></a>
+            </div><div>
             <a style="text-decoration: none;" href="{% url 'product_Main' %}"><button class="buttonStyleGeneral"> Products </button></a>
             <a style="text-decoration: none;" href="{% url 'humanResources_Main' %}"><button class="buttonStyleGeneral"> Human Resources </button></a>
+            </div><div>
             <a style="text-decoration: none;" href="{% url 'orders' %}"><button class="buttonStyleGeneral"> Orders </button></a>
             <a style="text-decoration: none;" href="{% url 'about' %}"><button class="buttonStyleGeneral"> About </button></a>
+            </div>
         </div>
     {% endblock content %}
 </body>

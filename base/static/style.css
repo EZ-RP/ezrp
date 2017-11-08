@@ -1,5 +1,7 @@
 * {
 	font-family: arial, sans-serif;
+	margin: 0;
+	padding: 0;
 }
 
 h1 {
@@ -17,40 +19,41 @@ h3 {
 	font-size: 24px;
 	font-style: italic;
 }
-.banner {
-	background: linear-gradient(#07450a, #0b6e10);
-	height: 55px;
-	width: 70%;
-	margin: 0 auto;
-	min-width: 900px;
-	justify-content: center;
-}
-.banner ul{
-	list-style-type: none;
-	display: inline-block;
-	width: 800px;
+body {
 	margin: 0;
 	padding: 0;
-	position: absolute;
+	min-height: 100%;
+}
+.banner {
+	background: linear-gradient(#07450a, #0b6e10);
+	height: 75px;
+	width: 70%;
+	margin: 0 auto;
+	text-align: center;
+	min-width: 900px;
+	padding: 0;
+}
+.banner ul {
+	font-size: 0;
 }
 .banner ul li {
-	width: 105px;
+
+	width: 130px;
 	font-size: 24px;
 	color: white;
 	text-align: center;
-	line-height: 55px;
-	height: 55px;
+	line-height: 75px;
+	height: 75px;
 	display: inline-block;
-	margin-right: -8px;
-	position: relative;
-	border-left: groove #095e0d;
-	border-right: ridge #095e0d;
+
 }
 .banner ul li:hover {
 	background:linear-gradient(#053007, #095e0d);
 	text-decoration: none;
+	width: 124px;
 	color: white;
-
+	border-left: 3px ridge #0b6e10;
+	border-right: 3px groove #0b6e10;
 }
 .banner ul li a,visited {
 	text-decoration: none;
@@ -121,9 +124,9 @@ h3 {
 }
 .contentGrey {
 	border-top: 5px solid #e4e4e4;
-	min-height: 300px;
+	text-align: center;
 	width: 70%;
-	margin: auto;
+	margin: 0 auto;
 	min-width: 900px;
 }
 .contentBanner {
@@ -138,6 +141,7 @@ h3 {
 	background: linear-gradient(#07450a, #0b6e10);
 	color: white;
 	height: 100px;
+	position: absolute;
 	width: 70%;
 	bottom: 0;
 	right: 0;
@@ -145,8 +149,8 @@ h3 {
 	margin: auto;
 	min-width: 900px;
 }
-.footer.text {
-	margin: auto;
+.footer p{
+	padding-left: 15px;
 }
 a.button {
 	-webkit-appearance: button;
@@ -171,7 +175,7 @@ a.button {
 	box-shadow: 0 1px 1px #777;
 }
 .buttonStyle:hover {
-	background: linear-gradient(#333, #888888);
+	background:linear-gradient(#053007, #095e0d);
 	box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 5px 25px 0 rgba(0,0,0,0.19);
 	cursor: pointer;
 }
@@ -198,7 +202,7 @@ a.button {
 	box-shadow: 0 1px 1px #777;
 }
 .buttonStyleGeneral:hover {
-	background: -moz-linear-gradient(#333, #888888);
+	background:linear-gradient(#053007, #095e0d);
 	box-shadow: 0 6px 8px 0 rgba(0,0,0,0.24), 0 5px 25px 0 rgba(0,0,0,0.19);
 	cursor: pointer;
 }
