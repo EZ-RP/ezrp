@@ -3,7 +3,7 @@ from django.shortcuts import render
 from human_resources.models import Employee, Leave, Roles, Payday, EmployeeAddress, EmployeePayDetails
 from .forms import EmployeeForm, RoleForm, PayForm, LeaveForm
 from base.modelforms import AddressForm, PayDetailsForm
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django_tables2 import RequestConfig
 from human_resources.tables import *
 
@@ -43,6 +43,10 @@ def employee_new(request):
             leave = Leave()
             leave.employee_id = employee
             leave.save()
+
+        form_employee = EmployeeForm()
+        form_address = AddressForm()
+        form_pay_details = PayDetailsForm()
     else:
         form_employee = EmployeeForm()
         form_address = AddressForm()
@@ -71,6 +75,8 @@ def employee_edit(request, id):
             employee_line.save()
 
             form_employee = EmployeeForm(instance=employee_line)
+        last = request.POST.get('next', '/human_resources/Employee/all_employees/')
+        return HttpResponseRedirect(last)
     else:
         single_employee = Employee.objects.get(id=id)
 
@@ -144,6 +150,7 @@ def pay_new(request):
 
             emp_leave.save()
 
+        form_pay = PayForm()
     else:
         form_pay = PayForm()
     return render(request, 'human_resources/Pay/pay_new.html', {'form_pay': form_pay})
@@ -173,6 +180,9 @@ def leave_edit(request, id):
             leave_line.save()
 
             form_leave = LeaveForm(instance=leave_line)
+
+        last = request.POST.get('next', '/human_resources/Leave/all_leave/')
+        return HttpResponseRedirect(last)
     else:
         single_employee = Leave.objects.get(id=id)
 
@@ -194,6 +204,7 @@ def role_new(request):
         if form_role.is_valid():
             role = form_role.save(commit=False)
             role.save()
+        form_role = RoleForm()
     else:
         form_role = RoleForm()
     return render(request, 'human_resources/Role/role_new.html', {'form_role': form_role})
