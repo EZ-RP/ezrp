@@ -14,7 +14,7 @@ def main(request):
 
 def available(request):
     items = StockTable(Inventory.objects.all())
-    RequestConfig(request).configure(items)
+    RequestConfig(request, paginate={'per_page': 15}).configure(items)
     return render(request, 'stock/all_available.html', {'available': items})
     # return render(request, 'stock/all_available.html', {'available': Inventory.objects.all()})
 
