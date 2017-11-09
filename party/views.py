@@ -52,11 +52,14 @@ def customer(request, account_number):
 
     show_address_form = False
 
+    customer = Party.objects.get(account_number=account_number)
+
     if request.GET.get('add_address'):
         show_address_form = True
 
     if request.method == "POST":
         form_address = AddressForm(request.POST)
+        form_customer = PartyForm(request.POST, instance=customer)
 
         if form_address.is_valid():
 
@@ -70,16 +73,13 @@ def customer(request, account_number):
 
             show_address_form = False
 
-    form_customer = PartyForm(request.POST)
+        if form_customer.is_valid():
 
-    if form_customer.is_valid():
+            form_customer.save()
 
-        form_customer.save()
-
-    customer = Party.objects.get(account_number=account_number)
     address = CustomerAddress(PartyAddress.objects.filter(account_number=account_number))
-    form_customer = PartyForm(instance=customer)
     form_address = AddressForm()
+    form_customer = PartyForm(instance=customer)
     return render(request, 'party/customer/customer.html', {'form_customer': form_customer,
                                                             'address': address,
                                                             'show_address_form': show_address_form,
@@ -153,11 +153,14 @@ def vendor(request, account_number):
 
     show_address_form = False
 
+    vendor = Party.objects.get(account_number=account_number)
+
     if request.GET.get('add_address'):
         show_address_form = True
 
     if request.method == "POST":
         form_address = AddressForm(request.POST)
+        form_vendor = PartyForm(request.POST, instance=vendor)
 
         if form_address.is_valid():
 
@@ -171,7 +174,9 @@ def vendor(request, account_number):
 
             show_address_form = False
 
-    vendor = Party.objects.get(account_number=account_number)
+        if form_vendor.is_valid():
+            form_vendor.save()
+
     address = CustomerAddress(PartyAddress.objects.filter(account_number=account_number))
     form_vendor = PartyForm(instance=vendor)
     form_address = AddressForm()
