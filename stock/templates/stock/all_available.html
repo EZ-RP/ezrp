@@ -8,15 +8,18 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentGrey">
+        <div class="contentBanner" style="text-align: center">
             <h1> Stock </h1>
-         {% if filter %}
-        <form action="" method="get" class="form form-inline">
-            {% bootstrap_form filter.form layout='inline' %}
-            {% bootstrap_button 'filter' %}
-        </form>
-        {% endif %}
-        {% render_table available %}
+
+        </div>
+        <div class="contentGrey" style="text-align: left">
+            {% if filter %}
+                <form action="" method="get" class="form form-inline">
+                    {% bootstrap_form filter.form layout='inline' %}
+                    {% bootstrap_button 'filter' %}
+                </form>
+            {% endif %}
+            {% render_table available %}
         </div>
     {% endblock content %}
 </body>

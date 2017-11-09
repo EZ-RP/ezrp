@@ -5,7 +5,15 @@
 
 	<title>EZRP - Solution to your resource planning needs</title>
     {%  load static %}
-    <link rel="stylesheet" type="text/css" href={% static "style.css" %}>
+
+    <link rel="stylesheet" media="screen" type="text/css" href={% static "style.css" %}>
+    <style type="text/css">
+        body {
+            background: url("{% static "LogoBackground.png" %}") no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+        }
+    </style>
 </head>
 <body style="background: #e4e4e4">
 	<div class="banner">

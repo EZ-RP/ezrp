@@ -1,3 +1,4 @@
+
 * {
 	font-family: arial, sans-serif;
 	margin: 0;
@@ -75,6 +76,9 @@ body {
 	position: relative;
 	border-top: 0;
 	width: auto;
+	border-left: groove #0b6e10;
+	border-right: ridge #0b6e10;
+	border-bottom: ridge #0b6e10;
 
 }
 .banner li ul li {

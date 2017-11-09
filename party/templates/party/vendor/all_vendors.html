@@ -8,15 +8,16 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentBanner">
-            <a style="text-decoration: none;" href="{% url 'vendor_new' %}"> <button class="buttonStyle"> Create Vendor </button></a>
+        <div class="contentBanner" style="text-align: center">
+            <h1> Vendors </h1>
         </div>
-        <div class="contentGrey">
-        {% if filter %}
-        <form action="" method="get" class="form form-inline">
-            {% bootstrap_form filter.form layout='inline' %}
-            {% bootstrap_button 'filter' %}
-        </form>
+        <div class="contentGrey" style="text-align: left">
+            <a style="text-decoration: none;" href="{% url 'vendor_new' %}"> <button class="buttonStyle"> Create Vendor </button></a>
+            {% if filter %}
+                <form action="" method="get" class="form form-inline">
+                    {% bootstrap_form filter.form layout='inline' %}
+                    {% bootstrap_button 'filter' %}
+                </form>
         {% endif %}
         {% render_table vendors %}
         </div>

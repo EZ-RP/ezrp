@@ -24,20 +24,24 @@
             <h1> Add Line </h1>
             {% if  show_line_form%}
              {{ form_orderline.as_p }}
-                <button class="save btn btn-default">Save</button>
+                <button class="buttonStyle">Save</button>
             {% endif %}
 
         </form>
-        <div class="Inline-contentGrey" layout="inline-block">
+        <div class="contentGrey">
+            <div>
             <form action="#" method="get">
-                <input type="submit" class="btn" value="Add line" name="add_line">
+                <input type="submit" class="buttonStyle" value="Add line" name="add_line">
             </form>
+            </div><div>
             <form action="#" method="get">
-                <input type="submit" class="btn" value="Confirm Order" name="confirm_order">
+                <input type="submit" class="buttonStyle" value="Confirm Order" name="confirm_order">
             </form>
+            </div><div>
             <form action="#" method="get">
-                <input type="submit" class="btn" value="Invoice Order" name="invoice_order">
+                <input type="submit" class="buttonStyle" value="Invoice Order" name="invoice_order">
             </form>
+            </div>
         </div>
         {% render_table saleslines %}
         </div>

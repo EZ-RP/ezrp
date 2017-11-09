@@ -17,7 +17,7 @@ def product_new(request):
             prod = form_product.save(commit=False)
             prod.item_number = 1
             prod.save()
-            stck = Inventory(item_id=prod)
+            stck = Inventory(item_id=prod, available_qty=0,reserved_qty=0, ordered_qty=0)
             stck.save()
 
             #return all_product(request)

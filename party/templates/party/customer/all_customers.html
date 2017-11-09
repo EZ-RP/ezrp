@@ -8,10 +8,11 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentBanner">
-            <a style="text-decoration: none;" href="{% url 'customer_new' %}"> <button class="buttonStyle"> Create Customer </button></a>
+        <div class="contentBanner" style="text-align: center">
+            <h1> Customers </h1>
         </div>
-        <div class="contentGrey">
+        <div class="contentGrey" style="text-align: left">
+        <a style="text-decoration: none;" href="{% url 'customer_new' %}"> <button class="buttonStyle"> Create Customer </button></a>
         {% if filter %}
         <form action="" method="get" class="form form-horizontal">
             {% bootstrap_form filter.form layout='horizontal' %}
