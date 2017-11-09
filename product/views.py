@@ -29,7 +29,7 @@ def product_new(request):
 def product(request):
     filter = ProductFilter(request.GET, Item.objects.all())
     prod = ProductTable(filter.qs)
-    RequestConfig(request).configure(prod)
+    RequestConfig(request, paginate={'per_page': 15}).configure(prod)
     return render(request, 'product/product.html', {'prodtable': prod, 'filter': filter})
 
 
@@ -54,7 +54,7 @@ def edit_product(request, lineid):
 def all_product(request):
     filter = ProductFilter(request.GET, Item.objects.all())
     product = ProductTable(filter.qs)
-    RequestConfig(request).configure(product)
+    RequestConfig(request, paginate={'per_page': 15}).configure(product)
     return render(request, 'product/product.html', {'prodtable': product, 'filter': filter})
 
 
