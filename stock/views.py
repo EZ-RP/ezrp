@@ -14,7 +14,7 @@ def main(request):
 
 def available(request):
     items = StockTable(Inventory.objects.all())
-    RequestConfig(request, paginate={'per_page': 15}).configure(items)
+    RequestConfig(request).configure(items)
     return render(request, 'stock/all_available.html', {'available': items})
     # return render(request, 'stock/all_available.html', {'available': Inventory.objects.all()})
 
@@ -59,5 +59,5 @@ def stock_edit(request, lineid):
 def all_stock(request):
     filter = StockFilter(request.GET, Inventory.objects.all())
     stock = StockTable(filter.qs)
-    RequestConfig(request).configure(stock)
+    RequestConfig(request, paginate={'per_page': 15}).configure(stock)
     return render(request, 'stock/all_available.html', {'available': stock, 'filter': filter})
