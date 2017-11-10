@@ -20,17 +20,14 @@ def sales(request):
 
 
 def all_sales(request):
-    filter = OrderFilter(request.GET, Order.objects.filter(order_type="S"))
-    saless = SalesTable(filter.qs)
+    filt = OrderFilter(request.GET, Order.objects.filter(order_type="S"))
+    saless = SalesTable(filt.qs)
     RequestConfig(request).configure(saless)
-    return render(request, 'order/Sales/all_salesOrders.html', {'sales': saless, 'filter': filter})
+    return render(request, 'order/Sales/all_salesOrders.html', {'sales': saless, 'filter': filt})
 
 
 def all_saleslines(request):
-    salesliness = SalesLineTable(
-        OrderLine.objects.filter(
-            order_number__in=Order.objects.values_list(
-                'order_number').filter(order_type="S")))
+    salesliness = SalesLineTable(OrderLine.objects.filter(order_number__order_type="S"))
     RequestConfig(request).configure(salesliness)
     return render(request, 'order/Sales/all_salesLines.html', {'saleslines': salesliness})
 
@@ -71,7 +68,11 @@ def sale_edit(request, order_number):
                 messages.error(request, er, extra_tags='email')
 
     if request.GET.get('add_line'):
-        show_line_form = True
+        aord = Order.objects.get(order_number=order_number)
+        if aord.order_status == "C":
+            show_line_form = True
+        else:
+            messages.error(request, "Cannot add lines to confirmed or invoiced orders", extra_tags='email')
 
     if request.method == "POST":
         form_orderlines = LineForm(request.POST)
@@ -100,12 +101,12 @@ def sale_edit(request, order_number):
             form_orderlines = LineForm()
             show_line_form = False
 
-            singlesale = Order.objects.get(order_number=order_number, order_type='S')
+            singlesale = Order.objects.get(order_number=order_number)
             form_order = OrderForm(instance=singlesale)
-            saleslines = OrderLine.objects.filter(order_number=order_number)
+            saleslines = OrderLine.objects.filter(order_number=singlesale)
     else:
 
-        singlesale = Order.objects.get(order_number=order_number)  # , order_type='S'
+        singlesale = Order.objects.get(order_number=order_number)
         form_order = OrderForm(instance=singlesale)
         form_orderlines = LineForm()
         saleslines = OrderLine.objects.filter(order_number=singlesale)
@@ -125,21 +126,34 @@ def sale_edit(request, order_number):
 
 
 def sale_delete(request, order_number):
-    Order.objects.get(order_number=order_number).delete()
-    filter = OrderFilter(request.GET, Order.objects.filter(order_type="S"))
-    saless = SalesTable(filter.qs)
+    storage = messages.get_messages(request)
+    storage.used = True
+    delorder = Order.objects.get(order_number=order_number)
+
+    if delorder.order_status == "C":
+        delorder.delete()
+    else:
+        messages.error(request, "Cannot delete confirmed or invoiced orders", extra_tags='email')
+
+    filt = OrderFilter(request.GET, Order.objects.filter(order_type="S"))
+    saless = SalesTable(filt.qs)
     RequestConfig(request).configure(saless)
-    return render(request, 'order/Sales/all_salesOrders.html', {'sales': saless})
+    return render(request, 'order/Sales/all_salesOrders.html', {'sales': saless, 'filter': filt})
 
 
-def salesline_delete(request, lineid):
-    OrderLine.objects.get(id=lineid).delete()
-    salesliness = SalesLineTable(
-        OrderLine.objects.filter(
-            order_number=Order.objects.values_list(
-                'order_number').filter(order_type="S")))
+def salesline_delete(request, sid):
+    storage = messages.get_messages(request)
+    storage.used = True
+    delline = OrderLine.objects.get(id=sid)
+
+    if delline.order_number.order_status == "C":
+        delline.delete()
+    else:
+        messages.error(request, "Cannot delete lines from a confirmed or invoiced order", extra_tags='email')
+
+    salesliness = SalesLineTable(OrderLine.objects.filter(order_number__order_type="S"))
     RequestConfig(request).configure(salesliness)
-    return render(request, 'order/Sales/all_salesLines.html', {'saleliness': salesliness})
+    return render(request, 'order/Sales/all_salesLines.html', {'saleslines': salesliness})
 
 
 def sale_new(request):
@@ -156,62 +170,53 @@ def sale_new(request):
     return render(request, 'order/Sales/sale_new.html', {'form': form})
 
 
-def sale_view(request):
-    if request.method == "POST":
-        form_order = OrderForm(request.GET)
-        form_orderline = LineForm(request.POST)
-        if form_order.is_valid() and form_orderline.is_valid():
-            orderline = form_orderline.save(commit=False)
-            if OrderLine.objects.count() > 0:
-                lineid = OrderLine.objects.latest('order_line_id').get_latest_by(order_number=orderline.order_number)
-                orderline.order_line_id = lineid
-            else:
-                orderline.order_line_id = 1
-            orderline.order_number = form_order.order_number
-            orderline.unit = "ea"
-            orderline.save()
-    else:
-        form_order = OrderForm(request.GET)
-        form_orderline = LineForm()
-    return render(request, 'order/Sales/sale_view.html', {'form_order': form_order, 'form_orderline': form_orderline})
-
-
 # Purchase views
 def purchases(request):
     return render(request, 'order/Purchases/purchases.html')
 
 
 def all_purchases(request):
-    filter = OrderFilter(request.GET, Order.objects.filter(order_type="P"))
-    purchs = PurchTable(filter.qs)
+    filt = OrderFilter(request.GET, Order.objects.filter(order_type="P"))
+    purchs = PurchTable(filt.qs)
     RequestConfig(request).configure(purchs)
-    return render(request, 'order/Purchases/all_purchOrders.html', {'purchases': purchs, 'filter': filter})
+    return render(request, 'order/Purchases/all_purchOrders.html', {'purchases': purchs, 'filter': filt})
 
 
 def all_purchlines(request):
-    purchliness = PurchLineTable(
-        OrderLine.objects.filter(
-            order_number__in=Order.objects.values_list(
-                'order_number').filter(order_type="P")))
+    purchliness = PurchLineTable(OrderLine.objects.filter(order_number__order_type="P"))
     RequestConfig(request).configure(purchliness)
     return render(request, 'order/Purchases/all_purchLines.html', {'purchlines': purchliness})
 
 
 def purch_delete(request, order_number):
-    Order.objects.get(order_number=order_number).delete()
-    purchs = PurchTable(Order.objects.filter(order_type="P"))
+    storage = messages.get_messages(request)
+    storage.used = True
+    delorder = Order.objects.get(order_number=order_number)
+
+    if delorder.order_status == "C":
+        delorder.delete()
+    else:
+        messages.error(request, "Cannot delete confirmed or invoiced orders", extra_tags='email')
+
+    filt = OrderFilter(request.GET, Order.objects.filter(order_type="P"))
+    purchs = PurchTable(filt.qs)
     RequestConfig(request).configure(purchs)
-    return render(request, 'order/Purchases/all_purchOrders.html', {'purch': purchs})
+    return render(request, 'order/Purchases/all_purchOrders.html', {'purchases': purchs, 'filter': filt})
 
 
-def purchline_delete(request, lineid):
-    OrderLine.objects.get(id=lineid).delete()
-    purchliness = PurchLineTable(
-        OrderLine.objects.filter(
-            order_number=Order.objects.values_list(
-                'order_number').filter(order_type="P")))
+def purchline_delete(request, pid):
+    storage = messages.get_messages(request)
+    storage.used = True
+    delline = OrderLine.objects.get(id=pid)
+
+    if delline.order_number.order_status == "C":
+        delline.delete()
+    else:
+        messages.error(request, "Cannot delete lines from a confirmed or invoiced order", extra_tags='email')
+
+    purchliness = PurchLineTable(OrderLine.objects.filter(order_number__order_type="P"))
     RequestConfig(request).configure(purchliness)
-    return render(request, 'order/Purchases/all_purchLines.html', {'purchliness': purchliness})
+    return render(request, 'order/Purchases/all_purchLines.html', {'purchlines': purchliness})
 
 
 def purch_new(request):
@@ -231,7 +236,7 @@ def purch_new(request):
 def purch(request, order_number):
     singlepurch = Order.objects.get(order_number=order_number, order_type='P')
     form_order = OrderForm(instance=singlepurch)
-    return render(request, 'order/Purchases/purch.html', {'form_purch': form_order})
+    return render(request, 'order/Purchases/Purch.html', {'form_purch': form_order})
 
 
 def purch_edit(request, order_number):
@@ -264,7 +269,11 @@ def purch_edit(request, order_number):
                 messages.error(request, er, extra_tags='email')
 
     if request.GET.get('add_line'):
-        show_line_form = True
+        aord = Order.objects.get(order_number=order_number)
+        if aord.order_status == "C":
+            show_line_form = True
+        else:
+            messages.error(request, "Cannot add lines to confirmed or invoiced orders", extra_tags='email')
 
     if request.method == "POST":
         form_orderlines = LineForm(request.POST)
@@ -282,7 +291,7 @@ def purch_edit(request, order_number):
 
             singlepurch = Order.objects.get(order_number=order_number, order_type='P')
             form_order = OrderForm(instance=singlepurch)
-            purchlines = OrderLine.objects.filter(order_number=order_number)
+            purchlines = OrderLine.objects.filter(order_number=singlepurch)
     else:
 
         singlepurch = Order.objects.get(order_number=order_number, order_type='P')
@@ -310,36 +319,47 @@ def production(request):
 
 
 def all_production(request):
-    filter = OrderFilter(request.GET, Order.objects.filter(order_type="M"))
-    prods = ProdTable(filter.qs)
+    filt = OrderFilter(request.GET, Order.objects.filter(order_type="M"))
+    prods = ProdTable(filt.qs)
     RequestConfig(request).configure(prods)
-    return render(request, 'order/Production/all_prodOrders.html', {'production': prods, 'filter': filter})
+    return render(request, 'order/Production/all_prodOrders.html', {'production': prods, 'filter': filt})
 
 
 def all_prodlines(request):
-    prodliness = ProdLineTable(
-        OrderLine.objects.filter(
-            order_number__in=Order.objects.values_list(
-                'order_number').filter(order_type="M")))
+    prodliness = ProdLineTable(OrderLine.objects.filter(order_number__order_type="M"))
     RequestConfig(request).configure(prodliness)
     return render(request, 'order/Production/all_prodLines.html', {'prodlines': prodliness})
 
 
 def prod_delete(request, order_number):
-    Order.objects.get(order_number=order_number).delete()
-    prods = ProdTable(Order.objects.filter(order_type="M"))
+    storage = messages.get_messages(request)
+    storage.used = True
+    delorder = Order.objects.get(order_number=order_number)
+
+    if delorder.order_status == "C":
+        delorder.delete()
+    else:
+        messages.error(request, "Cannot delete confirmed or invoiced orders", extra_tags='email')
+
+    filt = OrderFilter(request.GET, Order.objects.filter(order_type="M"))
+    prods = ProdTable(filt.qs)
     RequestConfig(request).configure(prods)
-    return render(request, 'order/Production/all_prodOrders.html', {'prod': prods})
+    return render(request, 'order/Production/all_prodOrders.html', {'production': prods, 'filter': filt})
 
 
-def prodline_delete(request, lineid):
-    OrderLine.objects.get(id=lineid).delete()
-    prodliness = ProdLineTable(
-        OrderLine.objects.filter(
-            order_number=Order.objects.values_list(
-                'order_number').filter(order_type="M")))
+def prodline_delete(request, mid):
+    storage = messages.get_messages(request)
+    storage.used = True
+    delline = OrderLine.objects.get(id=mid)
+
+    if delline.order_number.order_status == "C":
+        delline.delete()
+    else:
+        messages.error(request, "Cannot delete lines from a confirmed or invoiced order", extra_tags='email')
+
+    prodliness = ProdLineTable(OrderLine.objects.filter(order_number__order_type="M"))
     RequestConfig(request).configure(prodliness)
-    return render(request, 'order/Production/all_prodLines.html', {'prodliness': prodliness})
+    return render(request, 'order/Production/all_prodLines.html', {'prodlines': prodliness})
 
 
 def prod_new(request):
@@ -359,7 +379,7 @@ def prod_new(request):
 def prod(request, order_number):
     singleprod = Order.objects.get(order_number=order_number, order_type='M')
     form_order = OrderForm(instance=singleprod)
-    return render(request, 'order/Production/prod.html', {'form_prod': form_order})
+    return render(request, 'order/Production/Prod.html', {'form_prod': form_order})
 
 
 def prod_edit(request, order_number):
@@ -392,7 +412,11 @@ def prod_edit(request, order_number):
                 messages.error(request, er, extra_tags='email')
 
     if request.GET.get('add_line'):
-        show_line_form = True
+        aord = Order.objects.get(order_number=order_number)
+        if aord.order_status == "C":
+            show_line_form = True
+        else:
+            messages.error(request, "Cannot add lines to confirmed or invoiced orders", extra_tags='email')
 
     if request.method == "POST":
         form_orderlines = LineForm(request.POST)
@@ -410,7 +434,7 @@ def prod_edit(request, order_number):
 
             singleprod = Order.objects.get(order_number=order_number, order_type='M')
             form_order = OrderForm(instance=singleprod)
-            prodlines = OrderLine.objects.filter(order_number=order_number)
+            prodlines = OrderLine.objects.filter(order_number=singleprod)
     else:
 
         singleprod = Order.objects.get(order_number=order_number, order_type='M')
@@ -454,10 +478,10 @@ def new_discount(request):
         if form.is_valid():
             disc = form.save(commit=False)
 
-            if disc.value < 1:
+            if disc.value < 1 and disc.value > 0:
                 disc.save()
             else:
-                messages.error(request, "Discount not saved, check value is less than 1 or less than 100%",
+                messages.error(request, "Discount not saved, check value is between 0 (0%) and 1 (100%)",
                                extra_tags='email')
 
             form = DiscountForm()

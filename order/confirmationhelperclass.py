@@ -68,10 +68,6 @@ def confirmorder(corder):
         result.confirmation_status = "Not Ordered"
         result.add_error("Error: Order is already confirmed")
 
-    # test return
-    # result.confirmation_status = "Not Ordered"
-    # result.add_error("Error: product or inventory record not found")
-
     return result
 
 

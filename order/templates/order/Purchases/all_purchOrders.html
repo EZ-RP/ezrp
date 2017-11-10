@@ -12,13 +12,20 @@
             <a style="text-decoration: none;" href="{% url 'purch_new' %}"> <button class="buttonStyle"> Create Purchase</button></a>
         </div>
         <div class="contentGrey">
-        {% if filter %}
-            <form action="" method="get" class="form form-inline">
-                {% bootstrap_form filter.form layout='inline' %}
-                {% bootstrap_button 'filter' %}
-            </form>
-        {% endif %}
-        {% render_table purchases %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if filter %}
+                <form action="" method="get" class="form form-inline">
+                    {% bootstrap_form filter.form layout='inline' %}
+                    {% bootstrap_button 'filter' %}
+                </form>
+            {% endif %}
+            {% render_table purchases %}
         </div>
     {% endblock content %}
 </body>

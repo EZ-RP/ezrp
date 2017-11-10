@@ -12,13 +12,20 @@
             <a style="text-decoration: none;" href="{% url 'sale_new' %}"> <button class="buttonStyle"> Create Sale </button></a>
         </div>
         <div class="contentGrey">
-        {% if filter %}
-            <form action="" method="get" class="form form-inline">
-                {% bootstrap_form filter.form layout='inline' %}
-                {% bootstrap_button 'filter' %}
-            </form>
-        {% endif %}
-        {% render_table sales %}
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if filter %}
+                <form action="" method="get" class="form form-inline">
+                    {% bootstrap_form filter.form layout='inline' %}
+                    {% bootstrap_button 'filter' %}
+                </form>
+            {% endif %}
+            {% render_table sales %}
         </div>
     {% endblock content %}
 </body>
