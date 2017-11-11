@@ -130,14 +130,12 @@ img{
 	min-width: 900px;
 }
 .contentGrey {
-	border-top: 5px solid #e4e4e4;
 	text-align: center;
 	width: 70%;
 	margin: 0 auto;
 	min-width: 900px;
 }
 .contentBanner {
-	border-top: 5px solid #e4e4e4;
 	min-height: 10px;
 	width: 70%;
 	margin: auto;

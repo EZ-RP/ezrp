@@ -7,10 +7,10 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentGrey">
+        <div class="contentBanner" style="text-align: center"> <h1> Sale </h1> </div>
+        <div class="contentGrey" style="text-align: left">
         <form method="post" d >
             {% csrf_token %}
-            <h1> Sale </h1>
             {% if messages %}
                 <ul class="messages">
                     {% for message in messages %}

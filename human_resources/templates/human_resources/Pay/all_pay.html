@@ -8,10 +8,10 @@
 <body>
     {% block content %}
         <div class="contentBanner">
-            <a style="text-decoration: none;" href="{% url 'pay_new' %}"> <button class="buttonStyle"> Add Pay </button></a>
+            <h1>Pay</h1>
         </div>
-        <div class="contentGrey">
-            <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
+        <div class="contentGrey" style="text-align: left">
+            <a style="text-decoration: none;" href="{% url 'pay_new' %}"> <button class="buttonStyle"> Add Pay </button></a>
             {% render_table pay %}
         </div>
     {% endblock content %}

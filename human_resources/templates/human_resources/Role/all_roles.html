@@ -7,11 +7,11 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentBanner">
-            <a style="text-decoration: none;" href="{% url 'role_new' %}" > <button class="buttonStyle"> Add Role </button></a>
+        <div class="contentBanner" style="text-align: center">
+            <h1>Employee Role's</h1>
         </div>
-        <div class="contentGrey">
-            <link rel="stylesheet" href="{% static 'django_tables2/themes/paleblue/css/screen.css' %}" />
+        <div class="contentGrey" style="text-align: left">
+            <a style="text-decoration: none;" href="{% url 'role_new' %}" > <button class="buttonStyle"> Add Role </button></a>
             {% render_table roles %}
         </div>
     {% endblock content %}

@@ -7,10 +7,10 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentBanner">
-            <a href="{% url 'sale_view' %}" class="button">&nbsp;View Order&nbsp;</a>
+        <div class="contentBanner" style="text-align: left">
+            <a href="{% url 'sale_view' %}" class="buttonStyle">&nbsp;View Order&nbsp;</a>
         </div>
-        <div class="contentGrey">
+        <div class="contentGrey" style="text-align: left">
         {% render_table single_sales %}
         </div>
     {% endblock content %}

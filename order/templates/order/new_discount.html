@@ -5,7 +5,7 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentGrey">
+        <div class="contentGrey" style="text-align: left">
             <h1> Create Discount </h1>
             {% if messages %}
                 <ul class="messages">
@@ -16,7 +16,7 @@
             {% endif %}
             <form method="POST" class="discount-form">{% csrf_token %}
                 {{ form.as_p }}
-                <button class="save btn btn-default">Save</button>
+                <button class="buttonStyle">Save</button>
             </form>
         </div>
     {% endblock content %}

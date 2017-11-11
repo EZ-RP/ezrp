@@ -5,12 +5,12 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentGrey">
-            <h1> Create Sale </h1>
+        <div class="contentBanner" style="text-align: center"> <h1> Create Sale </h1> </div>
+        <div class="contentGrey" style="text-align: left">
 
             <form method="POST" class="order-form">{% csrf_token %}
                 {{ form.as_p }}
-                <button class="save btn btn-default">&nbsp;Add&nbsp;</button>
+                <button class="buttonStyle">&nbsp;Add&nbsp;</button>
             </form>
         </div>
     {% endblock content %}

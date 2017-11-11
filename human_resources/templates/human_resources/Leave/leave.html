@@ -7,13 +7,13 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentGrey">
+        <div class="contentGrey" style="text-align: left">
         <form method="post"  >
             {% csrf_token %}
             <h1> Leave </h1>
             {{ form_leave.as_p }}
             <h3> </h3>
-            <button>Save</button>
+            <button class="buttonStyle">Save</button>
         </form>
     {% endblock content %}
 </body>

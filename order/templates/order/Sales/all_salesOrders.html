@@ -8,10 +8,11 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentBanner">
-            <a style="text-decoration: none;" href="{% url 'sale_new' %}"> <button class="buttonStyle"> Create Sale </button></a>
+        <div class="contentBanner" style="text-align: center">
+            <h1> Sale Orders </h1>
         </div>
-        <div class="contentGrey">
+        <div class="contentGrey" style="text-align: left">
+        <a style="text-decoration: none;" href="{% url 'sale_new' %}"> <button class="buttonStyle"> Create Sale </button></a>
             {% if messages %}
                 <ul class="messages">
                     {% for message in messages %}
