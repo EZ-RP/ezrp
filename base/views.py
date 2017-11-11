@@ -60,3 +60,6 @@ def parameters_new(request):
     else:
         form = SysParamForm
     return render(request, 'base/parameters_new.html', {'form': form})
+
+def splash(request):
+    return render(request, 'base/splash.html')
