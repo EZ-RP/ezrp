@@ -163,6 +163,7 @@ def sale_new(request):
             order = form.save(commit=False)
             order.order_number = Order.get_next_order_number(order)
             order.order_type = 'S'
+            order.order_status = "C"
             order.save()
             form = OrderForm()
     else:
@@ -226,6 +227,7 @@ def purch_new(request):
             order = form.save(commit=False)
             order.order_number = Order.get_next_order_number(order)
             order.order_type = 'P'
+            order.order_status = "C"
             order.save()
             form = OrderForm()
     else:
@@ -369,6 +371,7 @@ def prod_new(request):
             order = form.save(commit=False)
             order.order_number = Order.get_next_order_number(order)
             order.order_type = 'M'
+            order.order_status = "C"
             order.save()
             form = OrderForm()
     else:
@@ -462,11 +465,10 @@ def setup(request):
 
 
 def all_discounts(request):
-    # return render(request, 'order/Sales/all_discounts.html',
-    #               {'discounts': Discounts.objects.all()})
-    discs = DiscountTable(Discounts.objects.all())
+    filt = DiscountFilter(request.GET, Discounts.objects.all())
+    discs = DiscountTable(filt.qs)
     RequestConfig(request).configure(discs)
-    return render(request, 'order/all_discounts.html', {'discounts': discs})
+    return render(request, 'order/all_discounts.html', {'discounts': discs, 'filter': filt})
 
 
 def new_discount(request):

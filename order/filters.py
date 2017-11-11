@@ -13,3 +13,13 @@ class OrderFilter(df.FilterSet):
         }
 
 
+class DiscountFilter(df.FilterSet):
+
+    class Meta:
+        model = Discounts
+        fields = {
+            'item_id': ['icontains'],
+            'start_date': ['contains'],
+            'end_date': ['contains'],
+        }
+

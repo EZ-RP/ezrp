@@ -7,6 +7,9 @@
 </head>
 <body>
     {% block content %}
+        <div class="contentBanner" style="text-align: center">
+            <h1> System Parameters </h1>
+        </div>
         <div class="contentBanner">
             <a style="text-decoration: none;" href="{% url 'parameters_new' %}"><button class="buttonStyle"> Add parameter </button></a>
         </div>
