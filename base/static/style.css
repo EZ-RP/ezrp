@@ -163,9 +163,8 @@ img{
 	right: 0;
 	left: 0;
 	margin: auto;
-	position: absolute;
 	min-width: 900px;
-	display: inline-block;
+	margin-top: 1%;
 }
 .footer p{
 	padding-left: 15px;

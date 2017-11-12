@@ -7,7 +7,7 @@ from django.db import models
 
 
 class Address(models.Model):
-    street = models.CharField(max_length=150)
+    street = models.CharField(max_length=150, help_text="A Street Address.")
     suburb = models.CharField(max_length=150)
     state = models.CharField(max_length=150)
     postcode = models.CharField(max_length=10)
