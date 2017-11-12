@@ -16,12 +16,42 @@ def main(request):
 
 #Employees
 def employees(request):
+    """
+        The table that shows all employees information
+
+        **Context**
+
+        ''employee''
+            An instance of :table: 'human_resources.EmployeeTable'
+
+        **Template**
+
+        :template:'human_resources/Employee/all_employees.html'
+        """
     employee = EmployeeTable(Employee.objects.all())
     RequestConfig(request).configure(employee)
     return render(request, 'human_resources/Employee/all_employees.html', {'employees': employee})
 
 @transaction.atomic
 def employee_new(request):
+    """
+        The form that allows new entries to be made
+
+        **Context**
+
+        ''form_employee''
+            An instance of :form: 'human_resources.EmployeeForm'
+
+        ''form_address''
+            An instance of :form: 'human_resources.AddressForm'
+
+        ''form_pay_details''
+            An instance of :form: 'human_resources.PayDetailsForm'
+
+        **Template**
+
+        :template:'human_resources/Employee/employee_new.html'
+        """
     if request.method == "POST":
         form_employee = EmployeeForm(request.POST)
         form_address = AddressForm(request.POST)
@@ -63,7 +93,24 @@ def employee(request, id):
 
 
 def employee_edit(request, id):
+    """
+        Adds a link in the table that allows the fields to be edited
 
+        **Context**
+
+        ''single_employee''
+            An instance of :model: 'human_resources.Employee'
+
+        ''form_employees''
+            An instance of :form: 'human_resources.EmployeeForm'
+
+        ''employee_line''
+            An instance of :form: 'human_resources.EmployeeForm'
+
+        **Template**
+
+        :template:'human_resources/Employee/employee.html'
+        """
     if request.method == "POST":
 
         form_employees = EmployeeForm(request.POST)
@@ -86,6 +133,18 @@ def employee_edit(request, id):
 
 
 def employee_delete(request, id):
+    """
+            Adds a link in the table that allows fields to be deleted
+
+            **Context**
+
+            ''single_employee''
+                An instance of :table: 'human_resources.EmployeeTable'
+
+            **Template**
+
+            :template:'human_resources/Employee/all_employees.html'
+            """
     Employee.objects.get(id=id).delete()
     single_employee = EmployeeTable(Employee.objects.all())
     RequestConfig(request).configure(single_employee)
@@ -93,12 +152,36 @@ def employee_delete(request, id):
 
 
 def pay(request):
+    """
+            The table that shows all pay information
+
+            **Context**
+
+            ''pay''
+                An instance of :table: 'human_resources.PayTable'
+
+            **Template**
+
+            :template:'human_resources/Pay/all_pay.html'
+            """
     pay = PayTable(Payday.objects.all())
     return render(request, 'human_resources/Pay/all_pay.html', {'pay': pay})
 
 
 @transaction.atomic
 def pay_new(request):
+    """
+            The form that allows new entries to be made
+
+            **Context**
+
+            ''form_pay''
+                An instance of :form: 'human_resources.PayForm'
+
+            **Template**
+
+            :template:'human_resources/Pay/pay_new.html'
+            """
     if request.method == "POST":
         form_pay = PayForm(request.POST)
         if form_pay.is_valid():
@@ -157,13 +240,39 @@ def pay_new(request):
 
 
 def leave(request):
+    """
+                The table that shows all leave information
+
+                **Context**
+
+                ''leaves''
+                    An instance of :table: 'human_resources.LeaveTable'
+
+                **Template**
+
+                :template:'human_resources/Leave/all_leave.html'
+                """
     leaves = LeaveTable(Leave.objects.all())
     RequestConfig(request).configure(leaves)
     return render(request, 'human_resources/Leave/all_leave.html', {'leave': leaves})
 
 
 def leave_edit(request, id):
+    """
+            Adds a link in the table that allows the fields to be edited
 
+            **Context**
+
+            ''single_employee''
+                An instance of :model: 'human_resources.Employee'
+
+            ''form_leave''
+                An instance of :form: 'human_resources.LeaveForm'
+
+            **Template**
+
+            :template:'human_resources/Leave/leave.html'
+            """
     if request.method == "POST":
 
         form_leave = LeaveForm(request.POST)
@@ -193,12 +302,36 @@ def leave_edit(request, id):
 
 
 def roles(request):
+    """
+                    The table that shows all roles information
+
+                    **Context**
+
+                    ''roles''
+                        An instance of :table: 'human_resources.RolesTable'
+
+                    **Template**
+
+                    :template:'human_resources/Role/all_roles.html'
+                    """
     roles = RolesTable(Roles.objects.all())
     return render(request, 'human_resources/Role/all_roles.html', {'roles': roles})
 
 
 @transaction.atomic
 def role_new(request):
+    """
+                The form that allows new entries to be made
+
+                **Context**
+
+                ''form_role''
+                    An instance of :form: 'human_resources.RoleForm'
+
+                **Template**
+
+                :template:'human_resources/Role/role_new.html'
+                """
     if request.method == "POST":
         form_role = RoleForm(request.POST)
         if form_role.is_valid():

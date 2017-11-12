@@ -166,8 +166,10 @@ def sale_new(request):
             order.order_status = "C"
             order.save()
             form = OrderForm()
+            form.fields['account_number'].queryset = Party.objects.filter(party_type='C')
     else:
         form = OrderForm()
+        form.fields['account_number'].queryset = Party.objects.filter(party_type='C')
     return render(request, 'order/Sales/sale_new.html', {'form': form})
 
 

@@ -5,20 +5,23 @@
 	padding: 0;
 }
 
+.helptext {
+	color: gray;
+	font-size: small;
+}
+
+
 h1 {
 	font-size: 48px;
-	font-style: italic;
-	margin-left: 100px;
+	text-align: center;
 }
 h2 {
 	font-size: 48px;
-	font-style: italic;
 	margin-right: 100px;
 	margin-left: 550px;
 }
 h3 {
 	font-size: 24px;
-	font-style: italic;
 }
 body {
 	margin: 0;
@@ -135,6 +138,12 @@ img{
 }
 .contentGrey {
 	text-align: center;
+	width: 70%;
+	margin: 0 auto;
+	min-width: 900px;
+}
+
+.about {
 	width: 70%;
 	margin: 0 auto;
 	min-width: 900px;
