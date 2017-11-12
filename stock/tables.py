@@ -8,6 +8,9 @@ from stock.models import Inventory
 
 
 class StockTable(tables.Table):
+    """
+    assignes what is shown on the stock table
+    """
     edit_link = tables.LinkColumn('stock_edit', args=[A('pk')],
                                   verbose_name='Edit Stock', text='Edit', accessor='pk',
                                   attrs={'class': 'edit_link'})
