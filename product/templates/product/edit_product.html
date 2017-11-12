@@ -9,7 +9,9 @@
         <h1> Edit Product </h1>
         <form method="post">
         {% csrf_token %}
-        {{ form_prod.as_p }}
+        <table>
+            {{ form_prod.as_table }}
+        </table>
         <input type="submit" class="buttonStyle" value="Edit" name="edit_prodBut" />
         </form>
         </div>

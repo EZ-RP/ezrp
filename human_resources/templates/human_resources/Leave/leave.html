@@ -11,7 +11,9 @@
         <form method="post"  >
             {% csrf_token %}
             <h1> Leave </h1>
-            {{ form_leave.as_p }}
+            <table>
+            {{ form_leave.as_table }}
+            </table>
             <h3> </h3>
             <button class="buttonStyle">Edit Leave</button>
         </form>

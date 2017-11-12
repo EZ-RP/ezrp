@@ -7,11 +7,13 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentGrey">
+        <div class="contentGrey" style="text-align: left">
         <form method="post"  >
             {% csrf_token %}
             <h1> Employee </h1>
-            {{ form_employee.as_p }}
+            <table>
+            {{ form_employee.as_table }}
+            </table>
             <h3> </h3>
             <button class="buttonStyle">Edit Employee</button>
         </form>

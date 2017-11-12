@@ -11,7 +11,9 @@
             <h1> Create parameter </h1>
 
             <form method="POST" class="SysParam-form">{% csrf_token %}
-                    {{ form.as_p }}
+                <table>
+                {{ form.as_table }}
+                </table>
                     <button class="save buttonStyle">Save</button>
             </form>
         </div>

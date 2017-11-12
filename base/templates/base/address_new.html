@@ -11,8 +11,10 @@
             <h1> Create address </h1>
 
             <form method="POST" class="address-form">{% csrf_token %}
-                    {{ form.as_p }}
-                    <button class="save buttonStyle">Save</button>
+                <table>
+                {{ form.as_table }}
+                </table>
+                    <button class="save buttonStyle">Add Address</button>
             </form>
         </div>
 

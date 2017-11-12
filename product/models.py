@@ -12,11 +12,11 @@ class Item(models.Model):
         ('M', 'Production')
     )
     item_number = models.IntegerField()
-    name = models.CharField(max_length=30)
-    item_desc = models.CharField(verbose_name="Description", max_length=120)
-    unit = models.CharField(max_length=10)
-    product_category = models.CharField(max_length=30)
-    fulfilment_type = models.CharField(max_length=1, choices=FULFILMENT_TYPE)
+    name = models.CharField(max_length=30, help_text= "The name of the desired product")
+    item_desc = models.CharField(verbose_name="Description", max_length=120, help_text="The description of the product")
+    unit = models.CharField(max_length=10, help_text="The unit of measurement for the product")
+    product_category = models.CharField(max_length=30, help_text="The category of the product")
+    fulfilment_type = models.CharField(max_length=1, choices=FULFILMENT_TYPE, help_text="Whether the product is produced or purchased")
 
     class Meta:
         managed = True

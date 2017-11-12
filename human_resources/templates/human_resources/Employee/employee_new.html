@@ -10,11 +10,17 @@
                 {% csrf_token %}
                 <h1>New Employee</h1>
                 <h3>Employee Details</h3>
-                {{ form_employee.as_p }}
+                <table>
+                {{ form_employee.as_table }}
+                </table>
                 <h3>Employee Address</h3>
-                {{ form_address.as_p }}
+                <table>
+                {{ form_address.as_table }}
+                </table>
                 <h3>Employee Pay Details</h3>
-                {{ form_pay_details.as_p }}
+                <table>
+                {{ form_pay_details.as_table }}
+                </table>
                 <h3> </h3>
 
                 <button class="buttonStyle">Add Employee</button>

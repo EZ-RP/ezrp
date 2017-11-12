@@ -8,7 +8,9 @@
         <div class="contentGrey" style="text-align: left">
             <h1>New Product</h1>
             <form method="POST" class="product-form">{% csrf_token %}
-            {{ form_product.as_p }}
+            <table>
+                {{ form_product.as_table }}
+            </table>
             <button class="buttonStyle">Save</button>
             </form>
         </div>

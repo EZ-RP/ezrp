@@ -7,3 +7,4 @@ class ProductForm(forms.ModelForm):
         model = Item
         fields = ('product_category', 'name', 'item_desc', 'unit', 'fulfilment_type')
 
+

@@ -9,7 +9,9 @@
             <form method="post">
                 {% csrf_token %}
                 <h1>New Role</h1>
-                {{ form_role.as_p }}
+                <table>
+                {{ form_role.as_table }}
+                </table>
                 <button class="buttonStyle">Add Role</button>
             </form>
         </div>
