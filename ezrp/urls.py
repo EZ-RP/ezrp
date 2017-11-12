@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^product/', include('product.urls')),
     url(r'^stock/', include('stock.urls')),
     url(r'^admin/', admin.site.urls),
+    url(r'^admin/doc/', include('django.contrib.admindocs.urls'))
 ]

@@ -8,7 +8,9 @@
         <div class="contentGrey">
         <form method="post">
         {% csrf_token %}
-        {{ form_address.as_p }}
+        <table>
+            {{ form_address.as_table }}
+        </table>
         <input type="submit" class="buttonStyle" value="Edit Address"/>
         </form>
         </div>
