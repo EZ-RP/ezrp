@@ -20,6 +20,9 @@ def available(request):
 
 
 def stockform(request):
+    """
+    the form that allows new entires to be made
+    """
     if request.method == "POST":
         form = InvForm(request.POST)
         if form.is_valid():
@@ -31,6 +34,9 @@ def stockform(request):
 
 
 def stock_delete(request, lineid):
+    """
+    adds a link in the table that allows fields to be deleted
+    """
     Inventory.objects.get(id=lineid).delete()
     items = StockTable(Inventory.objects.all())
     RequestConfig(request).configure(items)
@@ -38,7 +44,9 @@ def stock_delete(request, lineid):
 
 
 def stock_edit(request, lineid):
-
+    """
+    adds a link in the table that allows the fields to be edited
+    """
     if request.method == "POST":
         stock = Inventory.objects.get(id=lineid)
         form_stocks = InvForm(request.POST, instance= stock)
@@ -57,6 +65,9 @@ def stock_edit(request, lineid):
 
 
 def all_stock(request):
+    """
+    shows all of the stock in a table
+    """
     filter = StockFilter(request.GET, Inventory.objects.all())
     stock = StockTable(filter.qs)
     RequestConfig(request, paginate={'per_page': 15}).configure(stock)

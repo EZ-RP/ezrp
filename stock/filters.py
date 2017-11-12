@@ -3,7 +3,9 @@ from stock.models import Inventory
 
 
 class StockFilter(df.FilterSet):
-
+    """
+    is the code that tells the what fields to filter. icontains makes the search case insensitive
+    """
     class Meta:
         model = Inventory
         fields = {
