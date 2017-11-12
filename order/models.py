@@ -37,6 +37,8 @@ class Order(models.Model):
         else:
             return 1
 
+    def __str__(self):
+        return '%s %s' % (self.order_number, self.order_status)
 
 class OrderLine(models.Model):
     order_line_id = models.IntegerField()

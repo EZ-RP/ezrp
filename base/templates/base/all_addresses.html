@@ -7,6 +7,9 @@
 </head>
 <body>
     {% block content %}
+        <div class="contentBanner" style="text-align: center">
+            <h1> All Addresses </h1>
+        </div>
         <div class="contentBanner">
             <a style="text-decoration: none" href="{% url 'address_new' %}"><button class="buttonStyle"> Add Address </button></a>
         </div>
