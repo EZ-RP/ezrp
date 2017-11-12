@@ -70,7 +70,7 @@ def pay_details_new(request):
             form = PayDetailsForm()
     else:
         form = PayDetailsForm()
-    return render(request, 'base/parameters_new.html', {'form': form})
+    return render(request, 'base/pay_details_new.html', {'form': form})
 
 
 def splash(request):
