@@ -228,6 +228,7 @@ a.button {
 	text-decoration: none;
 	color: white;
 	border-radius: 8px;
+	font-size: 12px;
 	box-shadow: 0 1px 1px #777;
 }
 .buttonStyle:hover {

@@ -10,19 +10,26 @@
     {% block content %}
         <div class="contentBanner" style="text-align: center">
         <div><h1>Product</h1></div>
-
         </div>
         <div class="contentGrey" style="text-align: left">
             <div style="margin-right: 0;">
+                <br />
                 <a style="text-decoration: none;" href="{% url 'product_new' %}"> <button class='buttonStyle' >New Product</button> </a>
+                <br />
             </div>
+            <div>
+                <br />
                 {% if filter %}
                     <form action="" method="get" class="form form-inline">
                     {% bootstrap_form filter.form layout='inline' %}
-                    {% bootstrap_button 'filter' %}
+                        <br />
+                    <button class="buttonStyle" type="submit">Filter </button>
                     </form>
                 {% endif %}
+            <br />
                 {% render_table prodtable %}
+            <br />
+        </div>
         </div>
     {% endblock content %}
 </body>
