@@ -9,9 +9,13 @@
         <form method="post">
         {% csrf_token %}
         <h1>New vendor</h1>
-        {{ form_vendor.as_p }}
+        <table>
+        {{ form_vendor.as_table }}
+        </table>
         <h3>Address</h3>
-        {{ form_address.as_p }}
+            <table>
+        {{ form_address.as_table }}
+                </table>
         <input type="submit" class="buttonStyle" value="Add Vendor" />
         </form>
         </div>
