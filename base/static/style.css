@@ -222,13 +222,13 @@ a.button {
 	-webkit-transition: 0.4s;
 	-moz-transition: 0.4s;
 	appearance: button;
-	height: 30px;
+	height: 40px;
 	width:150px;
 	background: linear-gradient(#07450a, #0b6e10);
 	text-decoration: none;
 	color: white;
 	border-radius: 8px;
-	font-size: 12px;
+	font-size: 16px;
 	box-shadow: 0 1px 1px #777;
 }
 .buttonStyle:hover {
