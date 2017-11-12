@@ -13,6 +13,18 @@ def main(request):
 
 
 def available(request):
+    """
+    The table that shows all Stock information
+
+    **Context**
+
+    ''items''
+        An instance of :table: 'stock.StockTable'
+
+    **Template**
+
+    :template:'stock/all_available'
+    """
     items = StockTable(Inventory.objects.all())
     RequestConfig(request).configure(items)
     return render(request, 'stock/all_available.html', {'available': items})
@@ -21,7 +33,16 @@ def available(request):
 
 def stockform(request):
     """
-    the form that allows new entires to be made
+    The form that allows new entries to be made
+
+    **Context**
+
+    ''form''
+        An instance of :form: 'stock.Invform'
+
+    **Template**
+
+    :template:'stock_form.html'
     """
     if request.method == "POST":
         form = InvForm(request.POST)
@@ -35,7 +56,16 @@ def stockform(request):
 
 def stock_delete(request, lineid):
     """
-    adds a link in the table that allows fields to be deleted
+    Adds a link in the table that allows fields to be deleted
+
+    **Context**
+
+    ''items''
+        An instance of :table: 'stock.StockTable'
+
+    **Template**
+
+    :template:'stock/all_available.html'
     """
     Inventory.objects.get(id=lineid).delete()
     items = StockTable(Inventory.objects.all())
@@ -45,7 +75,25 @@ def stock_delete(request, lineid):
 
 def stock_edit(request, lineid):
     """
-    adds a link in the table that allows the fields to be edited
+    Adds a link in the table that allows the fields to be edited
+
+    **Context**
+
+    ''stock''
+        An instance of :model: 'stock.Inventory'
+
+    ''form_stocks''
+        An instance of :form: 'stock.InvForm'
+
+    ''form_stock''
+        An instance of :form: 'stock.InvForm'
+
+    ''single_stock''
+        An instance of :model: 'stock.Inventory'
+
+    **Template**
+
+    :template:'stock/edit_stock.html'
     """
     if request.method == "POST":
         stock = Inventory.objects.get(id=lineid)
@@ -66,7 +114,19 @@ def stock_edit(request, lineid):
 
 def all_stock(request):
     """
-    shows all of the stock in a table
+    The table that shows all of the stock information
+
+    **Context**
+
+    ''filter''
+        An instance of :filter:'stock.StockFilter'
+
+    ''stock''
+        An instance of :table:'stock.StockTable'
+
+    **Template**
+
+    :template:'stock/all_available'
     """
     filter = StockFilter(request.GET, Inventory.objects.all())
     stock = StockTable(filter.qs)

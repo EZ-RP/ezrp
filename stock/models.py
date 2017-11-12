@@ -9,6 +9,9 @@ from product.models import *
 
 
 class Inventory(models.Model):
+    """
+    Stores an item and its level of stock, related to :model: 'product.Item'
+    """
     item_id = models.ForeignKey(Item)  # models.CharField(max_length=30, primary_key=True)
     available_qty = models.FloatField(null=True, blank=True)
     reserved_qty = models.FloatField(null=True, blank=True)
@@ -25,6 +28,7 @@ class Inventory(models.Model):
         """
         Call method to reserve a qty of an item.
         Return value is the qty not reserved, if any, else zero
+        :model:'stock.Inventory'
         :param qty:
         :return Qty not reserved:
         """
@@ -40,6 +44,7 @@ class Inventory(models.Model):
         """
         Call method to return reserved qty of an item to available stock.
         Return value is the qty not returned, if any, else zero
+        :model:'stock.Inventory'
         :param qty:
         :return Qty not returned:
         """
@@ -54,6 +59,9 @@ class Inventory(models.Model):
     def quantity_received(self, qty: float):
         """
         Call method to increase available stock from a purchase order.
+        :model:'stock.Inventory'
+        :param qty:
+        :return:
         """
         self.available_qty += qty
         self.save()
@@ -63,6 +71,7 @@ class Inventory(models.Model):
         """
         Call method to remove the reserved qty of an item once it is shipped to the customer.
         Return value is the qty not removed, if any, else zero
+        :model:'stock.Inventory'
         :param qty:
         :return Qty not removed:
         """
@@ -76,6 +85,9 @@ class Inventory(models.Model):
     def add_ordered_qty(self, qty: float):
         """
         Call method to increase ordered stock qty.
+        :model:'stock.Inventory'
+        :param qty:
+        :return:
         """
         self.ordered_qty += qty
         self.save()
@@ -85,6 +97,7 @@ class Inventory(models.Model):
         """
         Call method to add ordered qty of an item to available stock.
         Return value is the qty not added, if any, else zero
+        :model:'stock.Inventory'
         :param qty:
         :return Qty not added:
         """
@@ -100,6 +113,7 @@ class Inventory(models.Model):
         """
         Call method to add ordered qty of an item to reserved stock.
         Return value is the qty not added, if any, else zero
+        :model:'stock.Inventory'
         :param qty:
         :return Qty not added:
         """

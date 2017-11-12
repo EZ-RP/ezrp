@@ -9,7 +9,9 @@
         <h1> Edit Stock </h1>
         <form method="post">
         {% csrf_token %}
-        {{ form_stock.as_p }}
+            <table>
+        {{ form_stock.as_table }}
+            </table>
         <input type="submit" class="buttonStyle" value="Edit Stock" />
         </form>
         </div>
