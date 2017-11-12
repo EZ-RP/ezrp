@@ -9,6 +9,19 @@ from party.filters import PartyFilter
 
 
 def all_customers(request):
+    """
+    Display all customers`.
+
+    ``filter``
+        filter used to filter customers
+
+    ''customers''
+        query set of parties, filtered to show customers
+
+    **Template:**
+
+    :template:`party/customer/all_customers.html`
+    """
     filter = PartyFilter(request.GET, Party.objects.filter(party_type='C'))
     customers = CustomerTable(filter.qs)
     RequestConfig(request).configure(customers)
@@ -17,13 +30,42 @@ def all_customers(request):
 
 
 def customers(request):
+    """
+        Display the customer menu
+
+        **Template:**
+
+        :template:`party/customer/customers.html`
+    """
     return render(request, 'party/customer/customers.html')
 
 def partyMain(request):
+    """
+            Display the party menu
+
+            **Template:**
+
+            :template:`party/partyMain.html`
+    """
+
     return render(request, 'party/partyMain.html')
 
 @transaction.atomic
 def customer_new(request):
+    """
+        Create a new customer
+
+        ``form_customer``
+            Model form of Party, for customer.
+
+        ``form_address``
+            Model form of Address, to be linked to customer
+
+        **Template:**
+
+        :template:`party/customer/customer_new.html`
+    """
+
     if request.method == "POST":
         form_customer = PartyForm(request.POST)
         form_address = AddressForm(request.POST)
@@ -49,6 +91,25 @@ def customer_new(request):
 
 
 def customer(request, account_number):
+    """
+        View and edit a customer
+
+        ``show_address_form``
+            Boolean dictating if the new address form is displayed.
+
+        ``customer``
+            The party instance of customer.
+
+        ``form_customer``
+            Model form of Party, for customer.
+
+        ``form_address``
+            Model form of Address, linked to customer
+
+        **Template:**
+
+        :template:`party/customer/customer_new.html`
+    """
 
     show_address_form = False
 
@@ -87,10 +148,29 @@ def customer(request, account_number):
 
 
 def customer_delete(request, account_number):
+
+    """
+        Delete a customer.
+    """
+
     Party.objects.get(account_number=account_number).delete()
     return all_customers(request)
 
 def edit_address(request, id):
+    """
+        Edit Party address
+
+        ``address``
+            Instance of address to be edited.
+
+        ``form_address``
+            Model form of Address, linked to customer
+
+        **Template:**
+
+        :template:`party/party_address/edit_address.html`
+    """
+
     address = PartyAddress.objects.get(id=id).address_id
     form_address = AddressForm(instance=address)
     return render(request, 'party/party_address/edit_address.html', {'address': address,
@@ -98,6 +178,13 @@ def edit_address(request, id):
 
 
 def delete_address(request, id):
+    """
+        Delete a party address
+
+        ``address``
+            address to delete.
+    """
+
     address = PartyAddress.objects.get(id=id)
     party = address.account_number
     address.delete()
@@ -105,14 +192,36 @@ def delete_address(request, id):
     if party.party_type == "C":
         return customer(request, party.account_number)
     else :
-        return #vendor
+        return vendor(request, party.account_number)
 
 
 def vendors(request):
+    """
+        Display the customer menu
+
+        **Template:**
+
+        :template:`party/vendor/vendors.html`
+    """
+
     return render(request, 'party/vendor/vendors.html')
 
 
 def all_vendors(request):
+    """
+        Display all vendors`.
+
+        ``filter``
+            filter used to filter vendors
+
+        ''vendors''
+            query set of parties, filtered to show vendors
+
+        **Template:**
+
+        :template:`party/vendor/all_vendors.html`
+    """
+
     filter = PartyFilter(request.GET, Party.objects.filter(party_type='V'))
     vendors = VendorTable(filter.qs)
     RequestConfig(request).configure(vendors)
@@ -120,12 +229,22 @@ def all_vendors(request):
                                                              'filter': filter})
 
 
-def vendors(request):
-    return render(request, 'party/vendor/vendors.html')
-
-
 @transaction.atomic
 def vendor_new(request):
+    """
+        Create a new vendor
+
+        ``form_vendor``
+            Model form of Party, for vendor.
+
+        ``form_address``
+            Model form of Address, to be linked to vendor
+
+        **Template:**
+
+        :template:`party/vendor/vendor_new.html`
+    """
+
     if request.method == "POST":
         form_vendor = PartyForm(request.POST)
         form_address = AddressForm(request.POST)
@@ -150,6 +269,25 @@ def vendor_new(request):
 
 
 def vendor(request, account_number):
+    """
+            View and edit a vendor
+
+            ``show_address_form``
+                Boolean dictating if the new address form is displayed.
+
+            ``vendor``
+                The party instance of vendor.
+
+            ``form_vendor``
+                Model form of Party, for vendor.
+
+            ``form_address``
+                Model form of Address, linked to vendor
+
+            **Template:**
+
+            :template:`party/vendor/vendor.html`
+    """
 
     show_address_form = False
 
@@ -187,6 +325,11 @@ def vendor(request, account_number):
 
 
 def vendor_delete(request, account_number):
+
+    """
+        Delete a customer.
+    """
+
     Party.objects.get(account_number=account_number).delete()
     return all_vendors(request)
 
