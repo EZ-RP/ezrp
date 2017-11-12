@@ -7,12 +7,12 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentGrey">
+        <div class="contentGrey" style="text-align: left">
         <form method="POST" class="stockform">
             {% csrf_token %}
             <h1>Edit Stock</h1>
         {{ form.as_p }}
-           <button class="save btn btn-default">Update</button>
+           <button class="save buttonStyle">Update</button>
     </form>
         </div>
     {% endblock content %}

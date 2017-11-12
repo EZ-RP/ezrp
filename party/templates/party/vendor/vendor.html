@@ -6,14 +6,14 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentGrey">
+        <div class="contentGrey" style="text-align: left">
         <form method="post">
         {% csrf_token %}
         {{ form_vendor.as_p }}
-        <button class="save btn btn-default">Save</button>
+        <button class="buttonStyle">Save</button>
         {% if  show_address_form%}
          {{ form_address.as_p }}
-            <button class="save btn btn-default">Save</button>
+            <button class="buttonStyle">Save</button>
         {% endif %}
         </form>
         <form action="#" method="get">

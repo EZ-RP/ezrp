@@ -5,14 +5,14 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentGrey">
+        <div class="contentGrey" style="text-align: left">
         <form method="post">
         {% csrf_token %}
         <h1>New vendor</h1>
         {{ form_vendor.as_p }}
         <h3>Address</h3>
         {{ form_address.as_p }}
-        <input type="submit" />
+        <input type="submit" class="buttonStyle" />
         </form>
         </div>
     {% endblock content %}

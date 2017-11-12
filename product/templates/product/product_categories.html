@@ -11,14 +11,11 @@
         <div><h1>Product</h1></div>
         </div>
         <div>
-        <a class='buttonStyle' href="{% url 'product_new' %}">New Product</a>
+
         </div>
-        <div class="contentGrey">
-        <table class="table">
-            <tr>
+        <div class="contentGrey" style="text-align: left">
+        <a class='buttonStyle' href="{% url 'product_new' %}">New Product</a>
                 {% render_table product %}
-            </tr>
-        </table>
         </div>
     {% endblock content %}
 </body>

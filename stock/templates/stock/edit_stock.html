@@ -5,12 +5,12 @@
 </head>
 <body>
     {% block content %}
-        <div class="contentGrey">
+        <div class="contentGrey" style="text-align: left">
         <h1> Edit Stock </h1>
         <form method="post">
         {% csrf_token %}
         {{ form_stock.as_p }}
-        <input type="submit" />
+        <input type="submit" class="buttonStyle" />
         </form>
         </div>
     {% endblock content %}
