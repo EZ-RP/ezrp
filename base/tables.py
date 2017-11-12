@@ -16,7 +16,14 @@ class PayDetailsTable(tables.Table):
 
 class AddressTable(tables.Table):
 
-
     class Meta:
         model = Address
         attrs = {'class': 'tableStyle'}
+
+
+class ParametersTable(tables.Table):
+
+    class Meta:
+        model = SystemParameters
+        attrs = {'class': 'tableStyle'}
+

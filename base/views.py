@@ -48,7 +48,8 @@ def address_new(request):
 
 
 def all_parameters(request):
-    return render(request, 'base/all_parameters.html', {'parameters': SystemParameters.objects.all()})
+    params = ParametersTable(SystemParameters.objects.all())
+    return render(request, 'base/all_parameters.html', {'parameters': params})
 
 
 def parameters_new(request):
@@ -61,5 +62,7 @@ def parameters_new(request):
         form = SysParamForm
     return render(request, 'base/parameters_new.html', {'form': form})
 
+
 def splash(request):
     return render(request, 'base/splash.html')
+
