@@ -335,4 +335,14 @@ a.buttonStylePage:hover {
 	width: 115px;
 }
 
+form th{
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+form input {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
 
