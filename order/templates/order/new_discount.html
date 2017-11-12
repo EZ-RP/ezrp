@@ -15,7 +15,9 @@
                 </ul>
             {% endif %}
             <form method="POST" class="discount-form">{% csrf_token %}
-                {{ form.as_p }}
+                <table>
+                    {{ form.as_table }}
+                </table>
                 <button class="buttonStyle">Save</button>
             </form>
         </div>

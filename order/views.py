@@ -11,15 +11,42 @@ from .confirmationhelperclass import *
 
 # Main Page
 def orders(request):
+    """
+    Display the orders menu.
+
+    **Template:**
+
+    :template:`order/ordersMain.html`
+    """
     return render(request, 'order/ordersMain.html')
 
 
 # Sales views
 def sales(request):
+    """
+    Display the Sales menu.
+
+    **Template:**
+
+    :template:`order/Sales/sales.html`
+    """
     return render(request, 'order/Sales/sales.html')
 
 
 def all_sales(request):
+    """
+    Display all :model:`order.Order` of type sales.
+
+    ``sales``
+        A query set of :model:`order.Order`.
+
+    ``filter``
+        The relevant filter object :model:`order.OrderFilter`.
+
+    **Template:**
+
+    :template:`order/Sales/all_salesOrders.html`
+    """
     filt = OrderFilter(request.GET, Order.objects.filter(order_type="S"))
     saless = SalesTable(filt.qs)
     RequestConfig(request).configure(saless)
@@ -27,19 +54,57 @@ def all_sales(request):
 
 
 def all_saleslines(request):
+    """
+    Display all :model:`order.OrderLine` of type sales.
+
+    ``saleslines``
+        A query set of :model:`order.OrderLine`.
+
+    **Template:**
+
+    :template:`order/Sales/all_salesLines.html`
+    """
     salesliness = SalesLineTable(OrderLine.objects.filter(order_number__order_type="S"))
     RequestConfig(request).configure(salesliness)
     return render(request, 'order/Sales/all_salesLines.html', {'saleslines': salesliness})
 
 
 def sale(request, order_number):
+    """
+    Create a new instance of :model:`order.Order` of type sales.
+
+    ``form_sale``
+        An instance of :model:`order.OrderForm`.
+
+    **Template:**
+
+    :template:`order/Sales/sale.html`
+    """
     singlesale = Order.objects.get(order_number=order_number, order_type='S')
     form_order = OrderForm(instance=singlesale)
     return render(request, 'order/Sales/sale.html', {'form_sale': form_order})
 
 
 def sale_edit(request, order_number):
+    """
+    Edit/Confirm/Invoice an instance of :model:`order.Order` of type sales.
 
+    ``form_sale``
+        An instance of :model:`order.OrderForm`.
+
+    ``form_orderline``
+        An instance of :model:`order.OrderLineForm`.
+
+    ``saleslines``
+        A query set of :model:`order.OrderLine`.
+
+    ``show_line_form``
+        A boolean to determine if the line form should be shown.
+
+    **Template:**
+
+    :template:`order/Sales/sale.html`
+    """
     show_line_form = False
     storage = messages.get_messages(request)
     storage.used = True
@@ -87,9 +152,11 @@ def sale_edit(request, order_number):
             tdate = time.strftime("%Y-%m-%d")
 
             if Discounts.objects.filter(account_number=orde.account_number, item_id=order_line.item_id.id,
-                                        start_date__lte=tdate, end_date__gt=tdate).exists():
+                                        start_date__lte=tdate, end_date__gt=tdate,
+                                        quantity__lte=order_line.quantity).exists():
                 dsc = Discounts.objects.get(account_number=orde.account_number, item_id=order_line.item_id.id,
-                                            start_date__lte=tdate, end_date__gt=tdate)
+                                            start_date__lte=tdate, end_date__gt=tdate,
+                                            quantity__lte=order_line.quantity)
                 prc = order_line.price
                 dscp = dsc.value
                 order_line.discount_price = prc * (1 - dscp)
@@ -126,6 +193,19 @@ def sale_edit(request, order_number):
 
 
 def sale_delete(request, order_number):
+    """
+    Delete an object :model:`order.Order` of type sales.
+
+    ``sales``
+        A query set of :model:`order.Order`.
+
+    ``filter``
+        The relevant filter object :model:`order.OrderFilter`.
+
+    **Template:**
+
+    :template:`order/Sales/all_salesOrders.html`
+    """
     storage = messages.get_messages(request)
     storage.used = True
     delorder = Order.objects.get(order_number=order_number)
@@ -142,6 +222,16 @@ def sale_delete(request, order_number):
 
 
 def salesline_delete(request, sid):
+    """
+    Delete an object :model:`order.OrderLine` from a sale.
+
+    ``saleslines``
+        A query set of :model:`order.OrderLine`.
+
+    **Template:**
+
+    :template:`order/Sales/all_salesLines.html`
+    """
     storage = messages.get_messages(request)
     storage.used = True
     delline = OrderLine.objects.get(id=sid)
@@ -157,6 +247,16 @@ def salesline_delete(request, sid):
 
 
 def sale_new(request):
+    """
+    Create a new instance of :model:`order.Order` of type sales.
+
+    ``form``
+        An instance of :model:`order.OrderForm`.
+
+    **Template:**
+
+    :template:`order/Sales/sale_new.html`
+    """
     if request.method == "POST":
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -175,10 +275,30 @@ def sale_new(request):
 
 # Purchase views
 def purchases(request):
+    """
+    Display the Purchases menu.
+
+    **Template:**
+
+    :template:`order/Purchases/purchases.html`
+    """
     return render(request, 'order/Purchases/purchases.html')
 
 
 def all_purchases(request):
+    """
+    Display all :model:`order.Order` of type Purchase.
+
+    ``purchases``
+        A query set of :model:`order.Order`.
+
+    ``filter``
+        The relevant filter object :model:`order.OrderFilter`.
+
+    **Template:**
+
+    :template:`order/Purchases/all_purchOrders.html`
+    """
     filt = OrderFilter(request.GET, Order.objects.filter(order_type="P"))
     purchs = PurchTable(filt.qs)
     RequestConfig(request).configure(purchs)
@@ -186,12 +306,35 @@ def all_purchases(request):
 
 
 def all_purchlines(request):
+    """
+    Display all :model:`order.OrderLine` of type Purchase.
+
+    ``purchlines``
+        A query set of :model:`order.OrderLine`.
+
+    **Template:**
+
+    :template:`order/Purchases/all_purchLines.html`
+    """
     purchliness = PurchLineTable(OrderLine.objects.filter(order_number__order_type="P"))
     RequestConfig(request).configure(purchliness)
     return render(request, 'order/Purchases/all_purchLines.html', {'purchlines': purchliness})
 
 
 def purch_delete(request, order_number):
+    """
+    Delete an object :model:`order.Order` of type Purchase.
+
+    ``purchases``
+        A query set of :model:`order.Order`.
+
+    ``filter``
+        The relevant filter object :model:`order.OrderFilter`.
+
+    **Template:**
+
+    :template:`order/Purchases/all_purchOrders.html`
+    """
     storage = messages.get_messages(request)
     storage.used = True
     delorder = Order.objects.get(order_number=order_number)
@@ -208,6 +351,16 @@ def purch_delete(request, order_number):
 
 
 def purchline_delete(request, pid):
+    """
+    Delete an object :model:`order.OrderLine` from a purchase order.
+
+    ``purchlines``
+        A query set of :model:`order.OrderLine`.
+
+    **Template:**
+
+    :template:`order/Purchases/all_purchLines.html`
+    """
     storage = messages.get_messages(request)
     storage.used = True
     delline = OrderLine.objects.get(id=pid)
@@ -223,6 +376,16 @@ def purchline_delete(request, pid):
 
 
 def purch_new(request):
+    """
+    Create a new instance of :model:`order.Order` of type Purchase.
+
+    ``form``
+        An instance of :model:`order.OrderForm`.
+
+    **Template:**
+
+    :template:`order/Purchases/new_purch.html`
+    """
     if request.method == "POST":
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -238,12 +401,41 @@ def purch_new(request):
 
 
 def purch(request, order_number):
+    """
+    Create a new instance of :model:`order.Order` of type Purchase.
+
+    ``form_purch``
+        An instance of :model:`order.OrderForm`.
+
+    **Template:**
+
+    :template:`order/Purchases/Purch.html`
+    """
     singlepurch = Order.objects.get(order_number=order_number, order_type='P')
     form_order = OrderForm(instance=singlepurch)
     return render(request, 'order/Purchases/Purch.html', {'form_purch': form_order})
 
 
 def purch_edit(request, order_number):
+    """
+    Edit/Confirm/Invoice an instance of :model:`order.Order` of type Purchase.
+
+    ``form_purch``
+        An instance of :model:`order.OrderForm`.
+
+    ``form_orderline``
+        An instance of :model:`order.OrderLineForm`.
+
+    ``purchlines``
+        A query set of :model:`order.OrderLine`.
+
+    ``show_line_form``
+        A boolean to determine if the line form should be shown.
+
+    **Template:**
+
+    :template:`order/Purchases/Purch.html`
+    """
 
     show_line_form = False
     storage = messages.get_messages(request)
@@ -319,10 +511,30 @@ def purch_edit(request, order_number):
 
 # Production views
 def production(request):
+    """
+    Display the Production menu.
+
+    **Template:**
+
+    :template:`order/Production/production.html`
+    """
     return render(request, 'order/Production/production.html')
 
 
 def all_production(request):
+    """
+    Display all :model:`order.Order` of type Production.
+
+    ``production``
+        A query set of :model:`order.Order`.
+
+    ``filter``
+        The relevant filter object :model:`order.OrderFilter`.
+
+    **Template:**
+
+    :template:`order/Production/all_prodOrders.html`
+    """
     filt = OrderFilter(request.GET, Order.objects.filter(order_type="M"))
     prods = ProdTable(filt.qs)
     RequestConfig(request).configure(prods)
@@ -330,12 +542,35 @@ def all_production(request):
 
 
 def all_prodlines(request):
+    """
+    Display all :model:`order.OrderLine` of type Production.
+
+    ``prodlines``
+        A query set of :model:`order.OrderLine`.
+
+    **Template:**
+
+    :template:`order/Production/all_prodLines.html`
+    """
     prodliness = ProdLineTable(OrderLine.objects.filter(order_number__order_type="M"))
     RequestConfig(request).configure(prodliness)
     return render(request, 'order/Production/all_prodLines.html', {'prodlines': prodliness})
 
 
 def prod_delete(request, order_number):
+    """
+    Delete an object :model:`order.Order` of type Production.
+
+    ``production``
+        A query set of :model:`order.Order`.
+
+    ``filter``
+        The relevant filter object :model:`order.OrderFilter`.
+
+    **Template:**
+
+    :template:`order/Production/all_prodOrders.html`
+    """
     storage = messages.get_messages(request)
     storage.used = True
     delorder = Order.objects.get(order_number=order_number)
@@ -352,6 +587,16 @@ def prod_delete(request, order_number):
 
 
 def prodline_delete(request, mid):
+    """
+    Delete an object :model:`order.OrderLine` from a Production order.
+
+    ``prodlines``
+        A query set of :model:`order.OrderLine`.
+
+    **Template:**
+
+    :template:`order/Production/all_prodLines.html`
+    """
     storage = messages.get_messages(request)
     storage.used = True
     delline = OrderLine.objects.get(id=mid)
@@ -367,6 +612,16 @@ def prodline_delete(request, mid):
 
 
 def prod_new(request):
+    """
+     Create a new instance of :model:`order.Order` of type Production.
+
+     ``form``
+         An instance of :model:`order.OrderForm`.
+
+     **Template:**
+
+     :template:`order/Production/new_prod.html`
+     """
     if request.method == "POST":
         form = OrderForm(request.POST)
         if form.is_valid():
@@ -382,12 +637,41 @@ def prod_new(request):
 
 
 def prod(request, order_number):
+    """
+    Create a new instance of :model:`order.Order` of type Production.
+
+    ``form_prod``
+        An instance of :model:`order.OrderForm`.
+
+    **Template:**
+
+    :template:`order/Production/Prod.html`
+    """
     singleprod = Order.objects.get(order_number=order_number, order_type='M')
     form_order = OrderForm(instance=singleprod)
     return render(request, 'order/Production/Prod.html', {'form_prod': form_order})
 
 
 def prod_edit(request, order_number):
+    """
+    Edit/Confirm/Invoice an instance of :model:`order.Order` of type Production.
+
+    ``form_prod``
+        An instance of :model:`order.OrderForm`.
+
+    ``form_orderline``
+        An instance of :model:`order.OrderLineForm`.
+
+    ``prodlines``
+        A query set of :model:`order.OrderLine`.
+
+    ``show_line_form``
+        A boolean to determine if the line form should be shown.
+
+    **Template:**
+
+    :template:`order/Production/Prod.html`
+    """
 
     show_line_form = False
     storage = messages.get_messages(request)
@@ -463,10 +747,30 @@ def prod_edit(request, order_number):
 
 # Discount views
 def setup(request):
+    """
+    Display the Setup menu.
+
+    **Template:**
+
+    :template:`order/orderSetup.html`
+    """
     return render(request, 'order/orderSetup.html')
 
 
 def all_discounts(request):
+    """
+    Display all :model:`order.Discounts`.
+
+    ``discounts``
+        A query set of :model:`order.Discounts`.
+
+    ``filter``
+        The relevant filter object :model:`order.DiscountFilter`.
+
+    **Template:**
+
+    :template:`order/all_discounts.html`
+    """
     filt = DiscountFilter(request.GET, Discounts.objects.all())
     discs = DiscountTable(filt.qs)
     RequestConfig(request).configure(discs)
@@ -474,6 +778,16 @@ def all_discounts(request):
 
 
 def new_discount(request):
+    """
+     Create a new instance of :model:`order.Discounts`.
+
+     ``form``
+         An instance of :model:`order.DiscountForm`.
+
+     **Template:**
+
+     :template:`order/new_discount.html`
+     """
     storage = messages.get_messages(request)
     storage.used = True
 
@@ -495,6 +809,16 @@ def new_discount(request):
 
 
 def discount_delete(request, lineid):
+    """
+    Delete an object :model:`order.Discounts`.
+
+    ``discounts``
+        A query set of :model:`order.Discounts`.
+
+    **Template:**
+
+    :template:`order/all_discounts.html`
+    """
     Discounts.objects.get(id=lineid).delete()
     discs = DiscountTable(Discounts.objects.all())
     RequestConfig(request).configure(discs)
@@ -502,6 +826,17 @@ def discount_delete(request, lineid):
 
 
 def discount_edit(request, lineid):
+    """
+    Edit an instance of :model:`order.Discounts`.
+
+    ``discounts``
+        An instance of :model:`order.OrderForm`.
+
+    **Template:**
+
+    :template:`order/all_discounts.html`
+    """
+
     if request.method == "POST":
         disc = Discounts.objects.get(id=lineid)
         form_disc = DiscountForm(request.POST, instance=disc)

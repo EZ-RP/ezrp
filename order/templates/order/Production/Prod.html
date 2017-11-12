@@ -20,11 +20,15 @@
                 </ul>
             {% endif %}
             <fieldset disabled="true">
-                {{ form_prod.as_p }}
+                <table>
+                    {{ form_prod.as_table }}
+                </table>
             </fieldset>
             <h1> Add Line </h1>
             {% if  show_line_form%}
-             {{ form_orderline.as_p }}
+                <table>
+                    {{ form_orderline.as_table }}
+                </table>
                 <button class="save buttonStyle">Save</button>
             {% endif %}
 

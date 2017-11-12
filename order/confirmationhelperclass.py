@@ -7,6 +7,11 @@ from order.confirmationresult import *
 
 
 def confirmorder(corder):
+    """
+    Takes the lines of the order and attempts to reserve them. if a line cannot be reserved it will create a fulfilment
+    order for the line assigned to the customer. also checks that product and stock records exist and returns a
+    confirmation result object
+    """
     result = ConfirmResult()
     tdate = time.strftime("%Y-%m-%d")
 
@@ -17,6 +22,8 @@ def confirmorder(corder):
 
             if prod is None or inv is None:
                 result.add_error("Error: product or inventory record not found")
+            elif result.confirmation_errors:
+                result.add_error("Error: Line was not confirmed due to other line issues")
             else:
                 if corder.order_type == "S":
                     if inv.available_qty >= sl.quantity:
@@ -72,6 +79,10 @@ def confirmorder(corder):
 
 
 def invoiceorder(iorder):
+    """
+    Takes the lines of the order and attempts remove the quantities from the reserved stock and returns a
+    confirmation result object
+    """
     result = ConfirmResult()
 
     if iorder.order_status == "O":

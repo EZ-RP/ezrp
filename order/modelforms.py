@@ -16,7 +16,7 @@ class OrderForm(forms.ModelForm):
 
         model = Order
 
-        fields = ('account_number', 'address', 'delivery_date')  # 'order_number', 'order_status'
+        fields = ('account_number', 'address', 'delivery_date', 'order_status')  # 'order_number', 'order_status'
         widgets = {
             'delivery_date': forms.SelectDateWidget()
         }
