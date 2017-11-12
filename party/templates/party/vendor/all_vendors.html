@@ -16,8 +16,9 @@
             {% if filter %}
                 <form action="" method="get" class="form form-inline">
                     {% bootstrap_form filter.form layout='inline' %}
-                    {% bootstrap_button 'filter' %}
+                    <button class="buttonStyle" type="submit">Filter</button>
                 </form>
+                <br />
         {% endif %}
         {% render_table vendors %}
         </div>

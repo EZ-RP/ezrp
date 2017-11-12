@@ -14,10 +14,11 @@
         <div class="contentGrey" style="text-align: left">
         <a style="text-decoration: none;" href="{% url 'customer_new' %}"> <button class="buttonStyle"> Create Customer </button></a>
         {% if filter %}
-        <form action="" method="get" class="form form-horizontal">
-            {% bootstrap_form filter.form layout='horizontal' %}
-            {% bootstrap_button 'filter' %}
+        <form action="" method="get" class="form">
+            {% bootstrap_form filter.form layout='inline' %}
+            <button class="buttonStyle" type="submit">Filter</button>
         </form>
+        <BR />
         {% endif %}
         {% render_table customers %}
         </div>

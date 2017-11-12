@@ -4,8 +4,7 @@ from base.models import Address
 from base.models import PayDetails
 from base.models import SystemParameters
 from base.tables import *
-from .modelforms import AddressForm
-from .modelforms import SysParamForm
+from .modelforms import *
 from base.tables import *
 
 
@@ -60,6 +59,17 @@ def parameters_new(request):
             form = SysParamForm()
     else:
         form = SysParamForm
+    return render(request, 'base/parameters_new.html', {'form': form})
+
+
+def pay_details_new(request):
+    if request.method == "POST":
+        form = PayDetailsForm(request.POST)
+        if form.is_valid():
+            form.save(commit=True)
+            form = PayDetailsForm()
+    else:
+        form = PayDetailsForm()
     return render(request, 'base/parameters_new.html', {'form': form})
 
 
