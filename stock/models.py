@@ -13,9 +13,9 @@ class Inventory(models.Model):
     Stores an item and its level of stock, related to :model: 'product.Item'
     """
     item_id = models.ForeignKey(Item)  # models.CharField(max_length=30, primary_key=True)
-    available_qty = models.FloatField(null=True, blank=True, help_text="The stock that is available to the company")
-    reserved_qty = models.FloatField(null=True, blank=True, help_text="The stock that is reserved for a sale")
-    ordered_qty = models.FloatField(null=True, blank=True, help_text="The stock that has been ordered from a supplier")
+    available_qty = models.FloatField(null=True, blank=True, help_text="The stock available for orders")
+    reserved_qty = models.FloatField(null=True, blank=True, help_text="The stock reserved for a sale")
+    ordered_qty = models.FloatField(null=True, blank=True, help_text="The stock ordered from a supplier")
 
     def get_next_id(self):
         last_inv = Inventory.objects.all().order_by('-id').first()
