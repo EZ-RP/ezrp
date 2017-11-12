@@ -6,17 +6,11 @@
 <body>
     {% block content %}
         <div class="contentBanner" style="text-align: center"> <h1> Production </h1></div>
-        <div class="contentGrey" style="text-align: left">
-            <div class="row">
-                <div class="column">
-                    <div>
-                        <a style="text-decoration: none;" href="{% url 'all_production' %}">
-                            <button class="buttonStyleGeneral"> Production </button></a>
-                        <a style="text-decoration: none;" href="{% url 'all_prodlines' %}">
-                            <button class="buttonStyleGeneral"> Production Lines </button></a>
-                    </div>
-                </div>
-            </div>
+        <div class="contentGrey">
+            <a style="text-decoration: none;" href="{% url 'all_production' %}">
+                <button class="buttonStyleGeneral"> Production </button></a>
+            <a style="text-decoration: none;" href="{% url 'all_prodlines' %}">
+                <button class="buttonStyleGeneral"> Production Lines </button></a>
         </div>
     {% endblock content %}
 </body>

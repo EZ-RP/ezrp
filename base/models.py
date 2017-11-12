@@ -12,8 +12,8 @@ class Address(models.Model):
     """
     street = models.CharField(max_length=150, help_text="The street and relevant street numbers")
     suburb = models.CharField(max_length=150, help_text="Suburb the street is located in")
-    state = models.CharField(max_length=150, help_text="the state the suburb is located in")
-    postcode = models.CharField(max_length=10, help_text="the postcode related to the suburb")
+    state = models.CharField(max_length=150, help_text="The state the suburb is located in")
+    postcode = models.CharField(max_length=10, help_text="The postcode related to the suburb")
     country = models.CharField(max_length=50, default="Australia", help_text="the country the address belongs to")
 
     def __str__(self):
@@ -37,7 +37,7 @@ class SystemParameters (models.Model):
     """
     Stores Parameters that can be used anywhere throughout the system
     """
-    description = models.CharField(max_length=200, help_text="description or name of the parameter")
-    str_value = models.CharField(max_length=150, help_text="value of the parameter")
+    description = models.CharField(max_length=200, help_text="Description or name of the parameter")
+    str_value = models.CharField(max_length=150, help_text="Value of the parameter")
 
 
