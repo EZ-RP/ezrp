@@ -170,23 +170,25 @@ def sale_edit(request, order_number):
 
             singlesale = Order.objects.get(order_number=order_number)
             form_order = OrderForm(instance=singlesale)
-            saleslines = OrderLine.objects.filter(order_number=singlesale)
+            saleslines_qs = OrderLine.objects.filter(order_number=singlesale)
     else:
 
         singlesale = Order.objects.get(order_number=order_number)
         form_order = OrderForm(instance=singlesale)
         form_orderlines = LineForm()
-        saleslines = OrderLine.objects.filter(order_number=singlesale)
+        saleslines_qs = OrderLine.objects.filter(order_number=singlesale)
 
         if not show_line_form:
 
-            if saleslines.exists():
+            if saleslines_qs.exists():
 
                 show_line_form = False
 
             else:
 
                 show_line_form = True
+
+    saleslines = SalesLineTable(saleslines_qs)
 
     return render(request, 'order/Sales/sale.html', {'form_sale': form_order, 'form_orderline': form_orderlines,
                                                      'saleslines': saleslines, 'show_line_form': show_line_form})
@@ -487,23 +489,25 @@ def purch_edit(request, order_number):
 
             singlepurch = Order.objects.get(order_number=order_number, order_type='P')
             form_order = OrderForm(instance=singlepurch)
-            purchlines = OrderLine.objects.filter(order_number=singlepurch)
+            purchlines_qs = OrderLine.objects.filter(order_number=singlepurch)
     else:
 
         singlepurch = Order.objects.get(order_number=order_number, order_type='P')
         form_order = OrderForm(instance=singlepurch)
         form_orderlines = LineForm()
-        purchlines = OrderLine.objects.filter(order_number=singlepurch)
+        purchlines_qs = OrderLine.objects.filter(order_number=singlepurch)
 
         if not show_line_form:
 
-            if purchlines.exists():
+            if purchlines_qs.exists():
 
                 show_line_form = False
 
             else:
 
                 show_line_form = True
+
+    purchlines = PurchLineTable(purchlines_qs)
 
     return render(request, 'order/Purchases/Purch.html', {'form_purch': form_order, 'form_orderline': form_orderlines,
                                                           'purchlines': purchlines, 'show_line_form': show_line_form})
@@ -723,23 +727,25 @@ def prod_edit(request, order_number):
 
             singleprod = Order.objects.get(order_number=order_number, order_type='M')
             form_order = OrderForm(instance=singleprod)
-            prodlines = OrderLine.objects.filter(order_number=singleprod)
+            prodlines_qs = OrderLine.objects.filter(order_number=singleprod)
     else:
 
         singleprod = Order.objects.get(order_number=order_number, order_type='M')
         form_order = OrderForm(instance=singleprod)
         form_orderlines = LineForm()
-        prodlines = OrderLine.objects.filter(order_number=singleprod)
+        prodlines_qs = OrderLine.objects.filter(order_number=singleprod)
 
         if not show_line_form:
 
-            if prodlines.exists():
+            if prodlines_qs.exists():
 
                 show_line_form = False
 
             else:
 
                 show_line_form = True
+
+    prodlines = ProdLineTable(prodlines_qs)
 
     return render(request, 'order/Production/Prod.html', {'form_prod': form_order, 'form_orderline': form_orderlines,
                                                           'prodlines': prodlines, 'show_line_form': show_line_form})

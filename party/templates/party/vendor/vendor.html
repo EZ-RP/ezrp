@@ -9,10 +9,14 @@
         <div class="contentGrey" style="text-align: left">
         <form method="post">
         {% csrf_token %}
-        {{ form_vendor.as_p }}
+        <table>
+        {{ form_vendor.as_table }}
+        </table>
         <button class="buttonStyle">Save</button>
         {% if  show_address_form%}
-         {{ form_address.as_p }}
+         <table>
+            {{ form_address.as_table }}
+        </table>
             <button class="buttonStyle">Save</button>
         {% endif %}
         </form>
